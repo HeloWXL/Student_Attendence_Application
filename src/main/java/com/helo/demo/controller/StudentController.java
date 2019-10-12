@@ -8,6 +8,7 @@ import com.helo.demo.service.StudentService;
 import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ import java.util.Map;
  * @date 2019/8/21 0:08
  */
 @Api(tags = "学生接口")
-@RestController
+@Controller
 @RequestMapping("studentApi")
 public class StudentController {
 
@@ -33,8 +34,24 @@ public class StudentController {
   @Resource
   private ProfessionService professionService;
 
+
+  @ApiOperation(value = "跳转到学生登录界面")
+  @GetMapping("/toLogin")
+  public String toLogin(){
+    return "/student/login";
+  }
+
+
+  @ApiOperation(value = "跳转到学生首页界面")
+  @GetMapping("/index")
+  public String toIndex(){
+    return "/student/index";
+  }
+
+
   @ApiOperation(value = "根据Sno查询学生信息")
   @GetMapping("/selectByStudentId/{sno}")
+  @ResponseBody
   public DataResult<Student> selectByStudentId(@PathVariable("sno") String sno){
     DataResult<Student> result = new DataResult<>();
     result.setBody(studentService.selectByPrimaryKey(sno));
@@ -44,6 +61,7 @@ public class StudentController {
 
   @ApiOperation(value = "根据ID删除学生信息")
   @GetMapping("/deleteByStudentId/{id}")
+  @ResponseBody
   public DataResult<Integer> deleteByStudentId(@RequestParam("id") Integer id){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(studentService.deleteByPrimaryKey(id));
@@ -53,6 +71,7 @@ public class StudentController {
 
   @ApiOperation(value = "添加学生信息")
   @PostMapping("/insertStudent")
+  @ResponseBody
   public DataResult<Integer> insertStudent(@RequestBody Student student){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(studentService.insertSelective(student));
@@ -62,6 +81,7 @@ public class StudentController {
 
   @ApiOperation(value = "修改学生信息")
   @PostMapping("/updateStudent")
+  @ResponseBody
   public DataResult<Integer> updateStudent(@RequestBody Student student){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(studentService.updateByPrimaryKeySelective(student));
@@ -71,6 +91,7 @@ public class StudentController {
 
   @ApiOperation(value = "学生登录")
   @PostMapping("/checkLogin")
+  @ResponseBody
   public DataResult<Boolean> checkLogin(@RequestParam("sno") String sno, @RequestParam("password") String password, HttpServletRequest request){
       Student student = studentService.selectBySno(sno);
 
@@ -91,6 +112,7 @@ public class StudentController {
 
   @ApiOperation(value = "获取学生的session对象")
   @PostMapping("getStudentSession")
+  @ResponseBody
   public DataResult<Student> getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean){
     DataResult<Student> result = new DataResult<>();
     Student student = (Student) request.getSession().getAttribute(studentBean);
@@ -105,6 +127,7 @@ public class StudentController {
 
   @ApiOperation(value = "查询学生信息-分页显示")
   @GetMapping("/selectStudentByPage")
+  @ResponseBody
   public DataResult<Map<String,Object>> selectStudentByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
     DataResult<Map<String,Object>> result = new DataResult<>();
     result.setBody(studentService.getStudentByPage(pageNo,pageSize));
@@ -113,6 +136,7 @@ public class StudentController {
 
   @ApiOperation(value = "清除学生的session对象")
   @GetMapping("/removeStudentSession")
+  @ResponseBody
   public void removeStudentSession(HttpServletRequest request, HttpServletResponse response){
     request.getSession().removeAttribute("studentsession");
     if ( request.getSession().getAttribute("studentsession") == null) {
@@ -126,6 +150,7 @@ public class StudentController {
 
   @ApiOperation(value = "根据学生的学号查询学生课程")
   @GetMapping("/selectCourseBySno")
+  @ResponseBody
   public  DataResult<List<Student>> selectCourseBySno(@RequestParam("sno") String sno){
     DataResult<List<Student>> result = new DataResult<>();
     result.setBody(studentService.selectCourseBySno(sno));

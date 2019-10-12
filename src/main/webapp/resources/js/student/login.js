@@ -1,5 +1,5 @@
 $(function() {
-  $('#login').click(function() {
+  $('#login_submit').click(function() {
     var sno  = $('#login_sno').val();
     var password = $('#login_password').val();
 
@@ -20,7 +20,7 @@ $(function() {
       type:'post',
       success:function(data) {
         if(data.body == true){
-          location.href=ctx+'/student/index.html';
+          location.href=ctx+'/studentApi/toLogin';
         }else{
           mui.alert('学号或密码错误');
         }

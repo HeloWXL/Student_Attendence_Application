@@ -23,9 +23,6 @@
 <body>
 <section class="aui-flexView">
     <header class="aui-navBar aui-navBar-fixed">
-        <a href="javascript:;" class="aui-navBar-item">
-            <i class="icon icon-return"></i>
-        </a>
         <div class="aui-center">
             <span class="aui-center-title"></span>
         </div>
@@ -51,7 +48,7 @@
             <button id="login_submit">登录</button>
         </div>
         <div class="aui-account-link">
-            <a href="javascript:;">注册账号</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:;">联系管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="javascript:;">忘记密码</a>
         </div>
 
@@ -89,6 +86,7 @@
     </section>
 </section>
 </body>
-<script type="text/javascript" src="${ctx }/resources/js/jquery-2.1.4.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/student/login.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.js"></script>
+<script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
+<script type="text/javascript" src="${ctx}/resources/js/student/login.js"></script>
 </html>

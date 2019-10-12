@@ -19,17 +19,9 @@ public class HomeController {
    * 学生
    *
    */
-  @ApiOperation(value = "跳转到学生登录界面")
-  @GetMapping("/toLogin")
-  public String toLogin(){
-    return "/student/login.html";
-  }
 
-  @ApiOperation(value = "跳转到学生首页界面")
-  @GetMapping("/index")
-  public String toIndex(){
-    return "/student/index.html";
-  }
+
+
 
   @ApiOperation(value = "跳转到学生信息界面")
   @GetMapping("/person")
