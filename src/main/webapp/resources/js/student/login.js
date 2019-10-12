@@ -2,17 +2,14 @@ $(function() {
   $('#login_submit').click(function() {
     var sno  = $('#login_sno').val();
     var password = $('#login_password').val();
-
     if(sno==""||sno==null){
-    	mui.alert("请输入学号");
+    	mui.alert("学号不能为空，请输入学号");
     	return;
-		}
-
+    }
     if(password==""||password==null){
-      mui.alert("请输入密码");
+      mui.alert("密码不能为空，请输入密码");
       return;
     }
-
     $.ajax({
       url:ctx+'/studentApi/checkLogin',
       data:{sno:sno,password:password},
@@ -20,7 +17,7 @@ $(function() {
       type:'post',
       success:function(data) {
         if(data.body == true){
-          location.href=ctx+'/studentApi/toLogin';
+          location.href=ctx+'/studentApi/index';
         }else{
           mui.alert('学号或密码错误');
         }

@@ -15,6 +15,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable"/>
     <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
     <meta content="telephone=no" name="format-detection"/>
+    <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/student/login.css" rel="stylesheet" type="text/css"/>
     <script>
       var ctx = '${ctx }'
@@ -31,7 +32,6 @@
         </a>
     </header>
     <section class="aui-scrollView">
-
         <div class="aui-account-title">
             <h1>登录</h1>
         </div>
