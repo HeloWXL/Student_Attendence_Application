@@ -1,0 +1,81 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 王咸林
+  Date: 2019/10/12
+  Time: 15:08
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>学生首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
+    <link href="${ctx}/resources/css/student/index.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav mui-badge-primary">
+    <h1 class="mui-title">学生首页</h1>
+</header>
+<div class="mui-content">
+    <div id="attendance">
+        <a href="">
+            <img src="${ctx}/resources/images/人脸识别.png" />
+            <p>学生考勤</p>
+        </a>
+    </div>
+
+    <div  id="attendancelist">
+        <a href="">
+            <img src="/images/考勤记录.png" />
+            <p>考勤记录</p>
+        </a>
+    </div>
+
+    <div id="mycourse">
+        <a href="">
+            <img src="${ctx}/resources/images/课程.png" />
+            <p>我的课程</p>
+        </a>
+    </div>
+    <div id="mycourselist">
+        <a href="">
+            <img src="${ctx}/resources/images/课表管理.png" />
+            <p>我的课表</p>
+        </a>
+    </div>
+    <div>
+        <a href="/leave">
+            <img src="${ctx}/resources/images/请假.png" />
+            <p>请假</p>
+        </a>
+    </div>
+    <div>
+        <a href="/leaveList">
+            <img src="${ctx}/resources/images/请假记录.png" />
+            <p>请假记录</p>
+        </a>
+    </div>
+</div>
+<nav class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item mui-active" id="home">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">首页</span>
+    </a>
+    <a class="mui-tab-item">
+        <span class="mui-icon mui-icon-chatbubble"></span>
+        <span class="mui-tab-label">消息</span>
+    </a>
+    <a class="mui-tab-item" id="myinfo">
+        <span class="mui-icon mui-icon-person"></span>
+        <span class="mui-tab-label">我的信息</span>
+    </a>
+</nav>
+</body>
+
+<script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/student/index.js" type="application/javascript"></script>
+</html>

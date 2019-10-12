@@ -1,0 +1,27 @@
+body{
+  background-color: #EEEEEE;
+}
+.mui-content div{
+  border-radius: 15px;
+  width: 168px;
+  height: 148px;
+  background-color: #FFFFFF;
+  float: left;
+  margin: 11px 9px;
+}
+div a{
+  text-align: center;
+}
+a p{
+  color: #000000;
+}
+img{
+  margin-left: 35px;
+  margin-top: 15px;
+  border-radius: 15px;
+  width:100px;
+  height: 100px;
+}
+.mui-title{
+  color: #FFFFFF;
+}
