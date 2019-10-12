@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.helo.demo.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.helo.demo.model.Teacher" >
+    <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+    <result column="teacher_tno" property="teacherTno" jdbcType="VARCHAR" />
+    <result column="teacher_password" property="teacherPassword" jdbcType="VARCHAR" />
+    <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
+    <result column="teacher_sex" property="teacherSex" jdbcType="CHAR" />
+    <result column="teacher_age" property="teacherAge" jdbcType="INTEGER" />
+    <result column="profession_id" property="professionId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    teacher_id, teacher_name, teacher_tno, teacher_password, teacher_job_title, teacher_sex, 
+    teacher_age, create_time,profession_id
+  </sql>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </delete>
+
+<!--start-->
+  <resultMap id="TeacherAndProfessionMap" type="com.helo.demo.model.Teacher" >
+    <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+    <result column="teacher_tno" property="teacherTno" jdbcType="VARCHAR" />
+    <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
+    <result column="teacher_sex" property="teacherSex" jdbcType="CHAR" />
+    <result column="teacher_age" property="teacherAge" jdbcType="INTEGER" />
+    <result column="profession_id" property="professionId" jdbcType="INTEGER" />
+    <association property="profession" javaType="com.helo.demo.model.Profession">
+      <result column="profession_name" property="professionName" jdbcType="VARCHAR" />
+      <result column="apartment" property="apartment" jdbcType="VARCHAR" />
+      <result column="school" property="school" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="TeacherAndProfessionMap" parameterType="java.lang.String" >
+    select t.teacher_name,t.teacher_tno,t.teacher_job_title,t.teacher_sex,t.teacher_age,p.profession_name ,p.apartment ,p.school
+    from teacher t ,profession p
+    where t.profession_id = p.profession_id AND t.teacher_tno = #{teacherTno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="TeacherAndProfessionMap" parameterType="map" >
+    select t.teacher_name,t.teacher_tno,t.teacher_job_title,t.teacher_sex,t.teacher_age,p.profession_name ,p.apartment ,p.school
+    from teacher t ,profession p
+    where t.profession_id = p.profession_id
+    limit #{pageNo} , #{pageSize}
+  </select>
+<!--end-->
+  <select id="selectByTno" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from teacher
+    where teacher_tno = #{teacherTno,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.helo.demo.model.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="teacherName != null" >
+        teacher_name,
+      </if>
+      <if test="teacherTno != null" >
+        teacher_tno,
+      </if>
+      <if test="teacherPassword != null" >
+        teacher_password,
+      </if>
+      <if test="teacherJobTitle != null" >
+        teacher_job_title,
+      </if>
+      <if test="teacherSex != null" >
+        teacher_sex,
+      </if>
+      <if test="teacherAge != null" >
+        teacher_age,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="professionId != null" >
+        profession_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null" >
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTno != null" >
+        #{teacherTno,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPassword != null" >
+        #{teacherPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherJobTitle != null" >
+        #{teacherJobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherSex != null" >
+        #{teacherSex,jdbcType=CHAR},
+      </if>
+      <if test="teacherAge != null" >
+        #{teacherAge,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="professionId != null" >
+        #{professionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.Teacher" >
+    update teacher
+    <set >
+      <if test="teacherName != null" >
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTno != null" >
+        teacher_tno = #{teacherTno,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPassword != null" >
+        teacher_password = #{teacherPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherJobTitle != null" >
+        teacher_job_title = #{teacherJobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherSex != null" >
+        teacher_sex = #{teacherSex,jdbcType=CHAR},
+      </if>
+      <if test="teacherAge != null" >
+        teacher_age = #{teacherAge,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="professionId != null" >
+        profession_id = #{professionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+</mapper>

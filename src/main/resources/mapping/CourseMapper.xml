@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.helo.demo.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.helo.demo.model.Course" >
+    <id column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="classArrangement" property="classarrangement" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTIme" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="profession" property="profession" jdbcType="INTEGER" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="ceate_time" property="ceateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    course_id, course_name, classArrangement, startTime, endTIme, profession, teacher_id, 
+    ceate_time
+  </sql>
+<!--start-->
+  <resultMap id="selectCourseByTeacherTno" type="com.helo.demo.model.Course" >
+    <id column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="classArrangement" property="classarrangement" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTIme" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <association property="teacher" javaType="com.helo.demo.model.Teacher">
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectCourseByTno" resultMap="selectCourseByTeacherTno" parameterType="map" >
+    select c.course_name,c.course_id ,t.teacher_name,t.teacher_job_title,c.startTime,c.endTIme,c.classArrangement
+    from course c , teacher t
+    where c.teacher_id = t.teacher_id and t.teacher_id=#{teacherId,jdbcType=INTEGER}
+     limit #{pageNo} , #{pageSize}
+  </select>
+<!--end-->
+
+
+  <resultMap id="selectCourseDetailByCourseId" type="com.helo.demo.model.Course" >
+    <id column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="classArrangement" property="classarrangement" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTIme" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <association property="teacher" javaType="com.helo.demo.model.Teacher">
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
+    </association>
+    <association property="professions" javaType="com.helo.demo.model.Profession">
+      <result column="profession_name" property="professionName" jdbcType="VARCHAR" />
+      <result column="apartment" property="apartment" jdbcType="VARCHAR" />
+      <result column="school" property="school" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+
+  <select id="selectCourseDetailByCid" resultMap="selectCourseDetailByCourseId" parameterType="java.lang.Integer" >
+    select
+      c.course_name,c.classArrangement,c.startTime,c.endTIme,
+      t.teacher_name,t.teacher_job_title,
+      p.profession_name,p.apartment,p.school
+    from course c,teacher t ,profession p
+    where c.teacher_id = t.teacher_id AND  p.profession_id = c.profession AND course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.helo.demo.model.Course" >
+    insert into course (course_id, course_name, classArrangement, 
+      startTime, endTIme, profession, 
+      teacher_id, ceate_time)
+    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{classarrangement,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{profession,jdbcType=INTEGER}, 
+      #{teacherId,jdbcType=INTEGER}, #{ceateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.helo.demo.model.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="classarrangement != null" >
+        classArrangement,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTIme,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="ceateTime != null" >
+        ceate_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="classarrangement != null" >
+        #{classarrangement,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="ceateTime != null" >
+        #{ceateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.Course" >
+    update course
+    <set >
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="classarrangement != null" >
+        classArrangement = #{classarrangement,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTIme = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="ceateTime != null" >
+        ceate_time = #{ceateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.helo.demo.model.Course" >
+    update course
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      classArrangement = #{classarrangement,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTIme = #{endtime,jdbcType=TIMESTAMP},
+      profession = #{profession,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      ceate_time = #{ceateTime,jdbcType=TIMESTAMP}
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.helo.demo.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.helo.demo.model.Student" >
+    <id column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+    <result column="student_sno" property="studentSno" jdbcType="VARCHAR" />
+    <result column="student_password" property="studentPassword" jdbcType="VARCHAR" />
+    <result column="student_age" property="studentAge" jdbcType="VARCHAR" />
+    <result column="student_qq" property="studentQq" jdbcType="VARCHAR" />
+    <result column="student_email" property="studentEmail" jdbcType="VARCHAR" />
+    <result column="student_pic" property="studentPic" jdbcType="VARCHAR" />
+    <result column="student_sex" property="studentSex" jdbcType="VARCHAR" />
+    <result column="profession_id" property="professionId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    student_id, student_name, student_sno, student_password, student_age, student_qq, 
+    student_email, student_pic, student_sex, profession_id, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where student_sno = #{studentSno,jdbcType=VARCHAR}
+  </select>
+
+<!--start-->
+  <resultMap id="BaseResultMap1" type="com.helo.demo.model.Student" >
+    <collection property="courseList" ofType="com.helo.demo.model.Course">
+      <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+      <result column="classArrangement" property="classarrangement" jdbcType="INTEGER" />
+      <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+      <result column="endTIme" property="endtime" jdbcType="TIMESTAMP" />
+
+      <association property="teacher" javaType="com.helo.demo.model.Teacher">
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+        <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
+      </association>
+
+    </collection>
+
+  </resultMap>
+  <select id="selectCourseBySno" resultMap="BaseResultMap1" parameterType="java.lang.String" >
+      SELECT
+          c.course_name,
+          c.course_id,
+          c.startTime,
+          c.endTIme,
+          c.classArrangement,
+          t.teacher_name,
+          t.teacher_job_title
+
+      FROM
+          course c,
+          student stu,
+          teacher t
+      WHERE
+          c.profession = stu.profession_id
+      AND t.teacher_id = c.teacher_id
+      AND stu.student_sno = #{studentSno,jdbcType=VARCHAR}
+        </select>
+<!--end-->
+
+  <select id="selectBySno" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where student_sno = #{studentSno,jdbcType=VARCHAR}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.helo.demo.model.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="studentName != null" >
+        student_name,
+      </if>
+      <if test="studentSno != null" >
+        student_sno,
+      </if>
+      <if test="studentPassword != null" >
+        student_password,
+      </if>
+      <if test="studentAge != null" >
+        student_age,
+      </if>
+      <if test="studentQq != null" >
+        student_qq,
+      </if>
+      <if test="studentEmail != null" >
+        student_email,
+      </if>
+      <if test="studentPic != null" >
+        student_pic,
+      </if>
+      <if test="studentSex != null" >
+        student_sex,
+      </if>
+      <if test="professionId != null" >
+        profession_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSno != null" >
+        #{studentSno,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPassword != null" >
+        #{studentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAge != null" >
+        #{studentAge,jdbcType=VARCHAR},
+      </if>
+      <if test="studentQq != null" >
+        #{studentQq,jdbcType=VARCHAR},
+      </if>
+      <if test="studentEmail != null" >
+        #{studentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPic != null" >
+        #{studentPic,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null" >
+        #{studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="professionId != null" >
+        #{professionId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.Student" >
+    update student
+    <set >
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSno != null" >
+        student_sno = #{studentSno,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPassword != null" >
+        student_password = #{studentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAge != null" >
+        student_age = #{studentAge,jdbcType=VARCHAR},
+      </if>
+      <if test="studentQq != null" >
+        student_qq = #{studentQq,jdbcType=VARCHAR},
+      </if>
+      <if test="studentEmail != null" >
+        student_email = #{studentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPic != null" >
+        student_pic = #{studentPic,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null" >
+        student_sex = #{studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="professionId != null" >
+        profession_id = #{professionId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.helo.demo.model.Student" >
+    update student
+    set student_name = #{studentName,jdbcType=VARCHAR},
+      student_sno = #{studentSno,jdbcType=VARCHAR},
+      student_password = #{studentPassword,jdbcType=VARCHAR},
+      student_age = #{studentAge,jdbcType=VARCHAR},
+      student_qq = #{studentQq,jdbcType=VARCHAR},
+      student_email = #{studentEmail,jdbcType=VARCHAR},
+      student_pic = #{studentPic,jdbcType=VARCHAR},
+      student_sex = #{studentSex,jdbcType=VARCHAR},
+      profession_id = #{professionId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+</mapper>
