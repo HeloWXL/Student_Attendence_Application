@@ -19,10 +19,6 @@ public class HomeController {
    * 学生
    *
    */
-
-
-
-
   @ApiOperation(value = "跳转到学生信息界面")
   @GetMapping("/person")
   public String toPerson(){

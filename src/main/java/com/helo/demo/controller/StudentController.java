@@ -48,6 +48,11 @@ public class StudentController {
     return "/student/index";
   }
 
+  @ApiOperation(value = "跳转到学生信息界面")
+  @GetMapping("/person")
+  public String toPerson(){
+    return "/student/person";
+  }
 
   @ApiOperation(value = "根据Sno查询学生信息")
   @GetMapping("/selectByStudentId/{sno}")
