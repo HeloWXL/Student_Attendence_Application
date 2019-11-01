@@ -10,20 +10,21 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author xiayj
+ * @author wangxl
  * @ClassName CounselorController
  * @Description
  * @date 2019/8/21 0:03
  */
 @Api(tags = "辅导员接口")
-@RestController
-@RequestMapping("/counselorApi")
+@Controller
+@RequestMapping("counselorApi")
 public class CounselorController {
 
   private static final Logger LOG = LoggerFactory.getLogger(CounselorController.class);
@@ -32,8 +33,21 @@ public class CounselorController {
   @Resource
   private ProfessionService professionService;
 
+  @ApiOperation(value = "跳转到辅导员首页界面")
+  @GetMapping("/toCounselorIndex")
+  public String toCounselorIndex(){
+    return "counselor/index";
+  }
+
+  @ApiOperation(value = "跳转到学生列表界面")
+  @GetMapping("/toStudentTable")
+  public String toStudentTable(){
+    return "counselor/student";
+  }
+
   @ApiOperation(value = "添加辅导员信息")
   @PostMapping("/insertCounselor")
+  @ResponseBody
   public DataResult<Integer> insertAdmin(@RequestBody Counselor counselor){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(counselorService.insertSelective(counselor));
@@ -42,6 +56,7 @@ public class CounselorController {
 
   @ApiOperation(value = "根据ID查询辅导员信息")
   @PostMapping("/selectByCounselorId/{id}")
+  @ResponseBody
   public DataResult<Counselor> selectByPrimaryKey(@PathVariable("id") Integer id){
     DataResult<Counselor> result = new DataResult<>();
     result.setBody(counselorService.selectByPrimaryKey(id));
@@ -50,6 +65,7 @@ public class CounselorController {
 
   @ApiOperation(value = "根据ID删除辅导员信息")
   @GetMapping("/deleteByCounselorId/{id}")
+  @ResponseBody
   public DataResult<Integer> deleteByCounselorId(@RequestParam("id") Integer id){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(counselorService.deleteByPrimaryKey(id));
@@ -58,6 +74,7 @@ public class CounselorController {
 
   @ApiOperation(value = "修改辅导员信息")
   @PostMapping("/updateCounselor")
+  @ResponseBody
   public DataResult<Integer> updateCounselor(@RequestBody Counselor counselor){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(counselorService.updateByPrimaryKeySelective(counselor));
@@ -67,6 +84,7 @@ public class CounselorController {
 
   @ApiOperation(value = "辅导员登录")
   @PostMapping("/checkLogin")
+  @ResponseBody
   public DataResult<Boolean> checkLogin(@RequestParam("cno") String cno, @RequestParam("password") String password, HttpServletRequest request){
     Counselor counselor = counselorService.selectByCno(cno);
     DataResult<Boolean> result = new DataResult<>();
@@ -85,6 +103,7 @@ public class CounselorController {
 
   @ApiOperation(value = "获取辅导员的session对象")
   @PostMapping("/getCounselorSession")
+  @ResponseBody
   public DataResult<Counselor> getTeacherSession(HttpServletRequest request, @RequestParam("counselorrBean") String counselorrBean){
     DataResult<Counselor> result = new DataResult<>();
     Counselor counselor = (Counselor) request.getSession().getAttribute(counselorrBean);

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <meta charset="utf-8">
@@ -14,6 +16,9 @@
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
     <link href="${ctx}/resources/css/student/index.css" rel="stylesheet" />
     <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
+    <script>
+      var ctx = '${ctx }'
+    </script>
 </head>
 <body>
 <header class="mui-bar mui-bar-nav mui-badge-primary">
@@ -29,7 +34,7 @@
 
     <div  id="attendancelist">
         <a href="">
-            <img src="/images/考勤记录.png" />
+            <img src="${ctx}/resources/images/考勤记录.png" />
             <p>考勤记录</p>
         </a>
     </div>
@@ -47,13 +52,13 @@
         </a>
     </div>
     <div>
-        <a href="/leave">
+        <a id="askForLeave">
             <img src="${ctx}/resources/images/请假.png" />
             <p>请假</p>
         </a>
     </div>
     <div>
-        <a href="/leaveList">
+        <a >
             <img src="${ctx}/resources/images/请假记录.png" />
             <p>请假记录</p>
         </a>

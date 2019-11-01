@@ -38,16 +38,26 @@ public class StudentController {
   @ApiOperation(value = "跳转到学生登录界面")
   @GetMapping("/toLogin")
   public String toLogin(){
-    return "/student/login";
+    return "student/login";
   }
-
 
   @ApiOperation(value = "跳转到学生首页界面")
   @GetMapping("/index")
   public String toIndex(){
-    return "/student/index";
+    return "student/index";
   }
 
+  @ApiOperation(value = "跳转到学生个人信息界面")
+  @GetMapping("/myInfo")
+  public String myInfo(){
+    return "student/myinfo";
+  }
+
+  @ApiOperation(value = "跳转到学生个人信息界面")
+  @GetMapping("/askForLeave")
+  public String askForLeave(){
+    return "student/askForLeave";
+  }
 
   @ApiOperation(value = "根据Sno查询学生信息")
   @GetMapping("/selectByStudentId/{sno}")
@@ -58,16 +68,14 @@ public class StudentController {
     return result;
   }
 
-
   @ApiOperation(value = "根据ID删除学生信息")
-  @GetMapping("/deleteByStudentId/{id}")
+  @GetMapping("/deleteByStudentId}")
   @ResponseBody
   public DataResult<Integer> deleteByStudentId(@RequestParam("id") Integer id){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(studentService.deleteByPrimaryKey(id));
     return result;
   }
-
 
   @ApiOperation(value = "添加学生信息")
   @PostMapping("/insertStudent")
@@ -78,7 +86,6 @@ public class StudentController {
     return result;
   }
 
-
   @ApiOperation(value = "修改学生信息")
   @PostMapping("/updateStudent")
   @ResponseBody
@@ -87,7 +94,6 @@ public class StudentController {
     result.setBody(studentService.updateByPrimaryKeySelective(student));
     return result;
   }
-
 
   @ApiOperation(value = "学生登录")
   @PostMapping("/checkLogin")
@@ -111,7 +117,7 @@ public class StudentController {
 
 
   @ApiOperation(value = "获取学生的session对象")
-  @PostMapping("getStudentSession")
+  @PostMapping("/getStudentSession")
   @ResponseBody
   public DataResult<Student> getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean){
     DataResult<Student> result = new DataResult<>();

@@ -1,0 +1,25 @@
+body {
+  font-size: 14px;
+}
+.mui-title {
+  color: #FFFFFF;
+}
+
+.mui-input-row img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+input {
+  font-size: 14px;
+  color: #555555;
+}
+
+.mui-btn {
+  background-color: #007aff;
+  color: #FFFFFF;
+  border: none;
+  outline: none;
+  right: -315px;
+}
