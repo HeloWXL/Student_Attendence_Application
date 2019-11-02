@@ -60,20 +60,28 @@ public class StudentService {
     return studentMapper.updateByPrimaryKeySelective(record);
   }
 
-
   /**
    * 获取学生列表分页
-   * @param pageNo
-   * @param pageSize
+   * @param student
    * @return
    */
-  public Map<String, Object> getStudentByPage(Integer pageNo, Integer pageSize) {
+  public Map<String, Object> getStudentByPage(Student student) {
     EntityWrapper entityWrapper = new EntityWrapper();
-    List<Student> students = studentMapper.selectPage(new Page<Student>(pageNo,pageSize),entityWrapper);
+
+    if(!("").equals(student.getStudentName())&&student.getStudentName()!=null){
+      entityWrapper.like("student_name",student.getStudentName());
+    }
+    if(!("").equals(student.getStudentQq())&&student.getStudentQq()!=null){
+      entityWrapper.like("student_qq",student.getStudentQq());
+    }
+
+    List<Student> students = studentMapper.selectPage(new Page<Student>(student.getPage(),student.getLimit()),entityWrapper);
     int count = studentMapper.selectCount(entityWrapper);
     Map<String,Object> map = new HashMap<>();
     map.put("list",students);
     map.put("count",count);
+    map.put("msg","success");
+    map.put("code",0);
     return map;
   }
 

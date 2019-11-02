@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>学生管理</title>
@@ -31,9 +33,9 @@
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">手机号码：</label>
+                        <label class="layui-form-label">QQ：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="phone" autocomplete="off" class="layui-input">
+                            <input type="text" name="qq" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline" id="btn">

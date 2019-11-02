@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -48,6 +49,7 @@ public class Student {
     private Integer professionId;
 
     @TableField("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
 
     @TableField(exist = false)
@@ -55,4 +57,10 @@ public class Student {
 
     @TableField(exist = false)
     private List<Course> courseList ;
+
+    @TableField(exist = false)
+    private int page;
+
+    @TableField(exist = false)
+    private int limit;
 }

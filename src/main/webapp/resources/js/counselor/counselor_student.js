@@ -7,19 +7,19 @@ layui.use('table', function() {
   };
 
   // 加载表格数据
-  loadData(table, queryStudentVo);
+  loadData(ctx,table, queryStudentVo);
   // 查询
   $('#query').click(function() {
 
     var queryStudentVo = {
       studentName: $('input[name=\'userName\']').val(),
-      studentPhone: $('input[name=\'phone\']').val()
+      studentQq: $('input[name=\'qq\']').val()
     };
     loadData(table, queryStudentVo);
   });
 
   //加载列表数据
-  function loadData(table, queryStudentVo) {
+  function loadData(ctx,table, queryStudentVo) {
     table.render({
       id: 'studentTable',
       elem: '#demo'
@@ -28,22 +28,27 @@ layui.use('table', function() {
       , contentType: 'application/json; charset=utf-8'
       , defaultToolbar: []
       , where: queryStudentVo
-      , url: ctx + '/student/getStudent' //数据接口
+      , url: ctx + '/studentApi/selectStudentByPage' //数据接口
       , page: true //开启分页
       , cols: [[ //表头
         {field: 'checkbox', type: 'checkbox'}
         , {field: 'number', title: '序号', type: 'numbers'}
+        , {field: 'studentSno', title: '学号', width: 200}
         , {field: 'studentName', title: '学生姓名', width: 200}
-        , {field: 'studentPhone', title: '手机号码', width: 200}
+        , {field: 'studentSex', title: '性别', width: 200}
+        , {field: 'studentAge', title: '年龄', width: 200}
+        , {field: 'studentEmail', title: '邮箱', width: 200}
+        , {field: 'studentQq', title: 'QQ', width: 200}
         , {field: 'createTime', title: '创建时间', width: 200}
       ]]
       , skin: 'line,row' //表格风格
       , even: true
-      , limits: [5, 10, 15]
+      , limits: [10, 20, 30]
       , limit: 10 //每页默认显示的数量
     });
   }
 
+  // 工具栏
   table.on('toolbar(studentfilter)', function(obj) {
     var checkStatus = table.checkStatus(obj.config.id);
     var data = checkStatus.data; //获取选中的数据
