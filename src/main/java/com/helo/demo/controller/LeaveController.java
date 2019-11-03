@@ -27,6 +27,16 @@ public class LeaveController {
   @Resource
   private LeaveService leaveService;
 
+  @GetMapping("/toAskForLeave")
+  public String toAskLeave(){
+    return "/student/askForLeave";
+  }
+
+  @GetMapping("/toLeaveList")
+  public String toLeaveList(){
+    return "/student/leaveList";
+  }
+
   @ApiOperation(value = "添加一条请假记录")
   @PostMapping("/insertSelective")
   @ResponseBody

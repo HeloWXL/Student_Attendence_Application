@@ -27,39 +27,39 @@
 <div class="mui-content">
     <div id="attendance">
         <a href="">
-            <img src="${ctx}/resources/images/人脸识别.png" />
+            <img src="${ctx}/resources/images/face.png" />
             <p>学生考勤</p>
         </a>
     </div>
 
     <div  id="attendancelist">
         <a href="">
-            <img src="${ctx}/resources/images/考勤记录.png" />
+            <img src="${ctx}/resources/images/attendenceList.png" />
             <p>考勤记录</p>
         </a>
     </div>
 
     <div id="mycourse">
         <a href="">
-            <img src="${ctx}/resources/images/课程.png" />
+            <img src="${ctx}/resources/images/course.png" />
             <p>我的课程</p>
         </a>
     </div>
     <div id="mycourselist">
         <a href="">
-            <img src="${ctx}/resources/images/课表管理.png" />
+            <img src="${ctx}/resources/images/courseManage.png" />
             <p>我的课表</p>
         </a>
     </div>
     <div>
         <a id="askForLeave">
-            <img src="${ctx}/resources/images/请假.png" />
+            <img src="${ctx}/resources/images/leave.png" />
             <p>请假</p>
         </a>
     </div>
     <div>
-        <a >
-            <img src="${ctx}/resources/images/请假记录.png" />
+        <a id="leaveList">
+            <img src="${ctx}/resources/images/leaveList.png" />
             <p>请假记录</p>
         </a>
     </div>

@@ -14,9 +14,12 @@ $(function() {
   });
 // 请假页面
   $('#askForLeave').click(function() {
-    location.href=ctx+'/studentApi/askForLeave';
+    location.href=ctx+'/leaveApi/toAskForLeave';
   });
-
+// 请假记录
+  $('#leaveList').click(function() {
+    location.href=ctx+'/leaveApi/toLeaveList';
+  });
 
   mui('#attendance').on('tap','img',function(){
     mui.alert('正在建设中.....');

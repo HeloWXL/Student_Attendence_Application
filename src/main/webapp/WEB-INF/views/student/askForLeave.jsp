@@ -142,7 +142,6 @@
     return date;
   }
 
-
   // 时间选择函数
   function dateSelect(dom) {
     var $a = dom;
