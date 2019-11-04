@@ -5,6 +5,7 @@ import com.helo.demo.model.Profession;
 import com.helo.demo.service.ProfessionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,15 +18,22 @@ import java.util.Map;
  * @date 2019/8/21 0:03
  */
 @Api(tags = "专业接口")
-@RestController
-@RequestMapping("profession")
+@Controller
+@RequestMapping("professionApi")
 public class ProfessionController {
 
   @Resource
   private ProfessionService professionService;
 
+  @ApiOperation(value = "跳转到专业管理界面")
+  @GetMapping("/toCounselorProfessionTable")
+  public String toCounselorTable(){
+    return "counselor/profession";
+  }
+
   @ApiOperation(value = "根据ID查询专业信息")
   @GetMapping("/selectByProfessionId/{id}")
+  @ResponseBody
   public DataResult<Profession> selectByProfessionId(@RequestParam("id") Integer id){
     DataResult<Profession> result = new DataResult<>();
     result.setBody(professionService.selectByPrimaryKey(id));
@@ -33,15 +41,17 @@ public class ProfessionController {
   }
 
   @ApiOperation(value = "根据ID删除专业信息")
-  @GetMapping("/deleteByStudentId/{id}")
-  public DataResult<Integer> deleteByStudentId(@RequestParam("id") Integer id){
+  @GetMapping("/deleteByStudentId")
+  @ResponseBody
+  public DataResult<Integer> deleteByStudentId(@RequestParam("professionId") Integer professionId){
     DataResult<Integer> result = new DataResult<>();
-    result.setBody(professionService.deleteByPrimaryKey(id));
+    result.setBody(professionService.deleteByPrimaryKey(professionId));
     return result;
   }
 
   @ApiOperation(value = "添加专业信息")
   @PostMapping("/insertProfession")
+  @ResponseBody
   public DataResult<Integer> insertProfession(@RequestBody Profession profession){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(professionService.insertSelective(profession));
@@ -50,6 +60,7 @@ public class ProfessionController {
 
   @ApiOperation(value = "修改专业信息")
   @PostMapping("/updateProfession")
+  @ResponseBody
   public DataResult<Integer> updateProfession(@RequestBody Profession profession){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(professionService.updateByPrimaryKeySelective(profession));
@@ -58,9 +69,8 @@ public class ProfessionController {
 
   @ApiOperation(value = "查询专业信息-分页显示")
   @GetMapping("/selectProfessionByPage")
-  public DataResult<Map<String,Object>> selectProfessionByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSieze") Integer pageSieze){
-    DataResult<Map<String,Object>> result = new DataResult<>();
-    result.setBody(professionService.getProfessionByPage(pageNo,pageSieze));
-    return result;
+  @ResponseBody
+  public Map<String,Object> selectProfessionByPage(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSieze){
+    return professionService.getProfessionByPage(pageNo,pageSieze);
   }
 }

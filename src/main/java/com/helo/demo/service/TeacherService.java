@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.helo.demo.mapper.TeacherMapper;
 import com.helo.demo.model.Teacher;
 import com.helo.demo.utils.Md5Utils;
+import com.helo.demo.vo.TeacherVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -62,23 +63,16 @@ public class TeacherService {
     return teacherMapper.updateByPrimaryKeySelective(record);
   }
 
-
-
-
-
   /**
    * 获取教师列表分页
-   * @param pageNo
-   * @param pageSize
+   * @param page
+   * @param limit
    * @return
    */
-    public Map<String, Object> getTeacherByPage(Integer pageNo, Integer pageSize){
-      Map<String, Object> data = new HashMap();
+    public Map<String, Object> getTeacherByPage(Integer page, Integer limit){
       Map<String, Object> map = new HashMap();
       EntityWrapper entityWrapper = new EntityWrapper();
-      data.put("pageNo", (pageNo - 1) * pageSize);
-      data.put("pageSize", pageSize);
-      List<Teacher> teacherList = teacherMapper.selectByPage(data);
+      List<TeacherVo> teacherList = teacherMapper.selectByPage((page-1)*limit,limit);
       map.put("data",teacherList);
       int count = teacherMapper.selectCount(entityWrapper);
       map.put("count",count);

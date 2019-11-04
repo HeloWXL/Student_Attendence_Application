@@ -43,12 +43,6 @@
     from teacher t ,profession p
     where t.profession_id = p.profession_id AND t.teacher_tno = #{teacherTno,jdbcType=VARCHAR}
   </select>
-  <select id="selectByPage" resultMap="TeacherAndProfessionMap" parameterType="map" >
-    select t.teacher_name,t.teacher_tno,t.teacher_job_title,t.teacher_sex,t.teacher_age,p.profession_name ,p.apartment ,p.school
-    from teacher t ,profession p
-    where t.profession_id = p.profession_id
-    limit #{pageNo} , #{pageSize}
-  </select>
 <!--end-->
   <select id="selectByTno" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select *

@@ -2,31 +2,28 @@ layui.use('table', function() {
     var table = layui.table;
 
     // 加载表格数据
-    loadData();
+    loadProfessionData();
     // 查询
     $('#query').click(function() {
     });
 
     //加载列表数据
-    function loadData() {
+    function loadProfessionData() {
         table.render({
-            id: 'teacherTable',
+            id: 'professionTable',
             elem: '#demo'
-            , toolbar: '#toolbars'
+            ,toolbar: '#toolbars'
             ,method:'get'
             , defaultToolbar: []
-            , url: ctx + '/teacherApi/selectTeacherByPage' //数据接口
+            , url: ctx + '/professionApi/selectProfessionByPage' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'checkbox', type: 'checkbox'}
                 , {field: 'number', title: '序号', type: 'numbers'}
-                , {field: 'teacherTno', title: '工号', width: 80}
-                , {field: 'teacherName', title: '姓名', width: 120}
-                , {field: 'teacherSex', title: '性别', width: 80}
-                , {field: 'teacherJobTitle', title: '职称', width: 120}
-                , {field: 'professionName', title: '专业', width: 180}
+                , {field: 'professionName', title: '专业', width: 200}
                 , {field: 'apartment', title: '学院', width: 200}
                 , {field: 'school', title: '学校', width: 200}
+                , {field: 'createTime', title: '创建时间', width: 200}
             ]]
             , skin: 'line,row' //表格风格
             , even: true
@@ -34,8 +31,9 @@ layui.use('table', function() {
             , limit: 10 //每页默认显示的数量
         });
     }
+
     // 工具栏
-    table.on('toolbar(teacherfilter)', function(obj) {
+    table.on('toolbar(professionfilter)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id);
         var data = checkStatus.data; //获取选中的数据
         switch (obj.event) {
@@ -43,7 +41,7 @@ layui.use('table', function() {
                 layer.open({
                     id: 1,
                     type: 1,
-                    title: ['添加教师'],
+                    title: ['添加专业'],
                     skin: 'layui-layer-molv',
                     area: '500px',
                     offset: 'auto',
@@ -51,23 +49,21 @@ layui.use('table', function() {
                         '    <div class="layui-col-md10">' +
                         '        <form class="layui-form">' +
                         '            <div class="layui-form-item">\n' +
-                        '                <label class="layui-form-label" style="padding-left:-50px;">教师姓名:</label>\n' +
+                        '                <label class="layui-form-label" style="padding-left:-50px;">专业名称:</label>\n' +
                         '                <div class="layui-input-block">\n' +
-                        '                    <input type="text" placeholder="请输入教师姓名" name="teacherName" id="teacherName" class="layui-input">\n' +
+                        '                    <input type="text" placeholder="请输入专业名称" name="professionName" id="professionName" class="layui-input">\n' +
                         '                </div>\n' +
                         '            </div>\n' +
                         '            <div class="layui-form-item">\n' +
-                        '                <label class="layui-form-label" style="padding-left:-50px;">性别:</label>\n' +
+                        '                <label class="layui-form-label" style="padding-left:-50px;">学院名称:</label>\n' +
                         '                <div class="layui-input-block">\n' +
-                        '                    <input type="text" placeholder="请输入性别" name="studentPhone" id="studentPhone" class="layui-input">\n' +
+                        '                    <input type="text" placeholder="请输入学院名称" name="apartment" id="apartment" class="layui-input">\n' +
                         '                </div>\n' +
                         '            </div>\n' +
-
-
                         '            <div class="layui-form-item">\n' +
-                        '                <label class="layui-form-label" style="padding-left:-50px;">学生密码:</label>\n' +
+                        '                <label class="layui-form-label" style="padding-left:-50px;">学校名称:</label>\n' +
                         '                <div class="layui-input-block">\n' +
-                        '                    <input type="text" placeholder="请输入学生密码" name="studentPassword" id="studentPassword" class="layui-input">\n' +
+                        '                    <input type="text" placeholder="请输入学校名称" name="school" id="school" class="layui-input">\n' +
                         '                </div>\n' +
                         '            </div>\n' +
                         '        </form>\n' +
@@ -79,40 +75,40 @@ layui.use('table', function() {
                     },
                     btn1: function(index) {
                         //数据校验
-                        var studentPhone = $.trim($('#studentPhone').val());
-                        if(studentPhone==null&&studentPhone==''){
-                            layer.msg("手机号码不能为空",{icon:5,time:1500});
+                        var professionName = $.trim($('#professionName').val());
+                        if(professionName==null&&professionName==''){
+                            layer.msg("专业名称不能为空",{icon:5,time:1500});
                             return;
                         }
-                        var studentName = $.trim($('#studentName').val());
-                        if(studentName==null&&studentName==''){
-                            layer.msg("姓名不能为空",{icon:5,time:1500});
+                        var apartment = $.trim($('#apartment').val());
+                        if(apartment==null&&apartment==''){
+                            layer.msg("学院名称不能为空",{icon:5,time:1500});
                             return;
                         }
-                        var studentPassword = $.trim($('#studentPassword').val());
-                        if(studentPassword==null&&studentPassword==''){
-                            layer.msg("密码不能为空",{icon:5,time:1500});
+                        var school = $.trim($('#school').val());
+                        if(school==null&&school==''){
+                            layer.msg("学校名称不能为空",{icon:5,time:1500});
                             return;
                         }
                         // 提交
-                        var student = {
-                            studentPhone: studentPhone,
-                            studentName: studentName,
-                            studentPassword: studentPassword
+                        var profession = {
+                            professionName: professionName,
+                            apartment: apartment,
+                            school: school
                         };
                         $.ajax({
-                            url: ctx + '/student/insertStudent',
-                            data: JSON.stringify(student),
+                            url: ctx + '/professionApi/insertProfession',
+                            data: JSON.stringify(profession),
                             dataType: 'json',
                             type: 'post',
                             contentType: 'application/json; charset=utf-8',
                             success: function(data) {
-                                if (data == 1) {
+                                if (data.body == 1) {
                                     layer.alert('添加成功',{icon:1,time:1500}, function() {
                                         //关闭弹窗
                                         layer.closeAll();
                                         // 重新刷新表格
-                                        table.reload('studentTable');
+                                        table.reload('professionTable');
                                     });
                                 } else {
                                     layer.msg('添加失败',{icon:5,time:1500});
@@ -132,21 +128,21 @@ layui.use('table', function() {
                 if (data.length == 0) {
                     layer.msg('请选择一行');
                 } else {
-                    var studentId = data[0].studentId;
+                    var professionId = data[0].professionId;
                     layer.confirm('是否删除？', {title: '提示'}, function(index) {
                         $.ajax({
-                            url: ctx + '/student/deleteStudent',
-                            data: {studentId: studentId},
+                            url: ctx + '/professionApi/deleteByStudentId',
+                            data: {professionId: professionId},
                             dataType: 'json',
                             type: 'get',
                             contentType: 'application/json; charset=utf-8',
                             success: function(data) {
-                                if (data == 1) {
+                                if (data.body == 1) {
                                     layer.msg('删除成功',{icon:1,time:1500}, function() {
                                         //关闭弹窗
                                         layer.closeAll();
                                         // 重新刷新表格
-                                        table.reload('studentTable');
+                                        table.reload('professionTable');
                                     });
                                 } else {
                                     layer.msg('删除失败',{icon:5,time:1500});
@@ -163,7 +159,7 @@ layui.use('table', function() {
                     layer.msg('只能选择一行');
                 } else {
                     layer.open({
-                        id: 2,
+                        id: 'update',
                         type: 1,
                         title: ['课程修改'],
                         skin: 'layui-layer-molv',
@@ -173,27 +169,21 @@ layui.use('table', function() {
                             '    <div class="layui-col-md10">' +
                             '        <form class="layui-form">' +
                             '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">学生姓名:</label>\n' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">专业名称:</label>\n' +
                             '                <div class="layui-input-block">\n' +
-                            '                    <input type="text"   name="studentName" id="studentName" class="layui-input" disabled="disabled">\n' +
+                            '                    <input type="text"   name="professionName" id="professionName" class="layui-input" disabled="disabled">\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">手机号码:</label>\n' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">学院名称:</label>\n' +
                             '                <div class="layui-input-block">\n' +
-                            '                    <input type="text"   name="studentPhone" id="studentPhone" class="layui-input" disabled="disabled">\n' +
+                            '                    <input type="text"   name="apartment" id="apartment" class="layui-input" disabled="disabled">\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">学生密码:</label>\n' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">学校名称:</label>\n' +
                             '                <div class="layui-input-block">\n' +
-                            '                    <input type="text"   name="studentPassword" id="studentPassword" class="layui-input">\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">创建时间:</label>\n' +
-                            '                <div class="layui-input-block">\n' +
-                            '                    <input type="text"    name="createTime" id="createTime" class="layui-input" disabled="disabled">\n' +
+                            '                    <input type="text"   name="school" id="school" class="layui-input">\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '        </form>\n' +
@@ -203,34 +193,46 @@ layui.use('table', function() {
                         , success: function(layero) {
                             layero.find('.layui-layer-btn').css('text-align', 'center');
                             // 展示在弹出层里面
-                            $('#studentName').val(data[0].studentName);
-                            $('#studentPhone').val(data[0].studentPhone);
-                            $('#studentPassword').val();
-                            $('#createTime').val(data[0].createTime);
+                            $('#professionName').val(data[0].professionName);
+                            $('#apartment').val(data[0].apartment);
+                            $('#school').val(data[0].school);
                         },
                         btn1: function(index) {
                             //数据校验
-                            var studentPassword = $.trim($('#studentPassword').val());
-                            if(studentPassword==null&&studentPassword==''){
-                                layer.msg("密码不能为空",{icon:5,time:1500});
+                            var professionName = $.trim($('#professionName').val());
+                            if(professionName==null&&professionName==''){
+                                layer.msg("专业不能为空",{icon:5,time:1500});
+                                return;
+                            }
+                            var apartment = $.trim($('#apartment').val());
+                            if(apartment==null&&apartment==''){
+                                layer.msg("学院名称不能为空",{icon:5,time:1500});
+                                return;
+                            }
+                            var school = $.trim($('#school').val());
+                            if(school==null&&school==''){
+                                layer.msg("学校名称不能为空",{icon:5,time:1500});
                                 return;
                             }
                             // 提交
-                            var student = {
-                                studentId: data[0].studentId,
-                                studentPassword: studentPassword
+                            // 提交
+                            var profession = {
+                                professionName: professionName,
+                                apartment: apartment,
+                                school: school,
+                                professionId:data[0].professionId
                             };
                             $.ajax({
-                                url: ctx + '/student/updateStudentPasswordByAdmin',
-                                data: JSON.stringify(student),
+                                url: ctx + '/professionApi/updateProfession',
+                                data: JSON.stringify(profession),
                                 dataType: 'json',
                                 type: 'post',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function(data) {
-                                    if (data == 1) {
-                                        layer.alert('修改成功', function() {
+                                    if (data.body == 1) {
+                                        layer.msg('修改成功',{icon:1,time:1500}, function() {
                                             layer.closeAll();
-                                            table.reload('studentTable');
+                                            table.reload('professionTable');
                                         });
                                     } else {
                                         layer.msg('修改失败',{icon:5,time:1500});
@@ -246,4 +248,5 @@ layui.use('table', function() {
                 }
         }
     });
+
 });

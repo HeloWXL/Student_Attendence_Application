@@ -115,8 +115,8 @@ public class TeacherController {
   @ApiOperation(value = "查询教师信息-分页显示")
   @GetMapping("/selectTeacherByPage")
   @ResponseBody
-  public Map<String,Object> selectTeacherByPage(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize){
-    return teacherService.getTeacherByPage(pageNo,pageSize);
+  public Map<String,Object> selectTeacherByPage(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+    return teacherService.getTeacherByPage(page,limit);
   }
 
   @ApiOperation(value = "清除教师的session对象")

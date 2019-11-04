@@ -67,11 +67,14 @@ public class ProfessionService {
    */
   public Map<String, Object> getProfessionByPage(Integer pageNo, Integer pageSize) {
     EntityWrapper entityWrapper = new EntityWrapper();
+    //分页
     List<Profession> professions = professionMapper.selectPage(new Page<Profession>(pageNo,pageSize),entityWrapper);
     int count = professionMapper.selectCount(entityWrapper);
     Map<String,Object> map = new HashMap<>();
-    map.put("list",professions);
+    map.put("data",professions);
     map.put("count",count);
+    map.put("code",0);
+    map.put("msg","");
     return map;
   }
 

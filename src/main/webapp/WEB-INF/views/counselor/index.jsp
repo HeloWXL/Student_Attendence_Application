@@ -19,7 +19,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">后台</div>
+        <div class="layui-logo">学生考勤App后台管理</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <%--<ul class="layui-nav layui-layout-left">--%>
             <%--<li class="layui-nav-item"><a href="">控制台</a></li>--%>
@@ -56,6 +56,7 @@
                 <li class="layui-nav-item"><a id="index">首页</a></li>
                 <li class="layui-nav-item"><a id="student">学生管理</a></li>
                 <li class="layui-nav-item"><a id="teacher">教师管理</a></li>
+                <li class="layui-nav-item"><a id="profession">专业管理</a></li>
                 <li class="layui-nav-item"><a id="leave">请假管理</a></li>
                 <li class="layui-nav-item"><a id="attendce">考勤管理</a></li>
 <%--                <li class="layui-nav-item layui-nav-itemed">--%>
@@ -100,6 +101,9 @@
       })
       $("#teacher").click(function () {
           $("iframe").attr("src","/teacherApi/toCounselorTeacherTable")
+      })
+      $("#profession").click(function () {
+          $("iframe").attr("src","/professionApi/toCounselorProfessionTable")
       })
   })
 </script>

@@ -9,11 +9,12 @@ import java.util.Date;
 
 /**
  * 任课老师
- * @author xiayj
+ * @author wangxl
  * @since
  */
 @Data
 public class Teacher {
+
     @TableId(value = "teacher_id",type = IdType.AUTO)
     private Integer teacherId;
 

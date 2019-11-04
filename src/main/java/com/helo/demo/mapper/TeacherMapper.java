@@ -2,7 +2,10 @@ package com.helo.demo.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Teacher;
+import com.helo.demo.vo.TeacherVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -54,7 +57,8 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
      * 教师分页
      * @return List<Teacher>
      */
-    List<Teacher> selectByPage(Map<String, Object> map);
+    @Select("select * from teacher t ,profession pro where t.profession_id = pro.profession_id limit #{page},#{limit}")
+    List<TeacherVo> selectByPage(@Param("page") int page , @Param("limit") int limit);
 
 
 
