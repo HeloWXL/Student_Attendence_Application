@@ -27,14 +27,22 @@ public class LeaveController {
   @Resource
   private LeaveService leaveService;
 
+  @ApiOperation(value = "跳转到学生请假页面")
   @GetMapping("/toAskForLeave")
   public String toAskLeave(){
     return "/student/askForLeave";
   }
 
+  @ApiOperation(value = "跳转到请假请假列表页面")
   @GetMapping("/toLeaveList")
   public String toLeaveList(){
     return "/student/leaveList";
+  }
+
+  @ApiOperation(value = "跳转到辅导员管理请假列表页面")
+  @GetMapping("/toCounselorLeaveTable")
+  public String toCounselorLeaveList(){
+    return "/counselor/leave";
   }
 
   @ApiOperation(value = "添加一条请假记录")
@@ -78,11 +86,9 @@ public class LeaveController {
   @ApiOperation(value = "获取请假列表-分页")
   @GetMapping("/selectByPage")
   @ResponseBody
-  public DataResult<Map<String,Object>> selectByPage(@RequestParam("pageNo") Integer pageNo,
-                                                          @RequestParam("pageSize") Integer pageSieze){
-    DataResult<Map<String,Object>> result = new DataResult<>();
-    result.setBody(leaveService.selectByPage(pageNo,pageSieze));
-    return result;
+  public Map<String,Object> selectByPage(@RequestParam("page") Integer pageNo,
+                                                          @RequestParam("limit") Integer pageSieze){
+    return leaveService.selectByPage(pageNo,pageSieze);
   }
 
 

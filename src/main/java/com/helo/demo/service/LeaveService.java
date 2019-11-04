@@ -79,10 +79,12 @@ public class LeaveService {
     map.put("pageSize",pageSize);
 
     List<Leave> leaveList = leaveMapper.selectByPage(map);
-    data.put("list",leaveList);
+    data.put("data",leaveList);
 
     int count = leaveMapper.selectCount(entityWrapper);
     data.put("count",count);
+    data.put("msg","");
+    data.put("code",0);
     return data;
   }
 

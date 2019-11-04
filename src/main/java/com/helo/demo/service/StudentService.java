@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.helo.demo.mapper.StudentMapper;
 import com.helo.demo.model.Student;
 import com.helo.demo.utils.Md5Utils;
+import com.helo.demo.vo.StudentListVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -60,27 +61,20 @@ public class StudentService {
     return studentMapper.updateByPrimaryKeySelective(record);
   }
 
+
   /**
-   * 获取学生列表分页
-   * @param student
+   * 学生列表获取分页显示
+   * @param page
+   * @param limit
    * @return
    */
-  public Map<String, Object> getStudentByPage(Student student) {
+  public Map<String, Object> getStudentList(int page, int limit){
     EntityWrapper entityWrapper = new EntityWrapper();
-
-    if(!("").equals(student.getStudentName())&&student.getStudentName()!=null){
-      entityWrapper.like("student_name",student.getStudentName());
-    }
-    if(!("").equals(student.getStudentQq())&&student.getStudentQq()!=null){
-      entityWrapper.like("student_qq",student.getStudentQq());
-    }
-
-    List<Student> students = studentMapper.selectPage(new Page<Student>(student.getPage(),student.getLimit()),entityWrapper);
     int count = studentMapper.selectCount(entityWrapper);
     Map<String,Object> map = new HashMap<>();
-    map.put("list",students);
+    map.put("data",studentMapper.getStudentList((page-1)*limit,limit));
     map.put("count",count);
-    map.put("msg","success");
+    map.put("msg","");
     map.put("code",0);
     return map;
   }

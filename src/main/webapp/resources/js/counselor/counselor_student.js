@@ -1,45 +1,32 @@
 layui.use('table', function() {
   var table = layui.table;
 
-  var queryStudentVo = {
-    studentName: '',
-    studentPhone: ''
-  };
-
   // 加载表格数据
-  loadData(ctx,table, queryStudentVo);
+  loadData();
   // 查询
   $('#query').click(function() {
-
-    var queryStudentVo = {
-      studentName: $('input[name=\'userName\']').val(),
-      studentQq: $('input[name=\'qq\']').val()
-    };
-    loadData(table, queryStudentVo);
   });
 
   //加载列表数据
-  function loadData(ctx,table, queryStudentVo) {
+  function loadData() {
     table.render({
       id: 'studentTable',
       elem: '#demo'
       , toolbar: '#toolbars'
-      , method: 'post'
-      , contentType: 'application/json; charset=utf-8'
+      ,method:'get'
       , defaultToolbar: []
-      , where: queryStudentVo
       , url: ctx + '/studentApi/selectStudentByPage' //数据接口
       , page: true //开启分页
       , cols: [[ //表头
         {field: 'checkbox', type: 'checkbox'}
         , {field: 'number', title: '序号', type: 'numbers'}
-        , {field: 'studentSno', title: '学号', width: 200}
-        , {field: 'studentName', title: '学生姓名', width: 200}
-        , {field: 'studentSex', title: '性别', width: 200}
-        , {field: 'studentAge', title: '年龄', width: 200}
+        , {field: 'studentSno', title: '学号', width: 120}
+        , {field: 'studentName', title: '学生姓名', width: 100}
+        , {field: 'studentSex', title: '性别', width: 80}
+        , {field: 'studentAge', title: '年龄', width: 80}
         , {field: 'studentEmail', title: '邮箱', width: 200}
         , {field: 'studentQq', title: 'QQ', width: 200}
-        , {field: 'createTime', title: '创建时间', width: 200}
+        , {field: 'createTime', title: '创建时间', width: 120}
       ]]
       , skin: 'line,row' //表格风格
       , even: true

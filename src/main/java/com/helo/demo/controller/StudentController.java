@@ -8,6 +8,7 @@ import com.helo.demo.service.StudentService;
 import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -133,10 +134,10 @@ public class StudentController {
   }
 
   @ApiOperation(value = "查询学生信息-分页显示")
-  @PostMapping("/selectStudentByPage")
+  @GetMapping("/selectStudentByPage")
   @ResponseBody
-  public Map<String,Object> selectStudentByPage(@RequestBody Student student){
-    return studentService.getStudentByPage(student);
+  public Map<String,Object> selectStudentByPage(@RequestParam("page")Integer page , @RequestParam("limit") int limit){
+    return studentService.getStudentList(page,limit);
   }
 
   @ApiOperation(value = "清除学生的session对象")

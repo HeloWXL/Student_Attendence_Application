@@ -40,7 +40,7 @@ public class CounselorController {
   }
 
   @ApiOperation(value = "跳转到学生列表界面")
-  @GetMapping("/toStudentTable")
+  @GetMapping("/toCounselorStudentTable")
   public String toStudentTable(){
     return "counselor/student";
   }

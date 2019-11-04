@@ -75,14 +75,15 @@ public class TeacherService {
     public Map<String, Object> getTeacherByPage(Integer pageNo, Integer pageSize){
       Map<String, Object> data = new HashMap();
       Map<String, Object> map = new HashMap();
-
       EntityWrapper entityWrapper = new EntityWrapper();
       data.put("pageNo", (pageNo - 1) * pageSize);
       data.put("pageSize", pageSize);
       List<Teacher> teacherList = teacherMapper.selectByPage(data);
-      map.put("list",teacherList);
+      map.put("data",teacherList);
       int count = teacherMapper.selectCount(entityWrapper);
       map.put("count",count);
+      map.put("code",0);
+      map.put("msg","");
       return map;
     }
 

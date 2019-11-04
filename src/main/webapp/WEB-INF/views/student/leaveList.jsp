@@ -52,6 +52,10 @@
     </header>
     <div class="mui-content">
         <ul class="mui-table-view" id="leaveList">
+            <li class="mui-table-view-cell">
+
+
+            </li>
         </ul>
         <div id="loading">
             <button type="button" class="mui-btn mui-btn-outlined" style="display: none">加载</button>
@@ -79,32 +83,31 @@
             async:false,
             success:function(data) {
                 for(var i = 0 ;i<data.body.list.length;i++){
-                    // var $node = $('<li class="mui-table-view-cell">\n' +
-                    //     '<span class="mui-badge mui-badge-success" id="success">已批阅</span>\n' +
-                    //     '<a href = "/leaveApi/selectByPrimaryKey/'+data.body.list[i].leaveId+'">\n' +
-                    //     '<h4>'+data.body.list[i].leaveTitle+'</h4>\n' +
-                    //     '<p>\n' +
-                    //     '请假课程：<span>高等数学</span>\n' +
-                    //     '</p>\n' +
-                    //     '<p>开始时间：<span>'+data.body.list[i].startTime+'</span>&nbsp;&nbsp;&nbsp;结束时间：<span>'+data.body.list[i].endTime+'</span></p>\n' +
-                    //     '\n' +
-                    //     '</a>\n' +
-                    //     '</li>');
-                    var $node = $('<li class="mui-table-view-cell">' +
+                    var $node = $('<li class="mui-table-view-cell">\n' +
                         '<span class="mui-badge mui-badge-success" id="success">已批阅</span>\n' +
-                        '<a href = "/leaveApi/selectByPrimaryKey/'+data.body.list[i].leaveId+'">' +
-                        '<div class="mui-card">\n' +
-                        '\t<div class="mui-card-header">' +
-                        '<h4>'+data.body.list[i].leaveTitle+'</h4>' +
-                        '</div>\n' +
-                        '\t<div class="mui-card-content">' +
-                        '<p>请假课程：<span>高等数学</span></p>' +
-                        '</div>\n' +
-                        '\t<div class="mui-card-footer">' +
-                        ' <p>开始时间：<span>'+data.body.list[i].startTime+'</span>&nbsp;&nbsp;&nbsp;结束时间：<span>'+data.body.list[i].endTime+'</span></p>\n' +
-                        '</div>\n' +
-                        '</div>\n'+
-                        '</li>')
+                        '<a href = "/leaveApi/selectByPrimaryKey/'+data.body.list[i].leaveId+'">\n' +
+                        '<h4>'+data.body.list[i].leaveTitle+'</h4>\n' +
+                        '<p>\n' +
+                        '请假课程：<span>高等数学</span>\n' +
+                        '</p>\n' +
+                        '<p>开始时间：<span>'+data.body.list[i].startTime+'</span>&nbsp;&nbsp;&nbsp;结束时间：<span>'+data.body.list[i].endTime+'</span></p>\n' +
+                        '\n' +
+                        '</a>\n' +
+                        '</li>');
+                    // var $node = $('<li class="mui-table-view-cell">' +
+                    //     '<a href = "/leaveApi/selectByPrimaryKey/'+data.body.list[i].leaveId+'">' +
+                    //     '<div class="mui-card">\n' +
+                    //     '\t<div class="mui-card-header">' +
+                    //     '<h4>'+data.body.list[i].leaveTitle+'</h4>' +
+                    //     '</div>\n' +
+                    //     '\t<div class="mui-card-content">' +
+                    //     '<p>请假课程：<span>高等数学</span></p>' +
+                    //     '</div>\n' +
+                    //     '\t<div class="mui-card-footer">' +
+                    //     ' <p>开始时间：<span>'+data.body.list[i].startTime+'</span>&nbsp;&nbsp;&nbsp;结束时间：<span>'+data.body.list[i].endTime+'</span></p>\n' +
+                    //     '</div>\n' +
+                    //     '</div>\n'+
+                    //     '</li>')
 
                     $("#leaveList").append($node);
                 }

@@ -17,6 +17,7 @@ import java.util.Date;
 @Data
 @TableName(value = "leaves")
 public class Leave {
+
     @TableId(value = "leave_id",type = IdType.AUTO)
     private Integer leaveId;
     @TableField("student_sno")
