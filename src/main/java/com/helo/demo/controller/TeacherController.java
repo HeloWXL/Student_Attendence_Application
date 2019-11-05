@@ -33,11 +33,40 @@ public class TeacherController {
   @Resource
   private TeacherService teacherService;
 
-
   @ApiOperation(value = "跳转到教师信息列表")
   @GetMapping("/toCounselorTeacherTable")
   public String toTeacherList(){
     return "counselor/teacher";
+  }
+
+  @ApiOperation(value = "跳转到教师登录页面")
+  @GetMapping("/toLogin")
+  public String toLogin(){
+    return "/teacher/login";
+  }
+
+  @ApiOperation(value = "跳转到教师首页页面")
+  @GetMapping("/toIndex")
+  public String toIndex(){
+    return "/teacher/index";
+  }
+
+  @ApiOperation(value = "跳转到教师个人信息页面")
+  @GetMapping("/toPerson")
+  public String toPerson(){
+    return "/teacher/person";
+  }
+
+  @ApiOperation(value = "跳转到教师添加课程页面")
+  @GetMapping("/toCourse")
+  public String toCourse(){
+    return "/teacher/course";
+  }
+
+  @ApiOperation(value = "跳转到课程列表页面")
+  @GetMapping("/toCourseList")
+  public String toCourseList(){
+    return "/teacher/courseList";
   }
 
 
@@ -52,9 +81,9 @@ public class TeacherController {
       Profession profession = professionService.selectByPrimaryKey(teacher.getProfessionId());
       teacher.setProfession(profession);
       result.setBody(true);
-      request.getSession().setAttribute("teachersession", teacher);
+      request.getSession().setAttribute("teacher", teacher);
     } else {
-      request.getSession().setAttribute("teachersession", null);
+      request.getSession().setAttribute("teacher", null);
       result.setBody(false);
     }
     return result;

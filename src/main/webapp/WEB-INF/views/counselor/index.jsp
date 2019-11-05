@@ -48,7 +48,6 @@
             <li class="layui-nav-item"><a href="">退出登录</a></li>
         </ul>
     </div>
-
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -57,6 +56,7 @@
                 <li class="layui-nav-item"><a id="student">学生管理</a></li>
                 <li class="layui-nav-item"><a id="teacher">教师管理</a></li>
                 <li class="layui-nav-item"><a id="profession">专业管理</a></li>
+                <li class="layui-nav-item"><a id="course">课程管理</a></li>
                 <li class="layui-nav-item"><a id="leave">请假管理</a></li>
                 <li class="layui-nav-item"><a id="attendce">考勤管理</a></li>
 <%--                <li class="layui-nav-item layui-nav-itemed">--%>
@@ -95,6 +95,9 @@
   $(function () {
       $("#leave").click(function () {
           $("iframe").attr("src","/leaveApi/toCounselorLeaveTable")
+      })
+      $("#course").click(function () {
+          $("iframe").attr("src","/courseApi/toCounselorCourseTable")
       })
       $("#student").click(function () {
           $("iframe").attr("src","/counselorApi/toCounselorStudentTable")

@@ -25,6 +25,12 @@ public class CourseController {
   @Resource
   private CourseService courseService;
 
+  @ApiOperation(value = "跳转到课程信息列表")
+  @GetMapping("/toCounselorCourseTable")
+  public String toCounselorCourseTable(){
+    return "counselor/course";
+  }
+
   @ApiOperation(value = "根据ID查询课程信息")
   @GetMapping("/selectByCourseId/{id}")
   @ResponseBody
@@ -64,11 +70,9 @@ public class CourseController {
   @ApiOperation(value = "查询课程信息")
   @GetMapping("/selectCourseByPage")
   @ResponseBody
-  public DataResult<Map<String,Object>> selectCourseByPage(@RequestParam("pageNo") Integer pageNo,
-                                                           @RequestParam("pageSieze") Integer pageSieze){
-    DataResult<Map<String,Object>> result = new DataResult<>();
-    result.setBody(courseService.getCourseByPage(pageNo,pageSieze));
-    return result;
+  public Map<String,Object> selectCourseByPage(@RequestParam("page") Integer pageNo,
+                                                           @RequestParam("limit") Integer pageSiez){
+    return courseService.getCourseList(pageNo,pageSiez);
   }
 
   @ApiOperation(value = "查询课程信息")

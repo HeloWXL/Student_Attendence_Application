@@ -79,7 +79,7 @@
     </a>
 </nav>
 </body>
-
+<%--引入js文件--%>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/student/index.js" type="application/javascript"></script>

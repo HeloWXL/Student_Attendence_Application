@@ -3,6 +3,7 @@ package com.helo.demo.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.helo.demo.mapper.CourseMapper;
 import com.helo.demo.model.Course;
+import com.helo.demo.vo.CourseVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -59,25 +60,22 @@ public class CourseService {
   }
 
 
-
   /**
-   * 获取课程列表分页
+   * 分页查询课程列表信息
    * @param pageNo
    * @param pageSize
    * @return
    */
-  public Map<String, Object> getCourseByPage(Integer pageNo, Integer pageSize) {
-    Map<String,Object> data = new HashMap<>();
-    EntityWrapper entityWrapper = new EntityWrapper();
-    data.put("pageNo",(pageNo - 1) * pageSize);
-    data.put("pageSize",pageSize);
-//    List<Course> courses = courseMapper.selectCourseByPage(data);
-    int count = courseMapper.selectCount(entityWrapper);
+  public Map<String, Object> getCourseList(int pageNo, int pageSize){
     Map<String,Object> map = new HashMap<>();
-//    map.put("list",courses);
-    map.put("count",count);
+    List<CourseVo> list = courseMapper.getCourseList((pageNo-1)*pageSize,pageSize);
+    map.put("data",list);
+    map.put("count",courseMapper.selectCount(new EntityWrapper<>()));
+    map.put("msg","");
+    map.put("code",0);
     return map;
   }
+
 
 
   /**
