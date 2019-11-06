@@ -1,7 +1,7 @@
 server:
   port: 8088
-#  servlet:
-#    context-path: /helo
+  servlet:
+    context-path: /helo
 spring:
   mvc:
     view:
