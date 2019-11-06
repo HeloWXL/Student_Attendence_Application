@@ -4,10 +4,10 @@ $(function () {
     location.href = ctx + "/teacherApi/toLogin"
   }
   mui("#addCourse").on('tap', 'img', function () {
-    location.href = '/teacherApi/toCourse';
+    location.href = ctx+'/teacherApi/toCourse';
   })
   mui("#courselist").on('tap', 'img', function () {
-    location.href = '/teacherApi/toCourseList';
+    location.href = ctx+'/teacherApi/toCourseList';
   })
   mui("#attendancelist").on('tap', 'img', function () {
     mui.alert("正在建设中.....")

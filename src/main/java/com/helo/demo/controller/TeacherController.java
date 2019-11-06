@@ -152,10 +152,10 @@ public class TeacherController {
   @GetMapping("/removeTeacherSession")
   @ResponseBody
   public void removeTeacherSession(HttpServletRequest request, HttpServletResponse response){
-    request.getSession().removeAttribute("teachersession");
-    if ( request.getSession().getAttribute("teachersession") == null) {
+    request.getSession().removeAttribute("teacher");
+    if ( request.getSession().getAttribute("teacher") == null) {
       try {
-        response.sendRedirect("/toTeaLogin");
+        response.sendRedirect("/helo/teacherApi/toLogin");
       } catch (IOException e) {
         e.printStackTrace();
       }

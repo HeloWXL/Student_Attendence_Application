@@ -21,6 +21,9 @@
         var teacher = "${teacher}";
         var teacherId = "${teacher.teacherId}";
     </script>
+    <style>
+
+    </style>
 </head>
 <body>
 <header class="mui-bar mui-bar-nav mui-badge-primary">

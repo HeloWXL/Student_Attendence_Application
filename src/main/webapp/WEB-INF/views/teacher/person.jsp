@@ -34,38 +34,51 @@
 
             <div class="mui-input-row">
                 <label>姓名</label>
-                <input type="text" class="mui-input-clear" name="name">
+                <input type="text" class="mui-input-clear" name="name" disabled="disabled">
             </div>
-
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>工号</label>
                 <input type="text" class="mui-input-clear" name="tno">
             </div>
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>年龄</label>
-                <input type="text" class="mui-input-clear" name="age">
+                <input type="text" class="mui-input-clear" name="age" disabled="disabled">
             </div>
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>性别</label>
-                <input type="text" class="mui-input-clear" name="sex">
+                <input type="text" class="mui-input-clear" name="sex" disabled="disabled">
             </div>
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>职称</label>
-                <input type="text" class="mui-input-clear" name="job_title">
+                <input type="text" class="mui-input-clear" name="job_title" disabled="disabled">
             </div>
-
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>专业</label>
-                <input type="text" class="mui-input-clear" name="profession">
+                <input type="text" class="mui-input-clear" name="profession" disabled="disabled">
             </div>
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>学院</label>
-                <input type="text" class="mui-input-clear" name="apartment">
+                <input type="text" class="mui-input-clear" name="apartment" disabled="disabled">
             </div>
+        </li>
+        <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>学校</label>
-                <input type="text" class="mui-input-clear" name="school">
+                <input type="text" class="mui-input-clear" name="school" disabled="disabled">
             </div>
+        </li>
     </ul>
 </div>
 <nav class="mui-bar mui-bar-tab" id="home">

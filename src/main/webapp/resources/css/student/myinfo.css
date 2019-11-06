@@ -4,7 +4,9 @@ body {
 .mui-title {
   color: #FFFFFF;
 }
-
+.mui-content>.mui-table-view:first-child {
+  margin-top: 0px;
+}
 .mui-input-row img {
   width: 100px;
   height: 100px;

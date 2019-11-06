@@ -1,4 +1,9 @@
 $(function() {
+
+  if(student==''||student==null) {
+    location.href = ctx+'/studentApi/toLogin';
+  }
+
   // 获取session的值
   $.ajax({
     url: ctx+'/studentApi/getStudentSession',
@@ -6,7 +11,7 @@ $(function() {
     dataType: 'json',
     type: 'post',
     success: function(data) {
-      $('img[name="userPic"]').attr('src', data.body.studentPic);
+      $('img[name="userPic"]').attr('src', ctx+data.body.studentPic);
       $('input[name="username"]').val(data.body.studentName);
       $('input[name="sno"]').val(data.body.studentSno);
       $('input[name="age"]').val(data.body.studentAge);

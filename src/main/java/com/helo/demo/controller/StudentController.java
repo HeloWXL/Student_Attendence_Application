@@ -145,7 +145,7 @@ public class StudentController {
     request.getSession().removeAttribute("studentsession");
     if ( request.getSession().getAttribute("studentsession") == null) {
       try {
-        response.sendRedirect("/toLogin");
+        response.sendRedirect("/helo/studentApi/toLogin");
       } catch (IOException e) {
         e.printStackTrace();
       }
