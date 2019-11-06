@@ -1,6 +1,6 @@
 
 $(function() {
-  if('${studentsession}'==''||'${studentsession}'==null) {
+  if(student==''||student==null) {
     location.href = ctx+'/studentApi/toLogin';
     return;
   }

@@ -74,7 +74,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
-            <iframe align="center" width="100%" height="100%" src="/counselorApi/toCounselorStudentTable" frameborder="no" border="0" marginwidth="0"
+            <iframe align="center" width="100%" height="100%" src="" frameborder="no" border="0" marginwidth="0"
                                             marginheight="20px" scrolling="no" style="background-color: #FFFFFF;"></iframe>
         </div>
     </div>
@@ -93,20 +93,22 @@
   });
 
   $(function () {
+      $("iframe").attr("src",ctx+"/counselorApi/toCounselorStudentTable")
+
       $("#leave").click(function () {
-          $("iframe").attr("src","/leaveApi/toCounselorLeaveTable")
+          $("iframe").attr("src",ctx+"/leaveApi/toCounselorLeaveTable")
       })
       $("#course").click(function () {
-          $("iframe").attr("src","/courseApi/toCounselorCourseTable")
+          $("iframe").attr("src",ctx+"/courseApi/toCounselorCourseTable")
       })
       $("#student").click(function () {
-          $("iframe").attr("src","/counselorApi/toCounselorStudentTable")
+          $("iframe").attr("src",ctx+"/counselorApi/toCounselorStudentTable")
       })
       $("#teacher").click(function () {
-          $("iframe").attr("src","/teacherApi/toCounselorTeacherTable")
+          $("iframe").attr("src",ctx+"/teacherApi/toCounselorTeacherTable")
       })
       $("#profession").click(function () {
-          $("iframe").attr("src","/professionApi/toCounselorProfessionTable")
+          $("iframe").attr("src",ctx+"/professionApi/toCounselorProfessionTable")
       })
   })
 </script>
