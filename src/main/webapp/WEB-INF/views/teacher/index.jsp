@@ -67,36 +67,9 @@
     </a>
 </nav>
 </body>
-
+<%--引入JS文件--%>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
-<script type="text/javascript">
-
-    $(function () {
-        // 判断教师是否登录，未登录直接跳转到登录界面
-        if (teacher == null || teacher == '') {
-            location.href = ctx + "/teacherApi/toLogin"
-        }
-        mui("#addCourse").on('tap', 'img', function () {
-            location.href = '/teacherApi/toCourse';
-        })
-        mui("#courselist").on('tap', 'img', function () {
-            location.href = '/teacherApi/toCourseList';
-        })
-        mui("#attendancelist").on('tap', 'img', function () {
-            mui.alert("正在建设中.....")
-        })
-        mui("#mycourselist").on('tap', 'img', function () {
-            mui.alert("正在建设中.....")
-        })
-        $("#myinfo").click(function () {
-            location.href = ctx + '/teacherApi/toPerson';
-        });
-        $("#home").click(function () {
-            location.href = ctx + '/teacherApi/toIndex';
-        });
-    })
-
-</script>
-
+<%--引入自定义JS文件--%>
+<script type="text/javascript"  src="${ctx}/resources/js/teacher/index.js"></script>
 </html>

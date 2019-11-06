@@ -22,7 +22,7 @@ layui.use('table', function() {
                 , {field: 'courseName', title: '课程名称', width: 120}
                 , {field: 'teacherName', title: '教师姓名', width: 120}
                 , {field: 'teacherJobTitle', title: '教师职称', width: 120}
-                , {field: 'classarrangement', title: '开课安排(星期)', width: 120}
+                , {field: 'classarrangement', title: '开课安排(星期)', width: 150}
                 , {field: 'starttime', title: '开课时间', width: 120}
                 , {field: 'endtime', title: '结课时间', width: 120}
                 , {field: 'professionName', title: '专业', width: 120}

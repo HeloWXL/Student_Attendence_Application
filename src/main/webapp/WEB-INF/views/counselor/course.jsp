@@ -48,7 +48,7 @@
                     </div>
                 </form>
             </div>
-            <%--            表格--%>
+            <%--表格--%>
             <div class="center">
                 <table id="demo" lay-filter="coursefilter"></table>
             </div>
