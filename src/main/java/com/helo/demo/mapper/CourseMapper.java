@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Course;
 import com.helo.demo.vo.CourseVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -44,7 +45,6 @@ public interface CourseMapper extends BaseMapper<Course> {
      */
     int updateByPrimaryKeySelective(Course record);
 
-
     /**
      * 根据教师的Tno查询教师的课程
      * @param map
@@ -67,6 +67,6 @@ public interface CourseMapper extends BaseMapper<Course> {
      * @return
      */
     @Select("select * from course c , teacher t , profession p where c.teacher_id = t.teacher_id and t.profession_id = p.profession_id limit #{pageNo},#{pageSize}")
-    List<CourseVo> getCourseList(int pageNo,int pageSize);
+    List<CourseVo> getCourseList(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
 
 }

@@ -134,7 +134,7 @@ public class StudentController {
   @ApiOperation(value = "查询学生信息-分页显示")
   @GetMapping("/selectStudentByPage")
   @ResponseBody
-  public Map<String,Object> selectStudentByPage(@RequestParam("page")Integer page , @RequestParam("limit") int limit){
+  public Map<String,Object> selectStudentByPage(@RequestParam("page") Integer page , @RequestParam("limit") int limit){
     return studentService.getStudentList(page,limit);
   }
 

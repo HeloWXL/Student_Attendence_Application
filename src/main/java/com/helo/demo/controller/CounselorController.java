@@ -45,6 +45,12 @@ public class CounselorController {
     return "counselor/student";
   }
 
+  @ApiOperation(value = "跳转到系统统计界面")
+  @GetMapping("/toStatistcs")
+  public String toStatistcs(){
+    return "counselor/statistcs";
+  }
+
   @ApiOperation(value = "添加辅导员信息")
   @PostMapping("/insertCounselor")
   @ResponseBody
