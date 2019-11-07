@@ -39,6 +39,12 @@ public class CounselorController {
     return "counselor/index";
   }
 
+  @ApiOperation(value = "跳转到辅导员登录界面")
+  @GetMapping("/toCounselorLogin")
+  public String toCounselorLogin(){
+    return "counselor/login";
+  }
+
   @ApiOperation(value = "跳转到学生列表界面")
   @GetMapping("/toCounselorStudentTable")
   public String toStudentTable(){
@@ -95,13 +101,10 @@ public class CounselorController {
     Counselor counselor = counselorService.selectByCno(cno);
     DataResult<Boolean> result = new DataResult<>();
     if (Md5Utils.getSaltverifyMD5(password, counselor.getCounselorPassword())) {
-      //根据专业的ID获取教师的专业相关信息
-      Profession profession = professionService.selectByPrimaryKey(counselor.getProfessionId());
-      counselor.setProfession(profession);
       result.setBody(true);
-      request.getSession().setAttribute("counselorsession", counselor);
+      request.getSession().setAttribute("counselor", counselor);
     } else {
-      request.getSession().setAttribute("counselorsession", null);
+      request.getSession().setAttribute("counselor", null);
       result.setBody(false);
     }
     return result;

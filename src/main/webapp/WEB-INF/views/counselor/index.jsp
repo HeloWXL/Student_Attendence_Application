@@ -13,27 +13,14 @@
     <title>后台管理首页</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <script>
-      var ctx = '${ctx }'
+      var ctx = '${ctx }';
+      var counselor = '${counselor}';
     </script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">学生考勤App后台管理</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <%--<ul class="layui-nav layui-layout-left">--%>
-            <%--<li class="layui-nav-item"><a href="">控制台</a></li>--%>
-            <%--<li class="layui-nav-item"><a href="">商品管理</a></li>--%>
-            <%--<li class="layui-nav-item"><a href="">用户</a></li>--%>
-            <%--<li class="layui-nav-item">--%>
-                <%--<a href="javascript:;">其它系统</a>--%>
-                <%--<dl class="layui-nav-child">--%>
-                    <%--<dd><a href="">邮件管理</a></dd>--%>
-                    <%--<dd><a href="">消息管理</a></dd>--%>
-                    <%--<dd><a href="">授权管理</a></dd>--%>
-                <%--</dl>--%>
-            <%--</li>--%>
-        <%--</ul>--%>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
@@ -59,15 +46,6 @@
                 <li class="layui-nav-item"><a id="course">课程管理</a></li>
                 <li class="layui-nav-item"><a id="leave">请假管理</a></li>
                 <li class="layui-nav-item"><a id="attendce">考勤管理</a></li>
-<%--                <li class="layui-nav-item layui-nav-itemed">--%>
-<%--                    <a class="" href="javascript:;">学生管理</a>--%>
-<%--                    <dl class="layui-nav-child">--%>
-<%--                        <dd><a href="javascript:;">列表一</a></dd>--%>
-<%--                        <dd><a href="javascript:;">列表二</a></dd>--%>
-<%--                        <dd><a href="javascript:;">列表三</a></dd>--%>
-<%--                        <dd><a href="">超链接</a></dd>--%>
-<%--                    </dl>--%>
-<%--                </li>--%>
             </ul>
         </div>
     </div>
@@ -78,42 +56,10 @@
                                             marginheight="20px" scrolling="no" style="background-color: #FFFFFF;"></iframe>
         </div>
     </div>
-
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © email - wangxinalin@icloud.com - author by -王咸林
-    </div>
 </div>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
-<script>
-  //JavaScript代码区域
-  layui.use('element', function() {
-    var element = layui.element;
-  });
-
-  $(function () {
-      $("iframe").attr("src",ctx+"/counselorApi/toStatistcs")
-
-      $("#index").click(function () {
-       $("iframe").attr("src",ctx+"/counselorApi/toStatistcs")
-      })
-      $("#leave").click(function () {
-          $("iframe").attr("src",ctx+"/leaveApi/toCounselorLeaveTable")
-      })
-      $("#course").click(function () {
-          $("iframe").attr("src",ctx+"/courseApi/toCounselorCourseTable")
-      })
-      $("#student").click(function () {
-          $("iframe").attr("src",ctx+"/counselorApi/toCounselorStudentTable")
-      })
-      $("#teacher").click(function () {
-          $("iframe").attr("src",ctx+"/teacherApi/toCounselorTeacherTable")
-      })
-      $("#profession").click(function () {
-          $("iframe").attr("src",ctx+"/professionApi/toCounselorProfessionTable")
-      })
-  })
-</script>
+<%--引入自定义js文件--%>
+<script src="${ctx}/resources/js/counselor/counselor_index.js" type="application/javascript"></script>
 </body>
 </html>

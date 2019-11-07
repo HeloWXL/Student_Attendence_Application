@@ -14,7 +14,8 @@
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <script>
-        var ctx = '${ctx}'
+        var ctx = '${ctx}';
+        var counselor = '${counselor}';
     </script>
 </head>
 <body>

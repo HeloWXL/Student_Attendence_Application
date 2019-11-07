@@ -12,6 +12,10 @@
 <head>
     <title>统计图</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
+    <script>
+        var ctx = '${ctx}';
+        var counselor = '${counselor}';
+    </script>
 </head>
 <body>
 <div class="layui-row layui-col-space1">
