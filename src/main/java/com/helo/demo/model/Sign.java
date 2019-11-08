@@ -8,12 +8,13 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author xiayj
+ * @author wangxl
  * @since
  */
 @Data
 @TableName(value = "sign")
 public class Sign {
+    
     @TableId(value = "sign_id",type = IdType.AUTO)
     private Integer signId;
 
