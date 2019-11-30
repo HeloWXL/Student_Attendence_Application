@@ -98,7 +98,9 @@ public class StudentController {
   @ApiOperation(value = "学生登录")
   @PostMapping("/checkLogin")
   @ResponseBody
-  public DataResult<Boolean> checkLogin(@RequestParam("sno") String sno, @RequestParam("password") String password, HttpServletRequest request){
+  public DataResult<Boolean> checkLogin(@RequestParam("sno") String sno, @RequestParam("password") String password, HttpServletRequest request,
+                                        HttpServletResponse response){
+      response.addHeader("Access-Control-Allow-Origin","*");
       Student student = studentService.selectBySno(sno);
 
       DataResult<Boolean> result = new DataResult<>();

@@ -20,9 +20,9 @@ $(function() {
   $('#leaveList').click(function() {
     location.href=ctx+'/leaveApi/toLeaveList';
   });
-
+//签到界面
   mui('#attendance').on('tap','img',function(){
-    mui.alert('正在建设中.....');
+    location.href=ctx+'/signApi/toAttence';
   });
 
   mui('#mycourse').on('tap','img',function(){

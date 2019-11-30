@@ -18,7 +18,7 @@
     <link href="${ctx}/resources/css/student/askForLeave.css" rel="stylesheet"/>
     <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
     <script>
-        var ctx = '${ctx }'；
+        var ctx = '${ctx }';
         var student = "${studentsession}";
     </script>
 </head>

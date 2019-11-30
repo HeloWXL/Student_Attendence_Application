@@ -2,8 +2,6 @@ package com.helo.demo.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.helo.demo.mapper.SignMapper;
-import com.helo.demo.model.Sign;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
