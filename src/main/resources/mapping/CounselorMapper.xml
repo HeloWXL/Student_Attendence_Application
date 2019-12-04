@@ -14,18 +14,20 @@
   <sql id="Base_Column_List" >
     counselor_id, counselor_name, counselor_password, profession_id, create_time,counselor_cno
   </sql>
-  
+  <!--根据id进行查找-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select *
     from counselor
     where counselor_id = #{counselorId,jdbcType=INTEGER}
   </select>
 
+  <!--根据id删除-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from counselor
     where counselor_id = #{counselorId,jdbcType=INTEGER}
   </delete>
 
+  <!--按照工号进行查询-->
   <select id="selectByCno" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
@@ -33,7 +35,7 @@
     where counselor_cno = #{counselorCno,jdbcType=VARCHAR}
   </select>
 
-
+  <!--添加-->
   <insert id="insertSelective" parameterType="com.helo.demo.model.Counselor" >
     insert into counselor
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -77,6 +79,8 @@
       </if>
     </trim>
   </insert>
+
+  <!--修改-->
   <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.Counselor" >
     update counselor
     <set >
