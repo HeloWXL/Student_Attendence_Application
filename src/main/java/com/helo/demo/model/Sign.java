@@ -23,4 +23,11 @@ public class Sign {
 
     private Integer courseId;
 
+    private Integer startStatus;
+
+    private Integer endStatus;
+
+
+
+
 }

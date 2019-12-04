@@ -1,17 +1,14 @@
 package com.helo.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Sign;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface SignMapper {
-    int deleteByPrimaryKey(Integer signId);
-
-    int insert(Sign record);
+@Mapper
+public interface SignMapper extends BaseMapper<Sign> {
 
     int insertSelective(Sign record);
 
-    Sign selectByPrimaryKey(Integer signId);
-
     int updateByPrimaryKeySelective(Sign record);
 
-    int updateByPrimaryKey(Sign record);
 }

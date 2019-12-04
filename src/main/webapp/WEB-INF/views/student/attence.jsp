@@ -45,6 +45,7 @@
     <script>
         var ctx = '${ctx}';
         var student = "${studentsession}";
+        var studentId = "${studentsession.studentId}";
     </script>
 </head>
 <body>
@@ -55,41 +56,32 @@
 <div class="mui-content">
     <div class="top" style="margin-top: 10px;">
         <ul class="layui-timeline">
-            <li class="layui-timeline-item">
+            <li class="layui-timeline-item" id="start-time">
                 <i class="layui-icon layui-timeline-axis"></i>
                 <div class="layui-timeline-content layui-text">
-                    <h4 class="layui-timeline-title">上班打卡</h4>
-                    <h3 class="layui-timeline-title">打卡时间 08:45</h3>
-                    <p>
-                        地点：科大国创软件股份有限公司-合肥
-                    </p>
+                    <h4 class="layui-timeline-title">上课签到</h4>
                 </div>
             </li>
-            <li class="layui-timeline-item">
+            <li class="layui-timeline-item" id="end-time" style="display: none">
                 <i class="layui-icon layui-timeline-axis"></i>
                 <div class="layui-timeline-content layui-text">
-                    <h4 class="layui-timeline-title">下班打卡</h4>
-                    <h3 class="layui-timeline-title">打卡时间 18:45</h3>
-                    <p>
-                        地点：科大国创软件股份有限公司-合肥
-                    </p>
+                    <h4 class="layui-timeline-title">下课签退</h4>
                 </div>
             </li>
-
         </ul>
     </div>
 
     <div class="c-center">
         <div class="center">
-            <div class="mui-card" id="start">
+            <div class="mui-card" id="start" onclick="start_time(this)">
                 <!--内容区-->
                 <div class="mui-card-content">
-                    上班打卡
-                    08:00:12
+                    上课签到
+                    <p>08:00:12</p>
                 </div>
             </div>
 
-            <div class="mui-card" id="end">
+            <div class="mui-card" id="end" style="display: none">
                 <!--内容区-->
                 <div class="mui-card-content">
                     下班打卡
@@ -106,5 +98,45 @@
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
-
+<script>
+    $(function () {
+        if(student==''||student==null) {
+            location.href = ctx+'/studentApi/toLogin';
+            return;
+        }
+    })
+// 上课签到
+function start_time(_this) {
+        var myDate = new Date();
+        var now=myDate.toLocaleString();     //获取当前时间
+        console.log(now)
+        var sign = {
+            signLocation:'科大国创软件股份有限公司-合肥',
+            studentId:parseInt(studentId),
+            courseId:1
+        }
+        $.ajax({
+            url:ctx+'/signApi/insertSign',
+            data: JSON.stringify(sign),
+            type:'post',
+            dataType:'json',
+            contentType: 'application/json; charset=utf-8',
+            success:function (data) {
+                if(data.body==1){
+                    //隐藏本身
+                    $(_this).hide();
+                    $("#un-start-time").show();
+                    var $start = ' <h3 class="layui-timeline-title">打卡时间 '+now+'</h3>\n' +
+                        '                    <p>\n' +
+                        '                        地点：科大国创软件股份有限公司-合肥\n' +
+                        '                    </p>';
+                    //获取到上课签到时间
+                    $("#start-time div").append($start)
+                    $("#end-time").show()
+                    $("#end").show()
+                }
+            }
+        })
+    }
+</script>
 </html>

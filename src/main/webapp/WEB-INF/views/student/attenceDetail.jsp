@@ -15,6 +15,10 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet"/>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
+    <script>
+        var ctx = '${ctx}';
+        var student = "${studentsession}";
+    </script>
 </head>
 <body>
 <div class="mui-content">

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+    <script src="../../resources/plugins/clipboard.js" type="application/javascript"></script>
+
+</head>
+<body>
+
+<div id="code">
+    <img src="../../resources/images/face.png" id="img">
+</div>
+<button id="copyBtn">复制图片</button>
+</body>
+<script>
+
+    // 选中区域
+    function getSelect(targetNode) {
+        if (window.getSelection) {
+            //chrome等主流浏览器
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNode(targetNode);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        } else if (document.body.createTextRange) {
+            //ie
+            var range = document.body.createTextRange();
+            range.moveToElementText(targetNode);
+            range.select();
+        }
+    }
+
+    $('#copyBtn').off('click').click(function () {
+        // 尝试过复制canvas和table，但不能达到预期效果。所以这里还是转为img再下载
+        getSelect($('img')[0]);
+        document.execCommand('copy');
+        alert("已经复制到剪切板")
+        // copy之后清空选择区域
+        window.getSelection().removeAllRanges();
+    });
+
+
+    // $(function(){
+    //     var clipboard = new Clipboard('#copy', {
+    //         target: function() {
+    //             alert("复制成功！");
+    //             return document.querySelector('#img');
+    //
+    //         }
+    //     });
+    // });
+
+    // function getSelect(targetNode) {
+    //     if (window.getSelection) {
+    //         //chrome等主流浏览器
+    //         var selection = window.getSelection();
+    //         var range = document.createRange();
+    //         range.selectNode(targetNode);
+    //         selection.removeAllRanges();
+    //         selection.addRange(range);
+    //     } else if (document.body.createTextRange) {
+    //         //ie
+    //         var range = document.body.createTextRange();
+    //         range.moveToElementText(targetNode);
+    //         range.select();
+    //     }
+    // }
+
+    // ---------------------
+    // var oPopup = window.createPopup();
+    //
+    // function ButtonClick(div) {
+    //     div.contentEditable = 'true';
+    //     var controlRange;
+    //     if (document.body.createControlRange) {
+    //         controlRange = document.body.createControlRange();
+    //         controlRange.addElement(div);
+    //         controlRange.execCommand('Copy');
+    //     }
+    //     div.contentEditable = 'false';
+    // }
+</script>
+</html>

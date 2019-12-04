@@ -8,7 +8,10 @@
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="student_id" property="studentId" jdbcType="INTEGER" />
     <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="is_start_status" property="startStatus" jdbcType="INTEGER" />
+    <result column="is_end_status" property="endStatus" jdbcType="INTEGER" />
   </resultMap>
+
   <insert id="insertSelective" parameterType="com.helo.demo.model.Sign" >
     insert into sign
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -21,9 +24,7 @@
       <if test="startTime != null" >
         start_time,
       </if>
-      <if test="endTime != null" >
-        end_time,
-      </if>
+
       <if test="studentId != null" >
         student_id,
       </if>
@@ -40,9 +41,6 @@
       </if>
       <if test="startTime != null" >
         #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="studentId != null" >
         #{studentId,jdbcType=INTEGER},

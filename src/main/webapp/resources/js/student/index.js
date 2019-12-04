@@ -28,9 +28,9 @@ $(function() {
   mui('#mycourse').on('tap','img',function(){
     mui.alert('正在建设中.....');
   });
-
+  //我的签到列表
   mui('#attendancelist').on('tap','img',function(){
-    mui.alert('正在建设中.....');
+    location.href=ctx+'/signApi/toAttenceList';
   });
 
   mui('#mycourselist').on('tap','img',function(){

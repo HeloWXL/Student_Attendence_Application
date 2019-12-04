@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+    <script src="../../resources/plugins/clipboard.js" type="application/javascript"></script>
+
+</head>
+<body>
+
+<img src="../../resources/images/face.png" id="img">
+<button id="copy">复制图片</button>
+</body>
+<script>
+    $(function () {
+        var clipboard = new Clipboard('#copy', {  //.img-div触发复制事件
+            target: function (trigger) {           //trigger 相当于“.img-div”
+                return $(trigger).find("#img")[0];
+                // return 需要复制的内容
+            }
+        });
+        clipboard.on('success', function (e) { //复制成功后需要执行的function
+            //您可以加入成功提示
+            console.info('成功');
+
+            e.clearSelection();
+        });
+        clipboard.on('error', function (e) {//复制失败后需要执行的function
+            //您可以加入失败提示
+            console.error('失败');
+        });
+
+    });
+</script>
+</html>
