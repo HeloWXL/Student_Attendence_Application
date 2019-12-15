@@ -12,11 +12,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * 192.168.222.39
  * 学生
- * 127.0.0.1:8088/helo/studentApi/toLogin
+ * 127.0.0.1:8081/helo/studentApi/toLogin
  * 教师
- * 127.0.0.1:8088/helo/teacherApi/toLogin
+ * 127.0.0.1:8081/helo/teacherApi/toLogin
  * 辅导员
- * 127.0.0.1:8088/helo/counselorApi/toCounselorIndex
+ * 127.0.0.1:8081/helo/counselorApi/toCounselorIndex
  */
 @MapperScan("com.helo.demo.mapper")
 @EnableSwagger2

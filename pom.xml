@@ -164,7 +164,6 @@
         <!-- 应与application.properties(或application.yml)中context-path保持一致 -->
         <finalName>helo</finalName>
         <plugins>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

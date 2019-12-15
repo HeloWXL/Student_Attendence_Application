@@ -21,6 +21,17 @@
         var studentSno = "${studentsession.studentSno}";
     </script>
     <style>
+        body {
+            font-family: 'Helvetica Neue',Helvetica,sans-serif;
+            font-size: 14px;
+            line-height: 21px;
+            color: #000;
+            background-color: #efeff4;
+            -webkit-overflow-scrolling: touch;
+        }
+        .mui-content>.mui-table-view:first-child {
+            margin-top: 0px;
+        }
         .mui-title {
             color: #FFFFFF;
         }
@@ -88,12 +99,16 @@
             async: false,
             success: function (data) {
                 for (var i = 0; i < data.body.list.length; i++) {
+                    var reason = data.body.list[i].leaveTitle;
+                    if(reason.length>20){
+                        reason = reason.substring(0,20)+".....";
+                    }
                     var $node = $('<li class="mui-table-view-cell mui-media">\n' +
                         '            <a href="/leaveApi/selectByPrimaryKey/' + data.body.list[i].leaveId + '">\n' +
                         '                <div class="mui-media-body">\n' +
-                        '                    ' + data.body.list[i].leaveTitle + '\n' +
-                        '                    <p class=\'mui-ellipsis\'>' + data.body.list[i].leaveReason + '</p>\n' +
-                        '                    <p style="float: right">开始时间： ' + data.body.list[i].startTime + ' &nbsp;&nbsp;&nbsp;结束时间：' + data.body.list[i].endTime + '</p>\n' +
+                        '                    <div>标题：' + reason+ '</div>\n' +
+                        '                    <p class=\'mui-ellipsis\'>&nbsp;&nbsp;&nbsp;缘由：' + data.body.list[i].leaveReason + '</p>\n' +
+                        '                    <p style="float: right;font-size: 12px">开始时间： ' + data.body.list[i].startTime + ' &nbsp;&nbsp;&nbsp;结束时间：' + data.body.list[i].endTime + '</p>\n' +
                         '                </div>\n' +
                         '            </a>\n' +
                         '        </li>')

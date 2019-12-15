@@ -13,6 +13,11 @@
     <img src="../../resources/images/face.png" id="img">
 </div>
 <button id="copyBtn">复制图片</button>
+<div style="height: 200px;width: 200px;border: 1px solid #000000">
+    <textarea style="width: 100%;height: 100%">
+
+    </textarea>
+</div>
 </body>
 <script>
 
@@ -35,13 +40,18 @@
 
     $('#copyBtn').off('click').click(function () {
         // 尝试过复制canvas和table，但不能达到预期效果。所以这里还是转为img再下载
-        getSelect($('img')[0]);
+        getSelect($('img'));
         document.execCommand('copy');
         alert("已经复制到剪切板")
         // copy之后清空选择区域
         window.getSelection().removeAllRanges();
     });
 
+
+
+    document.addEventListener('paste', function (event) {
+        console.log(event)
+    })
 
     // $(function(){
     //     var clipboard = new Clipboard('#copy', {
