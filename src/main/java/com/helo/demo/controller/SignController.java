@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -36,6 +37,13 @@ public class SignController {
     @GetMapping("toAttenceList")
     public String toAttenceList() {
         return "/student/attenceList";
+    }
+
+    @ApiOperation("跳转到签到详情界面")
+    @GetMapping("toAttenceDetail/{signId}")
+    public String toAttenceDetail(Model model,@PathVariable("signId") Integer signId) {
+        model.addAttribute("sign",signService.selectSignById(signId));
+        return "/student/attenceDetail";
     }
 
     @ApiOperation("学生签到-添加签到记录")

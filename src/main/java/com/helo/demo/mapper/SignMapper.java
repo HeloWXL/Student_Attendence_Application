@@ -10,5 +10,4 @@ public interface SignMapper extends BaseMapper<Sign> {
     int insertSelective(Sign record);
 
     int updateByPrimaryKeySelective(Sign record);
-
 }

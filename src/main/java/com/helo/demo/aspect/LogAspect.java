@@ -40,19 +40,18 @@ public class LogAspect {
         log.info(method + ":" + params);
     }
 
-
-    @AfterReturning(pointcut = "pointcut()", returning = "ret")
-    public void printAfterParam(JoinPoint joinPoint, Object ret) {
-        //获取请求的方法
-        Signature sig = joinPoint.getSignature();
-        String method = joinPoint.getTarget().getClass().getName() + "." + sig.getName();
-        //获取请求的参数
-        Object[] args = joinPoint.getArgs();
-        //fastjson转换
-        String params = JSONObject.toJSONString(args);
-
-        //打印请求参数
-        log.info(method + ":" + params);
-        log.info("-->" + ret);
-    }
+//    @AfterReturning(pointcut = "pointcut()", returning = "ret")
+//    public void printAfterParam(JoinPoint joinPoint, Object ret) {
+//        //获取请求的方法
+//        Signature sig = joinPoint.getSignature();
+//        String method = joinPoint.getTarget().getClass().getName() + "." + sig.getName();
+//        //获取请求的参数
+//        Object[] args = joinPoint.getArgs();
+//        //fastjson转换
+//        String params = JSONObject.toJSONString(args);
+//
+//        //打印请求参数
+//        log.info(method + ":" + params);
+//        log.info("-->" + ret);
+//    }
 }

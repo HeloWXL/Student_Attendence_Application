@@ -31,9 +31,9 @@ public class Sign {
 
     private Integer courseId;
 
-    private Integer startStatus;
+    private Integer isStartStatus;
 
-    private Integer endStatus;
+    private Integer isEndStatus;
 
 
 

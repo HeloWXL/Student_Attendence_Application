@@ -20,6 +20,9 @@
         .mui-title {
             color: #FFFFFF;
         }
+        .mui-content>.mui-table-view:first-child {
+             margin-top: 0px;
+        }
     </style>
     <script>
         var ctx = '${ctx}';
@@ -32,29 +35,44 @@
     <h1 class="mui-title">考勤记录</h1>
 </header>
 <div class="mui-content">
-
     <ul class="mui-table-view">
         <li class="mui-table-view-cell mui-collapse">
-            <a  href="#">出勤天数：<span>24天</span></a>
+            <a  href="#">出勤天数：<span id="count">24天</span></a>
         </li>
     </ul>
-    <ul class="mui-table-view">
-        <li class="mui-table-view-cell mui-collapse">
-            <a  href="#">2019-10-11<span class="mui-icon mui-icon-arrowright"></span></a>
-        </li>
-        <li class="mui-table-view-cell mui-collapse">
-            <a  href="#">2019-10-12<span class="mui-icon mui-icon-arrowright"></span></a>
-        </li>
-        <li class="mui-table-view-cell mui-collapse">
-            <a  href="#">2019-10-13<span class="mui-icon mui-icon-arrowright"></span></a>
-        </li>
-        <li class="mui-table-view-cell mui-collapse">
-            <a  href="#">2019-10-11<span class="mui-icon mui-icon-arrowright"></span></a>
-        </li>
+    <ul class="mui-table-view" id="signList">
+        <%--打卡记录--%>
     </ul>
-
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
+
+<script>
+    var page = 1 ;
+    var studentId = '${studentsession.studentId}';
+    $(function () {
+        $.ajax({
+            url:ctx+'/signApi/getSignStuByPage',
+            data:{
+                pageNo:page,
+                pageSize:10,
+                stuId:studentId
+            },
+            dataType:'json',
+            type:'get',
+            success:function (data) {
+                $('#signList').empty();
+                $('#count').html(data.count);
+
+                for(var i = 0 ; i<data.data.length;i++){
+                    var $node = $(' <li class="mui-table-view-cell mui-collapse">\n' +
+                        '            <a  href="${ctx}/signApi/toAttenceDetail/'+data.data[i].signId+'">'+data.data[i].startTime+'<span class="mui-icon mui-icon-arrowright"></span></a>\n' +
+                        '        </li>')
+                    $('#signList').append($node);
+                }
+            }
+        })
+    })
+</script>
 </html>

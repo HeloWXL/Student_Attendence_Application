@@ -33,6 +33,12 @@ public class SignService {
     return signMapper.insertSelective(sign);
   }
 
+
+  public Sign selectSignById(Integer signId){
+    return signMapper.selectById(signId);
+  }
+
+
   /**
    * 获取签到列表分页
    * @param pageNo
