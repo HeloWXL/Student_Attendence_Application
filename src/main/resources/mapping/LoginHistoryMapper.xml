@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.helo.demo.mapper.LoginHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.helo.demo.model.LoginHistory" >
+    <id column="history_id" property="historyId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="login_id" property="loginId" jdbcType="INTEGER" />
+    <result column="brower_name" property="browerName" jdbcType="VARCHAR" />
+    <result column="computer_version" property="computerVersion" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    history_id, create_time, login_id, brower_name, computer_version, ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from login_history
+    where history_id = #{historyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from login_history
+    where history_id = #{historyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.helo.demo.model.LoginHistory" >
+    insert into login_history (history_id, create_time, login_id, 
+      brower_name, computer_version, ip
+      )
+    values (#{historyId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{loginId,jdbcType=INTEGER}, 
+      #{browerName,jdbcType=VARCHAR}, #{computerVersion,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.helo.demo.model.LoginHistory" >
+    insert into login_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="historyId != null" >
+        history_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="loginId != null" >
+        login_id,
+      </if>
+      <if test="browerName != null" >
+        brower_name,
+      </if>
+      <if test="computerVersion != null" >
+        computer_version,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="historyId != null" >
+        #{historyId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=INTEGER},
+      </if>
+      <if test="browerName != null" >
+        #{browerName,jdbcType=VARCHAR},
+      </if>
+      <if test="computerVersion != null" >
+        #{computerVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.LoginHistory" >
+    update login_history
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginId != null" >
+        login_id = #{loginId,jdbcType=INTEGER},
+      </if>
+      <if test="browerName != null" >
+        brower_name = #{browerName,jdbcType=VARCHAR},
+      </if>
+      <if test="computerVersion != null" >
+        computer_version = #{computerVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where history_id = #{historyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.helo.demo.model.LoginHistory" >
+    update login_history
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      login_id = #{loginId,jdbcType=INTEGER},
+      brower_name = #{browerName,jdbcType=VARCHAR},
+      computer_version = #{computerVersion,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR}
+    where history_id = #{historyId,jdbcType=INTEGER}
+  </update>
+</mapper>
