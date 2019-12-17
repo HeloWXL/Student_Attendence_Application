@@ -106,8 +106,7 @@
                     var $node = $('<li class="mui-table-view-cell mui-media">\n' +
                         '            <a href="/leaveApi/selectByPrimaryKey/' + data.body.list[i].leaveId + '">\n' +
                         '                <div class="mui-media-body">\n' +
-                        '                    <div>标题：' + reason+ '</div>\n' +
-                        '                    <p class=\'mui-ellipsis\'>&nbsp;&nbsp;&nbsp;缘由：' + data.body.list[i].leaveReason + '</p>\n' +
+                        '                    <div>请假标题：' + reason+ '</div>\n' +
                         '                    <p style="float: right;font-size: 12px">开始时间： ' + data.body.list[i].startTime + ' &nbsp;&nbsp;&nbsp;结束时间：' + data.body.list[i].endTime + '</p>\n' +
                         '                </div>\n' +
                         '            </a>\n' +

@@ -117,4 +117,6 @@
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <%--引入自定义js文件--%>
 <script src="${ctx}/resources/js/counselor/counselor_login.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/getComputerInfo.js" type="application/javascript"></script>
+
 </html>
