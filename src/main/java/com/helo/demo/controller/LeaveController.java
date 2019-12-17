@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 /**
- * @author xiayj
+ * @author wangxianlin
  * @ClassName LeaveController
  * @Description TODO
  * @date 2019/8/23 17:51
@@ -61,8 +61,6 @@ public class LeaveController {
     model.addAttribute("leave",leave);
     return "/student/leaveDetail";
   }
-
-
 
   @ApiOperation(value = "根据学号查询请假信息 -分页")
   @GetMapping("/selectLeaveByPage")

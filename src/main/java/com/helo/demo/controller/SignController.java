@@ -39,6 +39,13 @@ public class SignController {
         return "/student/attenceList";
     }
 
+    @ApiOperation("跳转到管理员签到管理页面")
+    @GetMapping("toAttenceForCounselor")
+    public String toAttenceForCounselor() {
+        return "/counselor/sign";
+    }
+
+
     @ApiOperation("跳转到签到详情界面")
     @GetMapping("toAttenceDetail/{signId}")
     public String toAttenceDetail(Model model,@PathVariable("signId") Integer signId) {
@@ -58,10 +65,10 @@ public class SignController {
     }
 
     @ApiOperation("获取所有学生签到记录")
-    @GetMapping("getSignByPage")
+    @GetMapping("/getSignByPage")
     @ResponseBody
-    public Map<String, Object> getSignByPage(@RequestParam("pageNo") Integer pageNo,
-                                             @RequestParam("pageSize") Integer pageSize) {
+    public Map<String, Object> getSignByPage(@RequestParam("page") Integer pageNo,
+                                             @RequestParam("limit") Integer pageSize) {
         return signService.getSignByPage(pageNo, pageSize);
     }
 

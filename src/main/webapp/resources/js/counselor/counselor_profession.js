@@ -20,10 +20,10 @@ layui.use('table', function() {
             , cols: [[ //表头
                 {field: 'checkbox', type: 'checkbox'}
                 , {field: 'number', title: '序号', type: 'numbers'}
-                , {field: 'professionName', title: '专业', width: 200}
-                , {field: 'apartment', title: '学院', width: 200}
-                , {field: 'school', title: '学校', width: 200}
-                , {field: 'createTime', title: '创建时间', width: 200}
+                , {field: 'professionName', title: '专业', width: 200,align:'center'}
+                , {field: 'apartment', title: '学院', width: 200,align:'center'}
+                , {field: 'school', title: '学校', width: 200,align:'center'}
+                , {field: 'createTime', title: '创建时间', width: 200,align:'center'}
             ]]
             , skin: 'line,row' //表格风格
             , even: true

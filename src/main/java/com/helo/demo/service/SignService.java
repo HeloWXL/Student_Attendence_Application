@@ -52,6 +52,8 @@ public class SignService {
     Map<String,Object> map = new HashMap<>();
     map.put("data",signList);
     map.put("count",count);
+    map.put("code",0);
+    map.put("msg","");
     return map;
   }
 

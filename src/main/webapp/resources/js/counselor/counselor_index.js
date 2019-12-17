@@ -25,4 +25,9 @@ $(function () {
     $("#profession").click(function () {
         $("iframe").attr("src",ctx+"/professionApi/toCounselorProfessionTable")
     })
+
+    $("#attendce").click(function () {
+        $("iframe").attr("src",ctx+"/signApi/toAttenceForCounselor")
+    })
+
 })

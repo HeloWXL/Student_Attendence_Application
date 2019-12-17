@@ -20,13 +20,13 @@ layui.use('table', function() {
             , cols: [[ //表头
                 {field: 'checkbox', type: 'checkbox'}
                 , {field: 'number', title: '序号', type: 'numbers'}
-                , {field: 'teacherTno', title: '工号', width: 80}
-                , {field: 'teacherName', title: '姓名', width: 120}
-                , {field: 'teacherSex', title: '性别', width: 80}
-                , {field: 'teacherJobTitle', title: '职称', width: 120}
-                , {field: 'professionName', title: '专业', width: 180}
-                , {field: 'apartment', title: '学院', width: 200}
-                , {field: 'school', title: '学校', width: 200}
+                , {field: 'teacherTno', title: '工号', width: '10%',align:'center'}
+                , {field: 'teacherName', title: '姓名', width: '10%',align:'center'}
+                , {field: 'teacherSex', title: '性别', width: '10%',align:'center'}
+                , {field: 'teacherJobTitle', title: '职称', width: '10%',align:'center'}
+                , {field: 'professionName', title: '专业', width: '20%',align:'center'}
+                , {field: 'apartment', title: '学院', width: '20%',align:'center'}
+                , {field: 'school', title: '学校', width: '13.2%',align:'center'}
             ]]
             , skin: 'line,row' //表格风格
             , even: true

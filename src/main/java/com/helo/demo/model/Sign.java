@@ -1,5 +1,6 @@
 package com.helo.demo.model;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -35,7 +36,7 @@ public class Sign {
 
     private Integer isEndStatus;
 
-
-
+    @TableField(exist = false)
+    private String studentName;
 
 }
