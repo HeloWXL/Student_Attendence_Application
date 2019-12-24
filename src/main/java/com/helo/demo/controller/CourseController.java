@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 /**
- * @author xiayj
+ * @author wangxl
  * @ClassName CourseController
  * @Description
  * @date 2019/8/21 0:05

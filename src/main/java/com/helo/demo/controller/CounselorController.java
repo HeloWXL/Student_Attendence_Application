@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author wangxl
@@ -122,6 +124,20 @@ public class CounselorController {
     } else {
       result.setBody(counselor);
       return result;
+    }
+  }
+
+  @ApiOperation(value = "清除辅导员的session对象")
+  @GetMapping("/removeCounselorSession")
+  @ResponseBody
+  public void removeCounselorSession(HttpServletRequest request, HttpServletResponse response){
+    request.getSession().removeAttribute("counselor");
+    if ( request.getSession().getAttribute("counselor") == null) {
+      try {
+        response.sendRedirect("/helo/counselorApi/toCounselorLogin");
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 

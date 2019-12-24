@@ -38,12 +38,12 @@
 
 <!--header-->
 <div class="header-w3l">
-    <h1>考勤App后台管理</h1>
+    <h1>Back</h1>
 </div>
 <!--//header-->
 <div class="main-content-agile">
     <div class="sub-main-w3">
-        <h2>辅导员登录</h2>
+        <h2>For Login</h2>
         <form>
             <div class="pom-agile">
                 <span class="fa fa-user" aria-hidden="true"></span>

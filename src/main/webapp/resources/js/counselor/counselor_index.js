@@ -4,7 +4,10 @@ layui.use('element', function() {
 });
 
 $(function () {
-
+    if (counselor == '' || counselor == null) {
+        location.href = ctx + '/counselorApi/toCounselorLogin';
+        return;
+    }
     $("iframe").attr("src",ctx+"/counselorApi/toStatistcs")
 
     $("#index").click(function () {
