@@ -29,13 +29,13 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">教师姓名：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userName" autocomplete="off" class="layui-input">
+                            <input type="text" name="tName" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">QQ：</label>
+                        <label class="layui-form-label">工号：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="qq" autocomplete="off" class="layui-input">
+                            <input type="text" name="tno" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline" id="btn">

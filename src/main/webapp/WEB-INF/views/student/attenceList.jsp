@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
-
     <style>
         ul li span{
             float: right;
@@ -52,39 +51,5 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
-
-<script>
-    var page = 1 ;
-    var studentId = '${studentsession.studentId}';
-    $(function () {
-        if (student == '' || student == null) {
-            location.href = ctx + '/studentApi/toLogin';
-            return;
-        }
-        loadStuSignList(page,studentId)
-    })
-    function loadStuSignList(page,studentId) {
-        $.ajax({
-            url:ctx+'/signApi/getSignStuByPage',
-            data:{
-                pageNo:page,
-                pageSize:10,
-                stuId:studentId
-            },
-            dataType:'json',
-            type:'get',
-            success:function (data) {
-                $('#signList').empty();
-                $('#count').html(data.count);
-
-                for(var i = 0 ; i<data.data.length;i++){
-                    var $node = $(' <li class="mui-table-view-cell mui-collapse">\n' +
-                        '            <a  href="${ctx}/signApi/toAttenceDetail/'+data.data[i].signId+'">'+data.data[i].startTime+'<span class="mui-icon mui-icon-arrowright"></span></a>\n' +
-                        '        </li>')
-                    $('#signList').append($node);
-                }
-            }
-        })
-    }
-</script>
+<script src="${ctx}/resources/js/student/attenceList.js" type="application/javascript"></script>
 </html>

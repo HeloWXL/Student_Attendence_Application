@@ -98,7 +98,7 @@
     </a>
     <a class="mui-tab-item">
         <span class="mui-icon mui-icon-chatbubble"></span>
-        <span class="mui-tab-label">消息</span>
+        <span class="mui-tab-label">考勤统计</span>
     </a>
     <a class="mui-tab-item" id="myinfo">
         <span class="mui-icon mui-icon-person mui-active"></span>

@@ -11,113 +11,108 @@
 <html>
 <head>
     <title>辅导员登录</title>
-    <link href="${ctx}/resources/css/counselor/counselor_login.css" rel="stylesheet">
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
-    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico" type=”image/x-icon”>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
 
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!-- Custom Theme files -->
+    <link href="${ctx}/resources/css/counselor/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- //Custom Theme files -->
+    <!-- Style-CSS -->
+    <link rel="stylesheet" href="${ctx}/resources/css/counselor/css/font-awesome.css">
+    <!-- web font -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--web font-->
     <script>
         var ctx = '${ctx }'
     </script>
 </head>
 <body>
-<div class="videozz"></div>
-<div class="box">
-    <div class="box-a">
-        <div class="m-2">
-            <div class="m-2-1">
-                <form>
-                    <div class="m-2-2">
-                        <input type="text" placeholder="请输入账号" id="cno"/>
-                    </div>
-                    <div class="m-2-2">
-                        <input type="password" placeholder="请输入密码" id="password"/>
-                    </div>
-                    <div class="m-2-2">
-                        <button type="submit" value="登录" id="login"/>
-                        登录
-                    </div>
-                </form>
+
+<!--header-->
+<div class="header-w3l">
+    <h1>考勤App后台管理</h1>
+</div>
+<!--//header-->
+<div class="main-content-agile">
+    <div class="sub-main-w3">
+        <h2>辅导员登录</h2>
+        <form>
+            <div class="pom-agile">
+                <span class="fa fa-user" aria-hidden="true"></span>
+                <input placeholder="E-mail" name="Name" class="user" type="text" required="" id="cno">
             </div>
-        </div>
-        <div class="m-5">
-            <div id="m-5-id-1">
-                <div id="m-5-2">
-                    <div id="m-5-id-2">
-                    </div>
-                    <div id="m-5-id-3"></div>
+            <div class="pom-agile">
+                <span class="fa fa-key" aria-hidden="true"></span>
+                <input placeholder="Password" name="Password" class="pass" type="password" required="" id="password">
+            </div>
+            <div class="sub-w3l">
+                <div class="sub-agile">
+                    <input type="checkbox" id="brand1" value="">
+                    <label for="brand1">
+                        <span></span>Remember me</label>
                 </div>
+                <a href="#">Forgot Password?</a>
+                <div class="clear"></div>
             </div>
-        </div>
-        <div class="m-10"></div>
-        <div class="m-xz7"></div>
-        <div class="m-xz8 xzleft"></div>
-        <div class="m-xz9"></div>
-        <div class="m-xz9-1"></div>
-        <!-- <div class="m-x10"></div>
-        <div class="m-x11"></div>
-        <div class="m-x12 xzleft"></div>
-        <div class="m-x13"></div>
-        <div class="m-x14 xzleft"></div>
-        <div class="m-x15"></div>
-        <div class="m-x16 xzleft"></div>-->
-        <div class="m-x17 xzleft"></div>
-        <div class="m-x18"></div>
-        <div class="m-x19 xzleft"></div>
-        <div class="m-x20"></div>
-        <div class="m-8"></div>
-        <div class="m-9">
-            <div class="masked1" id="sx8">智能考勤App后台管理系统</div>
-        </div>
-        <div class="m-11">
-            <div class="m-k-1">
-                <div class="t1"></div>
+            <div class="right-w3l">
+                <input type="submit" value="Login" id="login">
             </div>
-            <div class="m-k-2">
-                <div class="t2"></div>
-            </div>
-            <div class="m-k-3">
-                <div class="t3"></div>
-            </div>
-            <div class="m-k-4">
-                <div class="t4"></div>
-            </div>
-            <div class="m-k-5">
-                <div class="t5"></div>
-            </div>
-            <div class="m-k-6">
-                <div class="t6"></div>
-            </div>
-            <div class="m-k-7">
-                <div class="t7"></div>
-            </div>
-        </div>
-        <div class="m-14">
-            <div class="ss"></div>
-        </div>
-        <div class="m-15-a">
-            <div class="m-15-k">
-                <div class="m-15xz1">
-                    <div class="m-15-dd2"></div>
-                </div>
-            </div>
-        </div>
-        <div class="m-16"></div>
-        <div class="m-17"></div>
-        <div class="m-18 xzleft"></div>
-        <div class="m-19"></div>
-        <div class="m-20 xzleft"></div>
-        <div class="m-21"></div>
-        <div class="m-22"></div>
-        <div class="m-23 xzleft"></div>
-        <div class="m-24" id="localtime"></div>
+        </form>
     </div>
 </div>
+
 </body>
 <%--引入js文件--%>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <%--引入自定义js文件--%>
-<script src="${ctx}/resources/js/counselor/counselor_login.js" type="application/javascript"></script>
-<script src="${ctx}/resources/js/getComputerInfo.js" type="application/javascript"></script>
+<script>
+    $(function () {
+        $("#login").click(function (e) {
+            e.preventDefault();
+            var cno = $("#cno").val();
+            if (cno == null && cno == '') {
+                alert('工号不能为空');
+                return;
+            }
+            var password = $("#password").val();
+            if (password == null && password == '') {
+                alert('密码不能为空');
+                return;
+            }
+            login(cno, password);
+        })
+    })
 
+    //登录
+    function login(cno, password) {
+        $.ajax({
+            url: ctx + '/counselorApi/checkLogin',
+            data: {
+                cno: cno,
+                password: password
+            },
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                if (data.body == true) {
+                    location.href = ctx + "/counselorApi/toCounselorIndex";
+                } else {
+                    alert('工号或密码错误');
+                }
+            }, error: function (e) {
+                alert('服务器内部错误');
+            }
+        });
+    }
+
+</script>
 </html>
