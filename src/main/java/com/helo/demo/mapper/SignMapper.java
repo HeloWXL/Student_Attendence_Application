@@ -43,6 +43,6 @@ public interface SignMapper extends BaseMapper<Sign> {
      * @param outLocation
      * @return
      */
-    @Update("update sign set end_time = now() , is_end_status = 1 ,signOutLocation = #{outLocation} where sign_id = #{signId}")
-    int updateSignById(@Param("signId") int signId,@Param("outLocation") String outLocation);
+    @Update("update sign set end_time = now() , is_end_status = 1 ,sign_out_location = #{outLocation} where sign_id = #{signId}")
+    int updateSignById(@Param("outLocation") String outLocation,@Param("signId") int signId);
 }

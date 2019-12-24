@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * @author xiayj
+ * @author wangxl
  * @ClassName SignController
- * @Description TODO
+ * @Description TODO 学生签到接口
  * @date 2019/8/23 17:51
  * @Version 1.0
  */
@@ -90,9 +90,9 @@ public class SignController {
     }
 
     @ApiOperation("学生下课签退")
-    @GetMapping("updateSignById")
+    @PostMapping("updateSignById")
     @ResponseBody
-    public int updateSignById(@RequestParam("signId") int signId,@RequestParam("location") String location) {
-        return signService.updateSignById(signId,location);
+    public int updateSignById(@RequestBody Sign sign) {
+        return signService.updateSignById(sign.getSignOutLocation(),sign.getSignId());
     }
 }

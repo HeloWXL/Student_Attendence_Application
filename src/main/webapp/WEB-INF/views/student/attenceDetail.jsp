@@ -21,6 +21,10 @@
     </script>
 </head>
 <body>
+<header class="mui-bar mui-bar-nav mui-badge-primary">
+    <span class="mui-icon mui-icon-back" onclick="javascript:history.back(-1);"></span>
+    <h1 class="mui-title">签到详情</h1>
+</header>
 <div class="mui-content">
     <!--日历容器-->
     <div id="calendar">
@@ -28,35 +32,33 @@
     </div>
     <div class="top" style="margin-top: 10px;">
         <ul class="layui-timeline">
-            <li class="layui-timeline-item">
+            <li class="layui-timeline-item" id="start">
                 <i class="layui-icon layui-timeline-axis"></i>
                 <div class="layui-timeline-content layui-text">
                     <h4 class="layui-timeline-title">上班打卡</h4>
-                    <h3 class="layui-timeline-title">打卡时间 08:45</h3>
+                    <h3 class="layui-timeline-title">上课签到</h3>
                     <p>
-                        地点：科大国创软件股份有限公司-合肥
+
                     </p>
                 </div>
             </li>
-            <li class="layui-timeline-item">
+            <li class="layui-timeline-item" id="end">
                 <i class="layui-icon layui-timeline-axis"></i>
                 <div class="layui-timeline-content layui-text">
-                    <h4 class="layui-timeline-title">下班打卡</h4>
-                    <h3 class="layui-timeline-title">打卡时间 18:45</h3>
+                    <h4 class="layui-timeline-title">下课签退</h4>
+                    <h3 class="layui-timeline-title"></h3>
                     <p>
-                        地点：科大国创软件股份有限公司-合肥
+
                     </p>
                 </div>
             </li>
 
         </ul>
     </div>
-
-
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
-
+<script src="${ctx}/resources/js/student/attenceDetail.js" type="application/javascript"></script>
 </html>

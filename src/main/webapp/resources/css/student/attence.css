@@ -1,0 +1,28 @@
+#start div {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #93D1FF;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 200px;
+}
+
+#end div {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #93D1FF;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 200px;
+}
+
+.mui-card {
+    background-color: #efeff4;
+    box-shadow: none;
+}
+
+.mui-title {
+    color: #FFFFFF;
+}
