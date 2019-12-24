@@ -37,7 +37,6 @@
             <button type="button" class="layui-btn layui-btn-normal" id="selectADocument">选择文件</button>
             <button type="button" class="layui-btn" id="startUpload">开始上传</button>
         </div>
-
     </div>
 </body>
 <%--引入js文件--%>

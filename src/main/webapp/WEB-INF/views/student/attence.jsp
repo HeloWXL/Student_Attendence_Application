@@ -11,12 +11,22 @@
 <html>
 <head>
     <title>考勤</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet"/>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <style>
+        #start div {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #93D1FF;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 200px;
+        }
 
-        #start div{
+        #end div {
             width: 200px;
             height: 200px;
             border-radius: 50%;
@@ -25,19 +35,12 @@
             text-align: center;
             line-height: 200px;
         }
-        #end div{
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background-color: #93D1FF;
-            margin: 0 auto;
-            text-align: center;
-            line-height: 200px;
-        }
-        .mui-card{
-            background-color:#efeff4;
+
+        .mui-card {
+            background-color: #efeff4;
             box-shadow: none;
         }
+
         .mui-title {
             color: #FFFFFF;
         }
@@ -77,15 +80,15 @@
                 <!--内容区-->
                 <div class="mui-card-content">
                     上课签到
-                    <p>08:00:12</p>
+                    <p></p>
                 </div>
             </div>
 
-            <div class="mui-card" id="end" style="display: none">
+            <div class="mui-card" id="end" style="display: none" onclick="end_time(this)">
                 <!--内容区-->
                 <div class="mui-card-content">
-                    下班打卡
-                    18:00:12
+                    下课签到
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -99,41 +102,103 @@
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
 <script>
+
+    var signId = '';
     $(function () {
-        if(student==''||student==null) {
-            location.href = ctx+'/studentApi/toLogin';
+        if (student == '' || student == null) {
+            location.href = ctx + '/studentApi/toLogin';
             return;
         }
+        getStuNewSignInfo()
     })
-// 上课签到
-function start_time(_this) {
-        var myDate = new Date();
-        var now=myDate.toLocaleString();     //获取当前时间
-        console.log(now)
-        var sign = {
-            signLocation:'科大国创软件股份有限公司-合肥',
-            studentId:parseInt(studentId),
-            courseId:1
-        }
+
+    // 查询学生当前签到的状态
+    function getStuNewSignInfo() {
         $.ajax({
-            url:ctx+'/signApi/insertSign',
-            data: JSON.stringify(sign),
-            type:'post',
-            dataType:'json',
+            url: ctx + '/signApi/getSignStuId',
+            data: {stuId: parseInt(studentId)},
+            type: 'get',
+            dataType: 'json',
+            asnyc:false,
             contentType: 'application/json; charset=utf-8',
-            success:function (data) {
-                if(data.body==1){
-                    //隐藏本身
-                    $(_this).hide();
-                    $("#un-start-time").show();
-                    var $start = ' <h3 class="layui-timeline-title">打卡时间 '+now+'</h3>\n' +
+            success: function (data) {
+                //已签到 未签退
+                if (data.isStartStatus == 1 && data.isEndStatus == 0) {
+                    $("#start").hide();
+                    var $start = ' <h3 class="layui-timeline-title">打卡时间 ' + data.startTime + '</h3>\n' +
                         '                    <p>\n' +
-                        '                        地点：科大国创软件股份有限公司-合肥\n' +
+                        '                        地点：' + data.signLocation + '\n' +
                         '                    </p>';
                     //获取到上课签到时间
                     $("#start-time div").append($start)
                     $("#end-time").show()
                     $("#end").show()
+                } else if(data.isStartStatus == 1 && data.isEndStatus == 1){//已签到 一起签退
+                    $("#end").hide()
+                    $("#start-time").show()
+                    $("#start").show()
+                }
+                signId = data.signId;
+                return signId;
+            }
+        })
+
+    }
+
+    // 上课签到
+    function start_time(_this) {
+        var myDate = new Date();
+        var now = myDate.toLocaleString();     //获取当前时间
+        var sign = {
+            signLocation: '科大国创软件股份有限公司-合肥',
+            studentId: parseInt(studentId),
+            courseId: 1
+        }
+        $.ajax({
+            url: ctx + '/signApi/insertSign',
+            data: JSON.stringify(sign),
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.body == 1) {
+                    //隐藏本身
+                    $(_this).hide();
+                    var $start = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
+                        '                    <p>\n' +
+                        '                        地点：泉州师范学院-泉州\n' +
+                        '                    </p>';
+                    //获取到上课签到时间
+                    $("#start-time div").append($start)
+                    $("#end-time").show()
+                    $("#end").show()
+                }
+            }
+        })
+    }
+
+    //下课签退
+    function end_time(_this) {
+        var myDate = new Date();
+        var now = myDate.toLocaleString();     //获取当前时间
+        $.ajax({
+            url: ctx + '/signApi/updateSignById',
+            data: {signId:signId},
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == 1) {
+                    //隐藏本身
+                    $(_this).hide();
+                    var $end = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
+                        '                    <p>\n' +
+                        '                        地点：泉州师范学院-泉州\n' +
+                        '                    </p>';
+                    //获取到上课签到时间
+                    $("#end-time div").append($end)
+                    $("#start-time").show()
+                    $("#start").show()
                 }
             }
         })

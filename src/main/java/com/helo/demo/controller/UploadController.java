@@ -4,13 +4,18 @@ import com.helo.demo.model.FileMeta;
 import com.helo.demo.utils.CommonUtil;
 import com.helo.demo.utils.ConfigUtil;
 import com.helo.demo.utils.SftpUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +28,7 @@ import java.util.Map;
  * @Date 2019/12/4 8:57 下午
  * @Created by wangxianlin
  */
+@Api(tags = "文件上传接口")
 @Controller
 @RequestMapping("uploadApi")
 public class UploadController {
@@ -34,6 +40,7 @@ public class UploadController {
     }
 
     //图片上传接口
+    @ApiOperation(value = "上传到本地")
     @PostMapping("/uploadToLocal")
     @ResponseBody
     public Map<String,Object> uploadToLocal(@RequestParam("file") MultipartFile file,
@@ -43,7 +50,7 @@ public class UploadController {
             String fileName = file.getOriginalFilename();
             try {
                 Date date = new Date();
-                String picDir = ConfigUtil.getValue("image");
+                String picDir = ConfigUtil.getValue("imageDir");
                 String relativeDir = getRelativeDir(date);
                 File fileDir = new File(picDir + relativeDir);
                 if (!fileDir.exists()) {
@@ -101,12 +108,13 @@ public class UploadController {
         return filePath;
     }
 
-    //跳转到图片上传界面
+    @ApiOperation(value = "跳转到上传文件到服务器页面")
     @GetMapping("/uploadToServerView")
     public String uploadToServerView() {
         return "upload/uploadToServer";
     }
 
+    @ApiOperation(value = "上传文件至服务器")
     @PostMapping("/uploadToServer")
     @ResponseBody
     public Map<String,Object> uploadToServer(@RequestParam("file") MultipartFile file) {
@@ -158,5 +166,43 @@ public class UploadController {
             result.put("msg", "文件不能超过10 MB");
         }
         return result;
+    }
+
+
+    @ApiOperation(value = "获取本地文件路径")
+    @RequestMapping(value = "/getLocalImg.do", method = RequestMethod.GET)
+    public void getLocalImg(HttpServletRequest request, HttpServletResponse response, @RequestParam("path") String path){
+        try {
+            File file = new File(ConfigUtil.getValue("imageDir") + path);
+            FileInputStream fin = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            fin.read(data);
+            fin.close();
+            response.setContentType("image/*");
+            OutputStream out = response.getOutputStream();
+            out.write(data);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @ApiOperation(value = "获取服务器文件路径")
+    @RequestMapping(value = "/getServerImg.do", method = RequestMethod.GET)
+    public void getServerImg(HttpServletRequest request, HttpServletResponse response, String path){
+        try {
+            File file = new File(ConfigUtil.getValue("server_file") + path);
+            FileInputStream fin = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            fin.read(data);
+            fin.close();
+            response.setContentType("image/*");
+            OutputStream out = response.getOutputStream();
+            out.write(data);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

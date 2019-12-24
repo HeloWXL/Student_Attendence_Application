@@ -48,8 +48,8 @@ public class SignController {
 
     @ApiOperation("跳转到签到详情界面")
     @GetMapping("toAttenceDetail/{signId}")
-    public String toAttenceDetail(Model model,@PathVariable("signId") Integer signId) {
-        model.addAttribute("sign",signService.selectSignById(signId));
+    public String toAttenceDetail(Model model, @PathVariable("signId") Integer signId) {
+        model.addAttribute("sign", signService.selectSignById(signId));
         return "/student/attenceDetail";
     }
 
@@ -81,4 +81,18 @@ public class SignController {
         return signService.getSignStuByPage(pageNo, pageSize, stuId);
     }
 
+
+    @ApiOperation("获取学生最新的签到信息")
+    @GetMapping("getSignStuId")
+    @ResponseBody
+    public Sign getStudentSign(@RequestParam("stuId") Integer stuId) {
+        return signService.getStudentSign(stuId);
+    }
+
+    @ApiOperation("学生下课签退")
+    @GetMapping("updateSignById")
+    @ResponseBody
+    public int updateSignById(@RequestParam("signId") int signId) {
+        return signService.updateSignById(signId);
+    }
 }

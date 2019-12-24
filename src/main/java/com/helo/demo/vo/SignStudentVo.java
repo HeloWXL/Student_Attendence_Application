@@ -1,8 +1,6 @@
-package com.helo.demo.model;
+package com.helo.demo.vo;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -10,13 +8,13 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author wangxl
- * @since
+ * @Classname SignStudentVo
+ * @Description TODO
+ * @Date 2019/12/23 10:53 下午
+ * @Created by wangxianlin
  */
 @Data
-@TableName(value = "sign")
-public class Sign {
-
+public class SignStudentVo {
     @TableId(value = "sign_id",type = IdType.AUTO)
     private Integer signId;
 
@@ -36,7 +34,5 @@ public class Sign {
 
     private Integer isEndStatus;
 
-    @TableField(exist = false)
     private String studentName;
-
 }
