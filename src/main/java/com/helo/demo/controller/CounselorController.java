@@ -8,6 +8,7 @@ import com.helo.demo.service.ProfessionService;
 import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,9 @@ import java.io.IOException;
 @Api(tags = "辅导员接口")
 @Controller
 @RequestMapping("counselorApi")
+@Slf4j
 public class CounselorController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CounselorController.class);
   @Resource
   private CounselorService counselorService;
   @Resource
@@ -103,6 +104,7 @@ public class CounselorController {
     Counselor counselor = counselorService.selectByCno(cno);
     DataResult<Boolean> result = new DataResult<>();
     if (Md5Utils.getSaltverifyMD5(password, counselor.getCounselorPassword())) {
+      log.info(counselor.getCounselorName() + "已登录" );
       result.setBody(true);
       request.getSession().setAttribute("counselor", counselor);
     } else {
@@ -131,9 +133,11 @@ public class CounselorController {
   @GetMapping("/removeCounselorSession")
   @ResponseBody
   public void removeCounselorSession(HttpServletRequest request, HttpServletResponse response){
+    Counselor counselor = (Counselor) request.getSession().getAttribute("counselor");
     request.getSession().removeAttribute("counselor");
-    if ( request.getSession().getAttribute("counselor") == null) {
+    if (request.getSession().getAttribute("counselor") == null) {
       try {
+        log.info(counselor.getCounselorName()+"已退出登录");
         response.sendRedirect("/helo/counselorApi/toCounselorLogin");
       } catch (IOException e) {
         e.printStackTrace();

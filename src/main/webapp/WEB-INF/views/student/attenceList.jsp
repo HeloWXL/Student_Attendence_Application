@@ -28,6 +28,8 @@
     <script>
         var ctx = '${ctx}';
         var student = "${studentsession}";
+        var studentId = '${studentsession.studentId}';
+
     </script>
 </head>
 <body>

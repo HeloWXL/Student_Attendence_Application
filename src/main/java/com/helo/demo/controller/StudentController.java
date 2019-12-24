@@ -8,6 +8,7 @@ import com.helo.demo.service.StudentService;
 import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author xiayj
+ * @author wangxl
  * @ClassName StudentController
  * @Description
  * @date 2019/8/21 0:08
@@ -27,6 +28,7 @@ import java.util.Map;
 @Api(tags = "学生接口")
 @Controller
 @RequestMapping("studentApi")
+@Slf4j
 public class StudentController {
 
   @Resource
@@ -69,11 +71,11 @@ public class StudentController {
   }
 
   @ApiOperation(value = "根据ID删除学生信息")
-  @GetMapping("/deleteByStudentId}")
+  @PostMapping("/deleteByStudentId")
   @ResponseBody
-  public DataResult<Integer> deleteByStudentId(@RequestParam("id") Integer id){
+  public DataResult<Integer> deleteByStudentId(@RequestBody List<Integer> studentId){
     DataResult<Integer> result = new DataResult<>();
-    result.setBody(studentService.deleteByPrimaryKey(id));
+    result.setBody(studentService.deleteByPrimaryKey(studentId));
     return result;
   }
 
@@ -102,9 +104,9 @@ public class StudentController {
                                         HttpServletResponse response){
       response.addHeader("Access-Control-Allow-Origin","*");
       Student student = studentService.selectBySno(sno);
-
       DataResult<Boolean> result = new DataResult<>();
     if (Md5Utils.getSaltverifyMD5(password,student.getStudentPassword())) {
+      log.info(student.getStudentName()+"正在登录");
       //根据学号的ID获取学生的专业相关信息
       Profession profession = professionService.selectByPrimaryKey(student.getProfessionId());
       student.setProfession(profession);
@@ -115,22 +117,6 @@ public class StudentController {
       result.setBody(false);
     }
     return result;
-  }
-
-
-  @ApiOperation(value = "获取学生的session对象")
-  @PostMapping("/getStudentSession")
-  @ResponseBody
-  public DataResult<Student> getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean){
-    DataResult<Student> result = new DataResult<>();
-    Student student = (Student) request.getSession().getAttribute(studentBean);
-    if (student == null) {
-      result.setBody(null);
-      return result;
-    } else {
-      result.setBody(student);
-      return result;
-    }
   }
 
   @ApiOperation(value = "查询学生信息-分页显示")
@@ -144,9 +130,11 @@ public class StudentController {
   @GetMapping("/removeStudentSession")
   @ResponseBody
   public void removeStudentSession(HttpServletRequest request, HttpServletResponse response){
+   Student student = (Student) request.getSession().getAttribute("studentsession");
     request.getSession().removeAttribute("studentsession");
     if ( request.getSession().getAttribute("studentsession") == null) {
       try {
+        log.info(student.getStudentName()+"正在退出登录");
         response.sendRedirect("/helo/studentApi/toLogin");
       } catch (IOException e) {
         e.printStackTrace();

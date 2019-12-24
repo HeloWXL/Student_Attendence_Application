@@ -1,5 +1,4 @@
 var page = 1 ;
-var studentId = '${studentsession.studentId}';
 $(function () {
     if (student == '' || student == null) {
         location.href = ctx + '/studentApi/toLogin';
@@ -8,13 +7,20 @@ $(function () {
     loadStuSignList(page,studentId)
 })
 
-// 跳转到详情页面
+/**
+ * 跳转到详情页面
+ */
 function toAttencedetailView(_this) {
     var signId  = $(_this).attr("name");
     console.log(signId);
     location.href=ctx+"/signApi/toAttenceDetail/"+signId;
 }
-// 加载学生考勤列表
+
+/**
+ * 加载学生考勤列表
+ * @param page
+ * @param studentId
+ */
 function loadStuSignList(page,studentId) {
     $.ajax({
         url:ctx+'/signApi/getSignStuByPage',

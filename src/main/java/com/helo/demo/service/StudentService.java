@@ -29,8 +29,8 @@ public class StudentService {
    * @param studentId
    * @return int
    */
-  public int deleteByPrimaryKey(Integer studentId){
-    return studentMapper.deleteByPrimaryKey(studentId);
+  public int deleteByPrimaryKey(List<Integer> studentId){
+    return studentMapper.deleteBatchIds(studentId);
   }
 
   /**
@@ -40,6 +40,7 @@ public class StudentService {
    */
   public int insertSelective(Student student){
     student.setStudentPassword(Md5Utils.getSaltMD5(student.getStudentPassword()));
+    student.setStudentPic("/resources/images/user.jpg");
     return studentMapper.insertSelective(student);
   }
 

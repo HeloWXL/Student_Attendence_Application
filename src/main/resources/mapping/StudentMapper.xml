@@ -150,6 +150,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.Student" >
     update student
     <set >

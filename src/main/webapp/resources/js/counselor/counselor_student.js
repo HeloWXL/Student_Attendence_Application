@@ -7,7 +7,9 @@ layui.use('table', function() {
   $('#query').click(function() {
   });
 
-  //加载列表数据
+  /**
+   * 加载学生列表
+   */
   function loadData() {
     table.render({
       id: 'studentTable',
@@ -35,7 +37,9 @@ layui.use('table', function() {
     });
   }
 
-  // 工具栏
+  /**
+   * 工具栏监听事件
+   */
   table.on('toolbar(studentfilter)', function(obj) {
     var checkStatus = table.checkStatus(obj.config.id);
     var data = checkStatus.data; //获取选中的数据
@@ -63,6 +67,11 @@ layui.use('table', function() {
           '                    <input type="text" placeholder="请输入学生学号" name="studentSno" id="studentSno" class="layui-input">\n' +
           '                </div>\n' +
           '            </div>\n' +
+              '<div class="layui-form-item">\n' +
+              '    <label class="layui-form-label">专业:</label>\n' +
+              '    <div class="layui-input-block" id="profession">\n' +
+              '    </div>\n' +
+              '  </div>'+
           '            <div class="layui-form-item">\n' +
           '                <label class="layui-form-label" style="padding-left:-50px;">性别:</label>\n' +
           '                <div class="layui-input-block">\n' +
@@ -98,8 +107,12 @@ layui.use('table', function() {
           '</div>\n',
           btn: ['提交', '取消']
           , success: function(layero) {
+            var form = layui.form;
             layero.find('.layui-layer-btn').css('text-align', 'center');
+            $("#profession").append(locationProfession())
+            form.render('select');
           },
+          //确认
           btn1: function(index) {
             //数据校验
             var studentName = $.trim($('#studentName').val());
@@ -107,41 +120,39 @@ layui.use('table', function() {
               layer.msg('姓名不能为空',{icon:5,time:1500});
               return;
             }
-
             var studentSno = $.trim($('#studentSno').val());
             if(studentSno==null&&studentSno==''){
               layer.msg('学号不能为空',{icon:5,time:1500});
               return;
             }
 
+            var professionId = $("select[name=\"professionId\"]").val();
+            if(professionId==null&&professionId==''){
+              layer.msg('专业不能为空',{icon:5,time:1500});
+              return;
+            }
             var studentSex = $.trim($('#studentSex').val());
             if(studentSex==null&&studentSex==''){
               layer.msg('性别不能为空',{icon:5,time:1500});
               return;
             }
-
-            var studentName = $.trim($('#studentName').val());
-            if(studentName==null&&studentName==''){
-              layer.msg('姓名不能为空',{icon:5,time:1500});
+            var studentAge = $.trim($('#studentAge').val());
+            if(studentAge==null&&studentAge==''){
+              layer.msg('年龄不能为空',{icon:5,time:1500});
+              return;
+            }
+            var studentEmail = $.trim($('#studentEmail').val());
+            if(studentEmail==null&&studentEmail==''){
+              layer.msg('邮箱不能为空',{icon:5,time:1500});
               return;
             }
 
-            var studentName = $.trim($('#studentName').val());
-            if(studentName==null&&studentName==''){
-              layer.msg('姓名不能为空',{icon:5,time:1500});
+            var studentQq = $.trim($('#studentQq').val());
+            if(studentQq==null&&studentQq==''){
+              layer.msg('QQ不能为空',{icon:5,time:1500});
               return;
             }
 
-            var studentName = $.trim($('#studentName').val());
-            if(studentName==null&&studentName==''){
-              layer.msg('姓名不能为空',{icon:5,time:1500});
-              return;
-            }
-            var studentName = $.trim($('#studentName').val());
-            if(studentName==null&&studentName==''){
-              layer.msg('姓名不能为空',{icon:5,time:1500});
-              return;
-            }
             var studentPassword = $.trim($('#studentPassword').val());
             if(studentPassword==null&&studentPassword==''){
               layer.msg('密码不能为空',{icon:5,time:1500});
@@ -149,7 +160,12 @@ layui.use('table', function() {
             }
             // 提交
             var student = {
-              studentPhone: studentPhone,
+              studentSno:studentSno,
+              professionId:parseInt(professionId),
+              studentSex:studentSex,
+              studentAge:studentAge,
+              studentEmail:studentEmail,
+              studentQq:studentQq,
               studentName: studentName,
               studentPassword: studentPassword
             };
@@ -172,7 +188,7 @@ layui.use('table', function() {
             studentId.push(data[i].studentId);
           }
           layer.confirm('是否删除？', {title: '提示'}, function(index) {
-            deleteStudent(studentId)
+            deleteStudent(studentId,length)
           });
         }
         break;
@@ -277,16 +293,19 @@ layui.use('table', function() {
     }
   });
 
-
-  function deleteStudent(studentId) {
+  /**
+   * 删除学生
+   * @param studentId ,length
+   */
+  function deleteStudent(studentId,length) {
     $.ajax({
-      url: ctx + '/student/deleteStudent',
+      url: ctx + '/studentApi/deleteByStudentId',
       data: JSON.stringify(studentId),
       dataType: 'json',
-      type: 'get',
+      type: 'post',
       contentType: 'application/json; charset=utf-8',
       success: function(data) {
-        if (data == 1) {
+        if (data.body == length) {
           layer.msg('删除成功',{icon:1,time:1500}, function() {
             //关闭弹窗
             layer.closeAll();
@@ -300,9 +319,34 @@ layui.use('table', function() {
     });
   }
 
+  /**
+   * 加载专业列表
+   * @returns
+   */
+  function locationProfession() {
+    var professionStr = "<select name=\"professionId\" ><option value=''>请选择专业</option>";
+    $.ajax({
+      url:ctx+'/professionApi/loadProfession',
+      type:'get',
+      async:false,
+      dataType:'json',
+      success:function (data) {
+        for(var i = 0 ;i<data.length;i++){
+          var node = ('<option value="'+data[i].professionId+'">'+data[i].professionName+'</option>');
+          professionStr+=node;
+        }
+      }
+    });
+    return professionStr+"</select>";
+  }
+
+  /**
+   * 修改学生信息
+   * @param student
+   */
   function updateStudent(student) {
     $.ajax({
-      url: ctx + '/student/updateStudentPasswordByAdmin',
+      url: ctx + '/studentApi/updateStudentPasswordByAdmin',
       data: JSON.stringify(student),
       dataType: 'json',
       type: 'post',
@@ -320,15 +364,20 @@ layui.use('table', function() {
       }
     });
   }
+
+  /**
+   * 添加学生
+   * @param student
+   */
   function insertStudent(student) {
     $.ajax({
-      url: ctx + '/student/insertStudent',
+      url: ctx + '/studentApi/insertStudent',
       data: JSON.stringify(student),
       dataType: 'json',
       type: 'post',
       contentType: 'application/json; charset=utf-8',
       success: function(data) {
-        if (data == 1) {
+        if (data.body == 1) {
           layer.alert('添加成功',{icon:1,time:1500}, function() {
             //关闭弹窗
             layer.closeAll();

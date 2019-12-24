@@ -24,11 +24,11 @@ public class Course {
     @TableField("classarrangement")
     private Integer classarrangement;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField("startTime")
     private Date starttime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField("endTIme")
     private Date endtime;
 
@@ -39,6 +39,7 @@ public class Course {
     private Integer teacherId;
 
     @TableField("crete_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date ceateTime;
 
     @TableField(exist = false)
