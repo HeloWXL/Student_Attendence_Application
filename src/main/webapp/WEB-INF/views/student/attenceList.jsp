@@ -13,6 +13,8 @@
     <title>Title</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
+
     <style>
         ul li span{
             float: right;
@@ -37,7 +39,7 @@
 <div class="mui-content">
     <ul class="mui-table-view">
         <li class="mui-table-view-cell mui-collapse">
-            <a  href="#">出勤天数：<span id="count">24天</span></a>
+            <a  href="#">出勤天数：<span id="count"></span></a>
         </li>
     </ul>
     <ul class="mui-table-view" id="signList">
@@ -55,6 +57,13 @@
     var page = 1 ;
     var studentId = '${studentsession.studentId}';
     $(function () {
+        if (student == '' || student == null) {
+            location.href = ctx + '/studentApi/toLogin';
+            return;
+        }
+        loadStuSignList(page,studentId)
+    })
+    function loadStuSignList(page,studentId) {
         $.ajax({
             url:ctx+'/signApi/getSignStuByPage',
             data:{
@@ -76,6 +85,6 @@
                 }
             }
         })
-    })
+    }
 </script>
 </html>

@@ -14,6 +14,7 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <link href="${ctx}/resources/css/student/attence.css" rel="stylesheet">
     <script>

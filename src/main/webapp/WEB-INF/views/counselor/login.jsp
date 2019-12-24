@@ -13,6 +13,7 @@
     <title>辅导员登录</title>
     <link href="${ctx}/resources/css/counselor/counselor_login.css" rel="stylesheet">
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
 
     <script>
         var ctx = '${ctx }'

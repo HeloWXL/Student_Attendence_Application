@@ -17,6 +17,8 @@
     <meta content="telephone=no" name="format-detection"/>
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/student/login.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
+
     <script>
       var ctx = '${ctx }'
     </script>

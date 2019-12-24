@@ -103,11 +103,14 @@
                     if(reason.length>20){
                         reason = reason.substring(0,20)+".....";
                     }
+
+                    var start = new Date( data.body.list[i].startTime)
+                    var end = new Date( data.body.list[i].endTime)
                     var $node = $('<li class="mui-table-view-cell mui-media">\n' +
                         '            <a href="${ctx}/leaveApi/selectByPrimaryKey/' + data.body.list[i].leaveId + '">\n' +
                         '                <div class="mui-media-body">\n' +
-                        '                    <div>请假标题：' + reason+ '</div>\n' +
-                        '                    <p style="float: right;font-size: 12px">开始时间： ' + data.body.list[i].startTime + ' &nbsp;&nbsp;&nbsp;结束时间：' + data.body.list[i].endTime + '</p>\n' +
+                        '                    <div>Title：' + reason+ '</div>\n' +
+                        '                    <p style="float: right;font-size: 12px">开始时间： ' + dateFormat("YYYY-mm-dd HH:MM:SS",start) + ' &nbsp;&nbsp;&nbsp;结束时间：' + dateFormat("YYYY-mm-dd HH:MM:SS", end) + '</p>\n' +
                         '                </div>\n' +
                         '            </a>\n' +
                         '        </li>')
@@ -117,12 +120,24 @@
         });
     });
 
-    function GMTToStr(time) {
-        var date = new Date(time)
-        var Str = date.getFullYear() + '-' +
-            (date.getMonth() + 1) + '-' +
-            date.getDate()
-        return Str
+    function dateFormat(fmt, date) {
+        var ret;
+        var opt = {
+            "Y+": date.getFullYear().toString(),        // 年
+            "m+": (date.getMonth() + 1).toString(),     // 月
+            "d+": date.getDate().toString(),            // 日
+            "H+": date.getHours().toString(),           // 时
+            "M+": date.getMinutes().toString(),         // 分
+            "S+": date.getSeconds().toString()          // 秒
+            // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (var k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
     }
 </script>
 

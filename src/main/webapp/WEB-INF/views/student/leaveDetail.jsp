@@ -86,22 +86,37 @@
     var startTime =  new Date('${leave.startTime}');
     var endTime =  new Date('${leave.endTime}');
 
-    $('#start').val(formatDate(startTime));
-    $('#end').val(formatDate(endTime));
-    // js时间格式化
-    function formatDate(date) {
-        var myyear = date.getFullYear();
-        var mymonth = date.getMonth() + 1;
-        var myweekday = date.getDate();
+    $(function () {
+        if (student == '' || student == null) {
+            location.href = ctx + '/studentApi/toLogin';
+            return;
+        }
 
-        if (mymonth < 10) {
-            mymonth = "0" + mymonth;
-        }
-        if (myweekday < 10) {
-            myweekday = "0" + myweekday;
-        }
-        return (myyear + "-" + mymonth + "-" + myweekday);
+        $('#start').val(dateFormat("YYYY-mm-dd HH:MM:SS",startTime));
+        $('#end').val(dateFormat("YYYY-mm-dd HH:MM:SS",endTime));
+    })
+
+    // js时间格式化
+    function dateFormat(fmt, date) {
+        var ret;
+        var opt = {
+            "Y+": date.getFullYear().toString(),        // 年
+            "m+": (date.getMonth() + 1).toString(),     // 月
+            "d+": date.getDate().toString(),            // 日
+            "H+": date.getHours().toString(),           // 时
+            "M+": date.getMinutes().toString(),         // 分
+            "S+": date.getSeconds().toString()          // 秒
+            // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (var k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
     }
+
 </script>
 
 

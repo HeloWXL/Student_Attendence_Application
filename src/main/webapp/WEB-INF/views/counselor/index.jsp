@@ -12,6 +12,8 @@
 <head>
     <title>后台管理首页</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
+    <link rel="shortcut icon" href="${ctx}/resources/ico/logo.ico"/>
+
     <script>
       var ctx = '${ctx }';
       var counselor = '${counselor}';

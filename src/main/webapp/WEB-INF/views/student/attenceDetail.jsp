@@ -15,6 +15,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet"/>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
+    <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>
     <script>
         var ctx = '${ctx}';
         var student = "${studentsession}";
@@ -38,7 +39,6 @@
                     <h4 class="layui-timeline-title">上班打卡</h4>
                     <h3 class="layui-timeline-title">上课签到</h3>
                     <p>
-
                     </p>
                 </div>
             </li>
@@ -48,11 +48,9 @@
                     <h4 class="layui-timeline-title">下课签退</h4>
                     <h3 class="layui-timeline-title"></h3>
                     <p>
-
                     </p>
                 </div>
             </li>
-
         </ul>
     </div>
 </div>
