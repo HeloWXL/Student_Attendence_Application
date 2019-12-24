@@ -92,7 +92,7 @@ public class SignController {
     @ApiOperation("学生下课签退")
     @GetMapping("updateSignById")
     @ResponseBody
-    public int updateSignById(@RequestParam("signId") int signId) {
-        return signService.updateSignById(signId);
+    public int updateSignById(@RequestParam("signId") int signId,@RequestParam("location") String location) {
+        return signService.updateSignById(signId,location);
     }
 }

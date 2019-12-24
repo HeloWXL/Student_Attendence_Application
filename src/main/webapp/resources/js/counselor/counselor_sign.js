@@ -21,6 +21,7 @@ layui.use('table', function () {
                 , {field: 'number', title: '序号', type: 'numbers'}
                 , {field: 'studentName', title: '学生', width: '8%',align:'center'}
                 , {field: 'signLocation', title: '签到地点', width: '20%'}
+                , {field: 'signLocation', title: '签退地点', width: '20%'}
                 , {field: 'startTime', title: '开始时间', width: '15%',align:'center'}
                 , {field: 'endTime', title: '结束时间', width: '15%',align:'center'}
                 , {

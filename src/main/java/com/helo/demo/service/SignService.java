@@ -98,8 +98,8 @@ public class SignService {
    * @param signId
    * @return
    */
-  public int updateSignById(int signId){
-    return signMapper.updateSignById(signId);
+  public int updateSignById(int signId,String location){
+    return signMapper.updateSignById(signId,location);
   }
 
 }

@@ -150,7 +150,7 @@
         var myDate = new Date();
         var now = myDate.toLocaleString();     //获取当前时间
         var sign = {
-            signLocation: '科大国创软件股份有限公司-合肥',
+            signLocation: '泉州师范学院-泉州',
             studentId: parseInt(studentId),
             courseId: 1
         }
@@ -183,7 +183,7 @@
         var now = myDate.toLocaleString();     //获取当前时间
         $.ajax({
             url: ctx + '/signApi/updateSignById',
-            data: {signId:signId},
+            data: {signId:signId,location:"泉州师范学研"},
             type: 'get',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
