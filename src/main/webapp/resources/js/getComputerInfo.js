@@ -200,8 +200,7 @@ $(function () {
             }
         }
     };
+    BrowserMatch.init();
+    console.log("当前浏览器为：" + BrowserMatch.browser +"\n版本为："+ BrowserMatch.version + "\n所处操作系统为："+BrowserMatch.OS);
 })
 
-
-// BrowserMatch.init();
-// alert("当前浏览器为：" + BrowserMatch.browser +"\n版本为："+ BrowserMatch.version + "\n所处操作系统为："+BrowserMatch.OS);

@@ -78,4 +78,12 @@ public class ProfessionService {
     return map;
   }
 
+  /**
+   * 获取所有的专业信息
+   * @return List<Profession>
+   */
+  public List<Profession> loadProfession(){
+    return professionMapper.selectList(new EntityWrapper<>());
+  }
+
 }

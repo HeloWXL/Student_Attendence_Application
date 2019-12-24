@@ -62,5 +62,6 @@
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <%--引入自定义js文件--%>
 <script src="${ctx}/resources/js/counselor/counselor_index.js" type="application/javascript"></script>
+<%--<script src="${ctx}/resources/js/getComputerInfo.js" type="application/javascript"></script>--%>
 </body>
 </html>

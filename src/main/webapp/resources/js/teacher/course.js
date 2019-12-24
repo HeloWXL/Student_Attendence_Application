@@ -3,19 +3,7 @@ $(function() {
     if (teacher == null || teacher == '') {
         location.href = ctx + "/teacherApi/toLogin"
     }
-    var professionList = [{
-        value: '1',
-        text: '信息管理与信息系统'
-    }, {
-        value: '2',
-        text: '计算机科学与技术'
-    }, {
-        value: '3',
-        text: '物联网'
-    }, {
-        value: '4',
-        text: '大数据科学与技术'
-    }];
+    var professionList =locationProfession();
     var dateList = [{
         value: '1',
         text: '星期一'
@@ -32,6 +20,7 @@ $(function() {
         value: '5',
         text: '星期五'
     }];
+    
     $('#startTime').click(function() {
         var $dom = $('#startTime');
         dateSelect($dom);
@@ -103,6 +92,28 @@ $(function() {
         };
         submitAddCourse(course)
     });
+    /**
+     * 加载专业列表
+     * @returns {any[]}
+     */
+    function locationProfession() {
+        var professionList = new Array();
+        $.ajax({
+            url:ctx+'/professionApi/loadProfession',
+            type:'get',
+            async:false,
+            dataType:'json',
+            success:function (data) {
+                for(var i = 0 ;i<data.length;i++){
+                    var obj = new Object();
+                    obj.value = data[i].professionId;
+                    obj.text = data[i].professionName;
+                    professionList.push(obj)
+                }
+            }
+        })
+        return professionList;
+    }
 
     /**
      * 后台提交数据
@@ -138,7 +149,7 @@ $(function() {
             function (a) { return parseInt(a, 10) - 1; }).match(/\d+/g) + ')');
         return date;
     }
-
+    
     /**
      * 时间选择
      * @param dom
