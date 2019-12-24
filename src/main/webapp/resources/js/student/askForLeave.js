@@ -50,8 +50,8 @@ $(function () {
         var leave = {
             studentSno: studentSno,
             leaveReason: leaveReason,
-            startTime: getDate(start),
-            endTime: getDate(end),
+            startTime: start,
+            endTime: end,
             leaveTitle: leaveTitle,
             coundelorId: 1
         };
@@ -77,6 +77,9 @@ $(function () {
             }
         });
     });
+    /**
+     * 清空
+     */
     $("#reset").click(function () {
         $('#leaveReason').val('');
         $('#start').val('');
@@ -97,11 +100,12 @@ function getDate(strDate) {
 function dateSelect(dom) {
     var $a = dom;
     var Date = new mui.DtPicker({
-        type: 'date'
+        type: 'datetime'
     });
     Date.show(function (item) {
+        console.log(item)
         //这里你可以用console 看看回调函数中的item的值
         var endDate = item.y.text + '-' + item.m.text + '-' + item.d.text;
-        $a.val(endDate);
+        $a.val(item.value);
     });
 }

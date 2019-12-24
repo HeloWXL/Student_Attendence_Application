@@ -126,6 +126,20 @@ public class StudentController {
     return studentService.getStudentList(page,limit);
   }
 
+  @ApiOperation(value = "获取学生的session对象")
+  @PostMapping("/getStudentSession")
+  @ResponseBody
+  public DataResult<Student> getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean) {
+    Student student = (Student) request.getSession().getAttribute(studentBean);
+    DataResult<Student> result = new DataResult<>();
+    if (student == null) {
+      return null;
+    } else {
+      result.setBody(student);
+      return result;
+    }
+  }
+
   @ApiOperation(value = "清除学生的session对象")
   @GetMapping("/removeStudentSession")
   @ResponseBody
@@ -150,6 +164,4 @@ public class StudentController {
     result.setBody(studentService.selectCourseBySno(sno));
     return result;
   }
-
-
 }

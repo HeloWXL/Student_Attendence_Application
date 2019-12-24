@@ -91,9 +91,8 @@
             location.href = ctx + '/studentApi/toLogin';
             return;
         }
-
-        $('#start').val(dateFormat("YYYY-mm-dd HH:MM:SS",startTime));
-        $('#end').val(dateFormat("YYYY-mm-dd HH:MM:SS",endTime));
+        $('#start').val(dateFormat("YYYY-mm-dd HH:MM",startTime));
+        $('#end').val(dateFormat("YYYY-mm-dd HH:MM",endTime));
     })
 
     // js时间格式化
@@ -103,9 +102,8 @@
             "Y+": date.getFullYear().toString(),        // 年
             "m+": (date.getMonth() + 1).toString(),     // 月
             "d+": date.getDate().toString(),            // 日
-            "H+": date.getHours().toString(),           // 时
+            "H+": (date.getHours()+8).toString(),           // 时
             "M+": date.getMinutes().toString(),         // 分
-            "S+": date.getSeconds().toString()          // 秒
             // 有其他格式化字符需求可以继续添加，必须转化成字符串
         };
         for (var k in opt) {
