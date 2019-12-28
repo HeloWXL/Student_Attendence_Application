@@ -16,7 +16,6 @@
     <script>
       var ctx = '${ctx}';
       var counselor = '${counselor}';
-
     </script>
 </head>
 <body>

@@ -43,11 +43,11 @@ public class ApiService {
 
     /**
      * 删除Api配置
-     * @param id
+     * @param ids
      * @return
      */
-    public int deleteFaceApi(Integer id){
-        return apiMapper.deleteById(id);
+    public int deleteFaceApi(List<Integer> ids){
+        return apiMapper.deleteBatchIds(ids);
     }
 
     /**

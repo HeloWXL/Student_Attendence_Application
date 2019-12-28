@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.List;
 
 /**
  * @Classname ApiController
- * @Description TODO
+ * @Description TODO 人脸对比API接口
  * @Date 2019/12/28 11:09 上午
  * @Created by wangxianlin
  */
@@ -45,10 +46,10 @@ public class ApiController {
     }
 
     @ApiOperation(value = "删除Api配置")
-    @GetMapping("/deleteFaceApi")
+    @PostMapping("/deleteFaceApi")
     @ResponseBody
-    public int deleteFaceApi(@RequestParam("id") Integer id) {
-        return apiService.deleteFaceApi(id);
+    public int deleteFaceApi(@RequestBody List<Integer> ids) {
+        return apiService.deleteFaceApi(ids);
     }
 
     @ApiOperation(value = "分页获取Api配置")
@@ -57,6 +58,4 @@ public class ApiController {
     public Map<String, Object> getApiListByPage(int counselorId, int page, int limit) {
         return apiService.getApiListByPage(counselorId, page, limit);
     }
-
-
 }
