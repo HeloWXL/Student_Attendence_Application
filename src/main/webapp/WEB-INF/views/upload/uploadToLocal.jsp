@@ -65,6 +65,7 @@
 </script>
 <script>
     layui.use('upload', function() {
+        var base64Img = '';
         var $ = layui.jquery
             , upload = layui.upload;
         //选完文件后不自动上传
@@ -77,6 +78,8 @@
             ,choose: function(obj){
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
+                    base64Img=result;
+                    console.log(base64Img)
                     $('#demo1').attr('src', result); //图片链接（base64）
                 });
             }

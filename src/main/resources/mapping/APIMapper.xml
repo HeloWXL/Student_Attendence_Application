@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.helo.demo.mapper.APIMapper" >
+  <resultMap id="BaseResultMap" type="com.helo.demo.model.API" >
+    <id column="API_ID" property="apiId" jdbcType="INTEGER" />
+    <result column="API_URL" property="apiUrl" jdbcType="VARCHAR" />
+    <result column="API_KEY" property="apiKey" jdbcType="VARCHAR" />
+    <result column="API_SECRET" property="apiSecret" jdbcType="VARCHAR" />
+    <result column="CREARE_TIME" property="creareTime" jdbcType="TIMESTAMP" />
+    <result column="COUNSRLOR_ID" property="counsrlorId" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insertSelective" parameterType="com.helo.demo.model.API" >
+    insert into API
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="apiId != null" >
+        API_ID,
+      </if>
+      <if test="apiUrl != null" >
+        API_URL,
+      </if>
+      <if test="apiKey != null" >
+        API_KEY,
+      </if>
+      <if test="apiSecret != null" >
+        API_SECRET,
+      </if>
+      <if test="creareTime != null" >
+        CREARE_TIME,
+      </if>
+      <if test="counsrlorId != null" >
+        COUNSRLOR_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="apiId != null" >
+        #{apiId,jdbcType=INTEGER},
+      </if>
+      <if test="apiUrl != null" >
+        #{apiUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null" >
+        #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="apiSecret != null" >
+        #{apiSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="creareTime != null" >
+        #{creareTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="counsrlorId != null" >
+        #{counsrlorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.helo.demo.model.API" >
+    update API
+    <set >
+      <if test="apiUrl != null" >
+        API_URL = #{apiUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null" >
+        API_KEY = #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="apiSecret != null" >
+        API_SECRET = #{apiSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="creareTime != null" >
+        CREARE_TIME = #{creareTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="counsrlorId != null" >
+        COUNSRLOR_ID = #{counsrlorId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where API_ID = #{apiId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -65,6 +65,7 @@
 <%--自定义js文件--%>
 <script>
   layui.use('upload', function() {
+      var base64Img = '';
     var $ = layui.jquery
         , upload = layui.upload;
     //普通图片上传
@@ -74,6 +75,7 @@
       ,before: function(obj){
         //预读本地文件示例，不支持ie8
         obj.preview(function(index, file, result){
+            base64Img = result;
           $('#demo1').attr('src', result); //图片链接（base64）
         });
       }
@@ -84,6 +86,7 @@
         }else{
           return layer.msg('上传成功',{icon:1,time:1500});
         }
+
 
       }
       ,error: function(){
@@ -115,11 +118,10 @@
           return layer.msg('上传失败',{icon:5,time:1500});
         }else{
           return layer.msg('上传成功',{icon:1,time:1500});
-
         }
       }
     });
-
+      console.log(base64Img)
   })
 </script>
 </html>
