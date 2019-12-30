@@ -13,11 +13,12 @@
     <result column="student_sex" property="studentSex" jdbcType="VARCHAR" />
     <result column="profession_id" property="professionId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="img_base_64" property="imgBase64" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     student_id, student_name, student_sno, student_password, student_age, student_qq, 
-    student_email, student_pic, student_sex, profession_id, create_time
+    student_email, student_pic, student_sex, profession_id, create_time,img_base_64
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >

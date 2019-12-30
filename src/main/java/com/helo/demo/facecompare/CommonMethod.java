@@ -20,9 +20,8 @@ public class CommonMethod {
     private final static int CONNECT_TIME_OUT = 30000;
     private final static int READ_OUT_TIME = 50000;
     private static String boundaryString = getBoundary();
-
     protected static byte[] post(String url, HashMap<String, String> map,
-                                 HashMap<String, byte[]> fileMap) throws Exception {
+                                 HashMap<String, String> fileMap) throws Exception {
         HttpURLConnection conne;
         URL url1 = new URL(url);
         conne = (HttpURLConnection) url1.openConnection();
@@ -87,7 +86,6 @@ public class CommonMethod {
         ins.close();
         return bytes;
     }
-
     private static String getBoundary() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
@@ -96,11 +94,9 @@ public class CommonMethod {
         }
         return sb.toString();
     }
-
     private static String encode(String value) throws Exception {
         return URLEncoder.encode(value, "UTF-8");
     }
-
     public static byte[] getBytesFromFile(File f) {
         if (f == null) {
             return null;

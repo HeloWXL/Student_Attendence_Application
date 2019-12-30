@@ -16,52 +16,98 @@ public class FaceCompare {
     /**
      * API的API_KEY
      */
-    public static final String API_KEY = "L_mT-oglbWdX2uw20G3tGl5TJqBy9v3L";
+    private String apiKey;
     /**
      * API 的 API_SECRET
      */
-    public static final String API_SECRET = "jaoj6KDENsq7JcgUL8mD-tMQVSMZRFlX";
+    private String apiSecret;
+    /**
+     * Api 地址
+     */
+    private String url;
+    /**
+     * 第一张图片的Base64编码
+     */
+    private String base64ImageOne;
+    /**
+     * 第二张图片的Base64编码
+     */
+    private String base64ImageSecond;
 
-    public static final String IMG_PATH =
-            "D:\\wangxianlin\\facedemo\\src\\main\\resources\\images\\Goal.png";
-    public static final String IMG_PATH_TO_COMPARE =
-            "D:\\wangxianlin\\facedemo\\src\\main\\resources\\images\\toCompare.png";
+
+    public FaceCompare(String apiKey, String apiSecret, String url, String base64ImageOne, String base64ImageSecond) {
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        this.url = url;
+        this.base64ImageOne = base64ImageOne;
+        this.base64ImageSecond = base64ImageSecond;
+    }
+
+    public String compareRes() {
+        HashMap<String, String> map = new HashMap<>();
+        /**
+         * 存放 image_file 因为它是一个二进制数组
+         */
+        map.put("api_key", this.getApiKey());
+        map.put("api_secret", this.getApiSecret());
+        HashMap<String, String> baseMap = new HashMap<>();
+
+        /***
+         * image_file
+         * 一个图片，二进制文件，需要用 post multipart/form-data 的方式上传
+         */
+        baseMap.put("image_base64_1", this.getBase64ImageOne());
+        baseMap.put("image_base64_2", this.getBase64ImageSecond());
+        String str = null;
+        try {
+            byte[] bacd = post(url, map, baseMap);
+             str = new String(bacd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 
 
-//    public static void main(String[] args) {
-//        File file1 = new File(IMG_PATH);
-//        byte[] buff1 = getBytesFromFile(file1);
-//        File file2 = new File(IMG_PATH_TO_COMPARE);
-//        byte[] buff2 = getBytesFromFile(file2);
-//        /**
-//         * Url
-//         * 必须要传递的参数
-//         */
-//        String url = "https://api-cn.faceplusplus.com/facepp/v3/compare";
-//        /**
-//         * 存放 api_key ， api_secret
-//         */
-//        HashMap<String, String> map = new HashMap<>();
-//        /**
-//         * 存放 image_file 因为它是一个二进制数组
-//         */
-//        HashMap<String, byte[]> byteMap = new HashMap<>();
-//        map.put("api_key", API_KEY);
-//        map.put("api_secret", API_SECRET);
-//        /***
-//         * image_file
-//         * 一个图片，二进制文件，需要用 post multipart/form-data 的方式上传
-//         */
-//        byteMap.put("image_file1", buff1);
-//        byteMap.put("image_file2", buff2);
-//        try {
-//            byte[] bacd = post(url, map, byteMap);
-//            String str = new String(bacd);
-//            System.out.println(str);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public String getBase64ImageOne() {
+        return base64ImageOne;
+    }
+
+    public void setBase64ImageOne(String base64ImageOne) {
+        this.base64ImageOne = base64ImageOne;
+    }
+
+    public String getBase64ImageSecond() {
+        return base64ImageSecond;
+    }
+
+    public void setBase64ImageSecond(String base64ImageSecond) {
+        this.base64ImageSecond = base64ImageSecond;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getApiSecret() {
+        return apiSecret;
+    }
+
+    public void setApiSecret(String apiSecret) {
+        this.apiSecret = apiSecret;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     /**
      *
