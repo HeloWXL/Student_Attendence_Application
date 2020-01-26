@@ -21,7 +21,7 @@ public class CommonMethod {
     private final static int READ_OUT_TIME = 50000;
     private static String boundaryString = getBoundary();
     protected static byte[] post(String url, HashMap<String, String> map,
-                                 HashMap<String, String> fileMap) throws Exception {
+                                 HashMap<String, byte[]> fileMap) throws Exception {
         HttpURLConnection conne;
         URL url1 = new URL(url);
         conne = (HttpURLConnection) url1.openConnection();

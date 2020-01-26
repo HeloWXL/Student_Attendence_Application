@@ -50,14 +50,14 @@ public class FaceCompare {
          */
         map.put("api_key", this.getApiKey());
         map.put("api_secret", this.getApiSecret());
-        HashMap<String, String> baseMap = new HashMap<>();
+        HashMap<String, byte[]> baseMap = new HashMap<>();
 
         /***
          * image_file
          * 一个图片，二进制文件，需要用 post multipart/form-data 的方式上传
          */
-        baseMap.put("image_base64_1", this.getBase64ImageOne());
-        baseMap.put("image_base64_2", this.getBase64ImageSecond());
+//        baseMap.put("image_file_1", this.getBase64ImageOne());
+//        baseMap.put("image_file_2", this.getBase64ImageSecond());
         String str = null;
         try {
             byte[] bacd = post(url, map, baseMap);

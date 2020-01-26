@@ -1,5 +1,6 @@
 package com.helo.demo.controller;
 
+import com.helo.demo.facecompare.FaceCompare;
 import com.helo.demo.model.API;
 import com.helo.demo.service.ApiService;
 import io.swagger.annotations.Api;
@@ -58,4 +59,20 @@ public class ApiController {
     public Map<String, Object> getApiListByPage(int counselorId, int page, int limit) {
         return apiService.getApiListByPage(counselorId, page, limit);
     }
+
+    @ApiOperation(value = "人脸识别API测试")
+    @PostMapping("/compareFaceApi")
+    @ResponseBody
+    public Object compareFaceApi(String base64Img,String base64Img2){
+        API api = null;
+        try {
+            api = apiService.selectGetUseFAceApi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FaceCompare faceCompare = new FaceCompare(api.getApiKey(),api.getApiSecret(),api.getApiUrl(),base64Img,base64Img2);
+        return faceCompare.compareRes();
+    }
+
+
 }

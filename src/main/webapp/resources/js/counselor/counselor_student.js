@@ -346,13 +346,13 @@ layui.use('table', function() {
    */
   function updateStudent(student) {
     $.ajax({
-      url: ctx + '/studentApi/updateStudentPasswordByAdmin',
+      url: ctx + '/studentApi/updateStudent',
       data: JSON.stringify(student),
       dataType: 'json',
       type: 'post',
       contentType: 'application/json; charset=utf-8',
       success: function(data) {
-        if (data == 1) {
+        if (data.body == 1) {
           layer.alert('修改成功', function() {
             layer.closeAll();
             table.reload('studentTable');

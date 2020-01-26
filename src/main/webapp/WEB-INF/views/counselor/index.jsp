@@ -10,7 +10,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>后台管理首页</title>
+    <title>智能考勤后台管理首页</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <link rel="shortcut icon" href="${ctx}/resources/ico/logo.ico"/>
     <script>

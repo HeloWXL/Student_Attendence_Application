@@ -45,7 +45,6 @@ public class SignController {
         return "/counselor/sign";
     }
 
-
     @ApiOperation("跳转到签到详情界面")
     @GetMapping("toAttenceDetail/{signId}")
     public String toAttenceDetail(Model model, @PathVariable("signId") Integer signId) {

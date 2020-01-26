@@ -54,8 +54,12 @@ public class ApiService {
      * 获取启用的API
      * @return
      */
-    public API selectGetUseFAceApi(){
-        return apiMapper.selectGetUseFAceApi();
+    public API selectGetUseFAceApi() throws Exception {
+        if(apiMapper.selectGetUseFAceApi()==null){
+            throw new Exception("获取API属性错误");
+        }else{
+            return apiMapper.selectGetUseFAceApi();
+        }
     }
 
     public Map<String,Object> getApiListByPage(int counselorId , int page , int limit){

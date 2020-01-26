@@ -35,31 +35,26 @@
     </script>
 </head>
 <body>
-
-<!--header-->
-<div class="header-w3l">
-    <h1>Back</h1>
-</div>
 <!--//header-->
 <div class="main-content-agile">
     <div class="sub-main-w3">
-        <h2>For Login</h2>
+        <h2>学生智能考勤后台管理系统</h2>
         <form>
             <div class="pom-agile">
                 <span class="fa fa-user" aria-hidden="true"></span>
-                <input placeholder="E-mail" name="Name" class="user" type="text" required="" id="cno">
+                <input placeholder="教师工号（例如：1001）" name="Name" class="user" type="text" required="" id="cno">
             </div>
             <div class="pom-agile">
                 <span class="fa fa-key" aria-hidden="true"></span>
-                <input placeholder="Password" name="Password" class="pass" type="password" required="" id="password">
+                <input placeholder="密码（例如：123456）" name="Password" class="pass" type="password" required="" id="password">
             </div>
             <div class="sub-w3l">
                 <div class="sub-agile">
                     <input type="checkbox" id="brand1" value="">
                     <label for="brand1">
-                        <span></span>Remember me</label>
+                        <span></span>记住我</label>
                 </div>
-                <a href="#">Forgot Password?</a>
+                <a href="#">忘记密码?</a>
                 <div class="clear"></div>
             </div>
             <div class="right-w3l">
