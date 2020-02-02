@@ -51,6 +51,15 @@
     </div>
 </div>
 <!-- 表格标签工具栏 -->
+<script type="text/html" id="toolbars">
+    <div class="layui-btn-container">
+        <div class="layui-btn-group">
+            <button type="button" id="export" class="layui-btn layui-btn-normal">
+                <i class="layui-icon">&#xe67b;</i>导出
+            </button>
+        </div>
+    </div>
+</script>
 
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>

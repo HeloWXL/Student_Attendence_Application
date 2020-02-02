@@ -14,6 +14,7 @@ layui.use('table', function () {
             elem: '#demo'
             , method: 'get'
             , defaultToolbar: []
+            , toolbar: '#toolbars'
             , url: ctx + '/signApi/getSignByPage' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
@@ -47,4 +48,42 @@ layui.use('table', function () {
             , limit: 10 //每页默认显示的数量
         });
     }
+
+    //考勤记录导出
+    $("#export").click(function () {
+        //获取当前页
+        var recodePage1 = $(".layui-laypage-skip .layui-input").val();
+        //获取当前页条数
+        var recodeLimit1 = $(".layui-laypage-limits").find("option:selected").val();
+
+        if(recodePage1 == undefined || recodeLimit1 == undefined){
+            recodePage1 = 0;
+            recodeLimit1 = 10;
+        }
+        var form = document.createElement("form"); //创建一个 form
+        document.body.appendChild(form); //添加到 body 中
+
+        var page = document.createElement("input"); //创建一个输入
+        page.type = "text";
+        page.id = "page";
+        page.name = "page";
+        page.display = 'none';
+        page.value = recodePage1;
+        form.appendChild(page);
+
+        var limit = document.createElement("input"); //创建一个输入
+        limit.type = "text";
+        limit.id = "limit";
+        limit.name = "limit";
+        limit.display = 'none';
+        limit.value = recodeLimit1;
+        form.appendChild(limit);
+
+        form.method = "POST"; //form 的提交方式
+        form.action = ctx+"/signApi/exportSign"; //form 提交路径
+        form.id = "form2";
+
+        form.submit(); //对该 form 执行提交
+        $("#form2").remove();
+    });
 });
