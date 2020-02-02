@@ -74,6 +74,7 @@ public class SignService {
   public Map<String, Object> getSignStuByPage(Integer pageNo, Integer pageSize,Integer stuId) {
     EntityWrapper entityWrapper = new EntityWrapper();
     entityWrapper.eq("student_id",stuId);
+    entityWrapper.orderBy("start_time",false);
     List<Sign> signList = signMapper.selectPage(new Page<Sign>(pageNo,pageSize),entityWrapper);
     int count = signMapper.selectCount(entityWrapper);
     Map<String,Object> map = new HashMap<>();
@@ -95,10 +96,11 @@ public class SignService {
 
   /**
    * 学生下课签退
-   * @param signId
+   * @param studentId
    * @return
    */
-  public int updateSignById(String location,int signId){
+  public int updateSignById(String location,int studentId){
+    int signId = getStudentSign(studentId).getSignId();
     return signMapper.updateSignById(location,signId);
   }
 

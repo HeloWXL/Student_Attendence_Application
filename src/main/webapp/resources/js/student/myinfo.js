@@ -16,7 +16,7 @@ $(function() {
       $('input[name="sno"]').val(data.body.studentSno);
       $('input[name="age"]').val(data.body.studentAge);
       $('input[name="sex"]').val(data.body.studentSex);
-      $('input[name="qq"]').val(data.body.studentQq);
+      // $('input[name="qq"]').val(data.body.studentQq);
       $('input[name="email"]').val(data.body.studentEmail);
       $('input[name="profession"]').val(data.body.profession.professionName);
       $('input[name="apartment"]').val(data.body.profession.apartment);

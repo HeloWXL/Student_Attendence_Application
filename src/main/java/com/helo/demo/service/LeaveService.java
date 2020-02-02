@@ -20,73 +20,104 @@ import java.util.Map;
 @Service
 public class LeaveService {
 
-  @Resource
-  private LeaveMapper leaveMapper;
+    @Resource
+    private LeaveMapper leaveMapper;
 
-  /**
-   * 添加一条请假记录
-   * @param record
-   * @return int
-   */
-  public  int insertSelective(Leave record){
-    return leaveMapper.insertSelective(record);
-  }
-
-
-  /**
-   * 根据ID查询出请假记录
-   * @param leaveId
-   * @return
-   */
-  public Leave selectByPrimaryKey(Integer leaveId){
-    return leaveMapper.selectByPrimaryKey(leaveId);
-  }
+    /**
+     * 添加一条请假记录
+     *
+     * @param record
+     * @return int
+     */
+    public int insertSelective(Leave record) {
+        return leaveMapper.insertSelective(record);
+    }
 
 
-  /**
-   * 获取请假列表分页 -根据学生的学号查询
-   * @param pageNo
-   * @param pageSize
-   * @return
-   */
-  public Map<String, Object> getLeaveByPage(Integer pageNo, Integer pageSize,Integer studentSno) {
-    EntityWrapper entityWrapper = new EntityWrapper();
-    Map<String ,Object> map = new HashMap<>();
-    Map<String ,Object> data = new HashMap<>();
-    map.put("pageNo",(pageNo - 1) * pageSize);
-    map.put("pageSize",pageSize);
-    map.put("studentSno",studentSno);
-    List<Leave> leaveList = leaveMapper.selectLeaveAndStudentByPage(map);
-    data.put("list",leaveList);
+    /**
+     * 根据ID查询出请假记录
+     *
+     * @param leaveId
+     * @return
+     */
+    public Leave selectByPrimaryKey(Integer leaveId) {
+        return leaveMapper.selectByPrimaryKey(leaveId);
+    }
 
-    entityWrapper.eq("student_sno",studentSno);
-    int count = leaveMapper.selectCount(entityWrapper);
-    data.put("count",count);
-    return data;
-  }
 
-  /**
-   * 请假列表分页查询
-   * @param pageNo
-   * @param pageSize
-   * @return
-   */
-  public Map<String, Object> selectByPage(Integer pageNo, Integer pageSize) {
-    EntityWrapper entityWrapper = new EntityWrapper();
-    Map<String ,Object> map = new HashMap<>();
-    Map<String ,Object> data = new HashMap<>();
-    map.put("pageNo",(pageNo - 1) * pageSize);
-    map.put("pageSize",pageSize);
+    /**
+     * 获取请假列表分页 -根据学生的学号查询
+     *
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public Map<String, Object> getLeaveByPage(Integer pageNo, Integer pageSize, Integer studentSno) {
+        EntityWrapper entityWrapper = new EntityWrapper();
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
+        map.put("pageNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+        map.put("studentSno", studentSno);
+        List<Leave> leaveList = leaveMapper.selectLeaveAndStudentByPage(map);
+        data.put("list", leaveList);
 
-    List<Leave> leaveList = leaveMapper.selectByPage(map);
-    data.put("data",leaveList);
+        entityWrapper.eq("student_sno", studentSno);
+        int count = leaveMapper.selectCount(entityWrapper);
+        data.put("count", count);
+        return data;
+    }
 
-    int count = leaveMapper.selectCount(entityWrapper);
-    data.put("count",count);
-    data.put("msg","");
-    data.put("code",0);
-    return data;
-  }
+    /**
+     * 请假列表分页查询
+     *
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public Map<String, Object> selectByPage(Integer pageNo, Integer pageSize) {
+        EntityWrapper entityWrapper = new EntityWrapper();
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
+        map.put("pageNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+
+        List<Leave> leaveList = leaveMapper.selectByPage(map);
+        data.put("data", leaveList);
+
+        int count = leaveMapper.selectCount(entityWrapper);
+        data.put("count", count);
+        data.put("msg", "");
+        data.put("code", 0);
+        return data;
+    }
+
+
+    /**
+     * 同意请假
+     *
+     * @param leaveId
+     * @return
+     */
+    public int agreeLeaves(int leaveId) {
+        Leave leave = new Leave();
+        leave.setLeaveId(leaveId);
+        leave.setIsRead(1);
+        return leaveMapper.updateById(leave);
+    }
+
+    /**
+     * 不同意请假
+     *
+     * @param leaveId
+     * @return
+     */
+    public int notAgreeLeaves(int leaveId) {
+        Leave leave = new Leave();
+        leave.setLeaveId(leaveId);
+        leave.setIsRead(2);
+        return leaveMapper.updateById(leave);
+    }
 
 
 }

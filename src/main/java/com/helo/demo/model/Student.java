@@ -52,6 +52,7 @@ public class Student {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date createTime;
 
+    @TableField("img_base_64")
     private String imgBase64;
 
     @TableField(exist = false)

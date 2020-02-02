@@ -33,12 +33,6 @@
                             <input type="text" name="userName" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">QQ：</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="qq" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
                     <div class="layui-inline" id="btn">
                         <div class="layui-inline">
                             <button type="button" class="layui-btn layui-btn-normal" id="query">查询</button>

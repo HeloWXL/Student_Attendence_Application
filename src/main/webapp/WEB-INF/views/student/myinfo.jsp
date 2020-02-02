@@ -39,7 +39,7 @@
                 <label>姓名</label>
                 <input type="text" class="mui-input-clear" name="username">
             </div>
-    </li>
+        </li>
         <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>学号</label>
@@ -58,12 +58,12 @@
                 <input type="text" class="mui-input-clear" name="sex">
             </div>
         </li>
-        <li class="mui-table-view-cell">
-            <div class="mui-input-row">
-                <label>QQ</label>
-                <input type="text" class="mui-input-clear" name="qq">
-            </div>
-    </li>
+        <%--<li class="mui-table-view-cell">--%>
+            <%--<div class="mui-input-row">--%>
+                <%--<label>QQ</label>--%>
+                <%--<input type="text" class="mui-input-clear" name="qq">--%>
+            <%--</div>--%>
+    <%--</li>--%>
         <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>邮箱</label>

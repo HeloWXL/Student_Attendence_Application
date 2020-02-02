@@ -2,6 +2,7 @@ package com.helo.demo.controller;
 
 import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Sign;
+import com.helo.demo.model.Student;
 import com.helo.demo.service.SignService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -91,7 +93,18 @@ public class SignController {
     @ApiOperation("学生下课签退")
     @PostMapping("updateSignById")
     @ResponseBody
-    public int updateSignById(@RequestBody Sign sign) {
-        return signService.updateSignById(sign.getSignOutLocation(),sign.getSignId());
+    public int updateSignById(@RequestBody Sign sign,HttpServletRequest request) {
+        int studentId=0;
+        Student student = (Student) request.getSession().getAttribute("studentsession");
+        try {
+            if(student==null){
+             throw new Exception("学生未登录");
+            }else{
+                studentId = student.getStudentId();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return signService.updateSignById(sign.getSignOutLocation(),studentId);
     }
 }

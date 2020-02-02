@@ -59,8 +59,4 @@ public interface StudentMapper extends BaseMapper<Student> {
      * @return
      */
     List<Student> selectCourseBySno(String sno);
-
-
-    @Select("select * from student stu ,profession pro where stu.profession_id = pro.profession_id limit #{page},#{limit}")
-    List<StudentListVo> getStudentList(@Param("page") int page, @Param("limit") int limit);
 }
