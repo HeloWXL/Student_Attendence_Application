@@ -18,8 +18,7 @@ layui.use('table', function () {
             , url: ctx + '/signApi/getSignByPage' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
-                {field: 'checkbox', type: 'checkbox'}
-                , {field: 'number', title: '序号', type: 'numbers'}
+                {field: 'number', title: '序号', type: 'numbers'}
                 , {field: 'studentName', title: '学生', width: '8%',align:'center'}
                 , {field: 'signLocation', title: '签到地点', width: '20%'}
                 , {field: 'signLocation', title: '签退地点', width: '20%'}

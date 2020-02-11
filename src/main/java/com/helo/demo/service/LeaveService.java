@@ -3,6 +3,7 @@ package com.helo.demo.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.helo.demo.mapper.LeaveMapper;
 import com.helo.demo.model.Leave;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -119,5 +120,14 @@ public class LeaveService {
         return leaveMapper.updateById(leave);
     }
 
+
+    /**
+    * @Description: 根据教师的ID查询学生的请假信息
+    * @Author: wangxianlin
+    * @Date: 2020/2/6 2:40 PM
+    */ 
+    public  List<Leave> getLeaveByTeacher(Integer tId){
+        return leaveMapper.getLeaveByTeacher(tId);
+    }
 
 }

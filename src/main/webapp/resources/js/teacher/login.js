@@ -25,9 +25,10 @@ function login(tno,password) {
             if(data.body == true){
                 location.href=ctx+'/teacherApi/toIndex';
             }else{
+                mui.alert("用户名或密码错误！！")
             }
-        },eror:function(e) {
-            console.log("Server Inter Error")
+        },error:function(e) {
+            mui.alert("Server Inter Error")
         }
     });
 }

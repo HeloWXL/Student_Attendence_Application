@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -98,9 +99,17 @@ public class LeaveController {
     @ResponseBody
     public DataResult<Integer> notAgreeLeaves(@RequestParam("id") Integer id) {
         DataResult<Integer> result = new DataResult<>();
-        result.setBody(leaveService.agreeLeaves(id));
+        result.setBody(leaveService.notAgreeLeaves(id));
         return result;
     }
 
+    @ApiOperation(value = "教师查看请假记录")
+    @GetMapping("/getLeaveByTeacher")
+    @ResponseBody
+    public DataResult<List<Leave>> getLeaveByTeacher(@RequestParam("tId") Integer tId) {
+        DataResult<List<Leave>> result = new DataResult<>();
+        result.setBody(leaveService.getLeaveByTeacher(tId));
+        return result;
+    }
 
 }

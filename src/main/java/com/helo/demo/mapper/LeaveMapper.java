@@ -3,6 +3,8 @@ package com.helo.demo.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Leave;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -45,5 +47,16 @@ public interface LeaveMapper extends BaseMapper<Leave> {
      * @return
      */
     List<Leave> selectByPage(Map<String, Object> map);
+
+
+    /**
+    * @Description: 根据教师的ID查询学生的请假信息
+    * @Author: wangxianlin
+    * @Date: 2020/2/6 2:27 PM
+    */
+    @Select("select leave_id,student_sno, leave_title,is_read,start_time,end_time \n" +
+            "from leaves l , teacher t ,course c\n" +
+            "where l.course_id = c.course_id and t.teacher_id = c.teacher_id and t.teacher_id = #{tId}")
+    List<Leave> getLeaveByTeacher(@Param("tId") Integer tId);
 
 }

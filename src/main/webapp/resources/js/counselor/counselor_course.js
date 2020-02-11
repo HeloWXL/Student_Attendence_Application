@@ -17,8 +17,7 @@ layui.use('table', function () {
             , url: ctx + '/courseApi/selectCourseByPage' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
-                {field: 'checkbox', type: 'checkbox'}
-                , {field: 'number', title: '序号', type: 'numbers'}
+                 {field: 'number', title: '序号', type: 'numbers'}
                 , {field: 'courseName', title: '课程名称', width: 120,align:'center'}
                 , {field: 'teacherName', title: '教师姓名', width: 120,align:'center'}
                 , {field: 'teacherJobTitle', title: '教师职称', width: 120,align:'center'}

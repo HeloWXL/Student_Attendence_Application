@@ -8,6 +8,7 @@ import com.helo.demo.service.TeacherService;
 import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ import java.util.Map;
 @Api(tags = "教师接口")
 @Controller
 @RequestMapping("/teacherApi")
+@Slf4j
 public class TeacherController {
 
   @Resource
@@ -69,23 +71,34 @@ public class TeacherController {
     return "/teacher/courseList";
   }
 
+  @ApiOperation(value = "跳转到请假记录页面")
+  @GetMapping("/toLeaveList")
+  public String toLeaveList(){
+    return "/teacher/leaveList";
+  }
 
   @ApiOperation(value = "教师登录")
   @PostMapping("/checkLogin")
   @ResponseBody
   public DataResult<Boolean> checkLogin(@RequestParam("tno") String tno, @RequestParam("password") String password, HttpServletRequest request) {
-    Teacher teacher = teacherService.selectByTno(tno);
     DataResult<Boolean> result = new DataResult<>();
-    if (Md5Utils.getSaltverifyMD5(password, teacher.getTeacherPassword())) {
-      //根据专业的ID获取教师的专业相关信息
-      Profession profession = professionService.selectByPrimaryKey(teacher.getProfessionId());
-      teacher.setProfession(profession);
-      result.setBody(true);
-      request.getSession().setAttribute("teacher", teacher);
-    } else {
-      request.getSession().setAttribute("teacher", null);
+    Teacher teacher = teacherService.selectByTno(tno);
+    if(teacher==null){
       result.setBody(false);
+    }else{
+      if (Md5Utils.getSaltverifyMD5(password, teacher.getTeacherPassword())) {
+        log.info(teacher.getTeacherName()+"已登陆");
+        //根据专业的ID获取教师的专业相关信息
+        Profession profession = professionService.selectByPrimaryKey(teacher.getProfessionId());
+        teacher.setProfession(profession);
+        result.setBody(true);
+        request.getSession().setAttribute("teacher", teacher);
+      } else {
+        request.getSession().setAttribute("teacher", null);
+        result.setBody(false);
+      }
     }
+
     return result;
   }
 
@@ -152,8 +165,10 @@ public class TeacherController {
   @GetMapping("/removeTeacherSession")
   @ResponseBody
   public void removeTeacherSession(HttpServletRequest request, HttpServletResponse response){
+    Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
     request.getSession().removeAttribute("teacher");
     if ( request.getSession().getAttribute("teacher") == null) {
+      log.info(teacher.getTeacherName()+"已下线，即将跳转到登录页面。");
       try {
         response.sendRedirect("/helo/teacherApi/toLogin");
       } catch (IOException e) {

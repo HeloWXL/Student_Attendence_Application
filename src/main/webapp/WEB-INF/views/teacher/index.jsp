@@ -50,6 +50,12 @@
             <p>考勤统计</p>
         </a>
     </div>
+    <div id="leavelist">
+        <a href="">
+            <img src="${ctx}/resources/images/attendenceList.png"/>
+            <p>请假统计</p>
+        </a>
+    </div>
 </div>
 <!-- 底部选项卡 -->
 <nav class="mui-bar mui-bar-tab">

@@ -17,8 +17,12 @@ function loadData(table) {
         , url: ctx + '/leaveApi/selectByPage' //数据接口
         , page: true //开启分页
         , cols: [[ //表头
-            {field: 'checkbox', type: 'checkbox'}
-            , {field: 'number', title: '序号', type: 'numbers'}
+           {field: 'number', title: '序号', type: 'numbers'}
+            , {
+                field: 'student', title: '学生姓名', width: '10%', templet: function (d) {
+                    return '<span>'+d.student.studentName+'</span>'
+                }
+            }
             , {field: 'leaveTitle', title: '请假标题', width: '10%'}
             , {field: 'leaveReason', title: '请假缘由', width: '20%'}
             , {field: 'startTime', title: '开始时间', width: '15%'}
@@ -33,7 +37,7 @@ function loadData(table) {
                 }
             }
             , {
-                title: '操作', width: '22.5%', templet: function (d) {
+                title: '操作', width: '20%', templet: function (d) {
                     if (d.isRead == 1) {
                         return '<button type="button" class="layui-btn layui-btn-normal" onclick="view(' + d.leaveId + ')">查看</button>';
                     }
