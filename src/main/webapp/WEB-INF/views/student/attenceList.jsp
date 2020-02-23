@@ -10,7 +10,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>Title</title>
+    <title>我的考勤记录</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="${ctx}/resources/ico/app.ico"/>

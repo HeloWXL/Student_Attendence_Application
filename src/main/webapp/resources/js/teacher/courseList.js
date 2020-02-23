@@ -17,11 +17,9 @@ $(function() {
         var start = data.body.list[i].starttime;
         var end = data.body.list[i].endtime;
 
-
-
         var $node = $('<li class="mui-table-view-cell">\n' +
             '      <span class="mui-badge mui-badge-success" id="success">'+courseStatus(start,end)+'</span>\n' +
-            '      <a href = "/courseApi/selectCourseDetailByCid/'+data.body.list[i].courseId+'">\n' +
+            '      <a href = +"/selectCourseDetailByCid/'+data.body.list[i].courseId+'>\n' +
             '        <h4>'+data.body.list[i].courseName+'</h4>\n' +
             '        <p>\n' +
             '          上课时间：<span>'+day+'</span>\n' +

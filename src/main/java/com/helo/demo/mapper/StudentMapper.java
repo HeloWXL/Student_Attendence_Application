@@ -59,4 +59,5 @@ public interface StudentMapper extends BaseMapper<Student> {
      * @return
      */
     List<Student> selectCourseBySno(String sno);
+
 }

@@ -2,6 +2,7 @@ package com.helo.demo.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Course;
+import com.helo.demo.model.Student;
 import com.helo.demo.vo.CourseVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -68,5 +69,13 @@ public interface CourseMapper extends BaseMapper<Course> {
      */
     @Select("select * from course c , teacher t , profession p where c.teacher_id = t.teacher_id and t.profession_id = p.profession_id limit #{pageNo},#{pageSize}")
     List<CourseVo> getCourseList(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
+
+    /**
+     * @Description: 查询上本门课程的所有学生
+     * @Author: wangxianlin
+     * @Date: 2020/2/14 9:10 PM
+     */
+    @Select("select * from ")
+    List<Student> selectStudentByCid(Integer cid);
 
 }

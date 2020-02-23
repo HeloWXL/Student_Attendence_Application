@@ -3,6 +3,7 @@ package com.helo.demo.controller;
 import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Profession;
 import com.helo.demo.model.Teacher;
+import com.helo.demo.service.CourseService;
 import com.helo.demo.service.ProfessionService;
 import com.helo.demo.service.TeacherService;
 import com.helo.demo.utils.Md5Utils;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,6 +36,8 @@ public class TeacherController {
   private ProfessionService professionService;
   @Resource
   private TeacherService teacherService;
+  @Resource
+  private CourseService courseService;
 
   @ApiOperation(value = "跳转到教师信息列表")
   @GetMapping("/toCounselorTeacherTable")
@@ -75,6 +79,13 @@ public class TeacherController {
   @GetMapping("/toLeaveList")
   public String toLeaveList(){
     return "/teacher/leaveList";
+  }
+
+  @ApiOperation(value = "根据ID查询课程的详细信息")
+  @GetMapping("/selectCourseDetailByCid/{cid}")
+  public String selectCourseDetailByCid(@PathVariable("cid") Integer cid, Model model){
+    model.addAttribute("course",courseService.selectCourseDetailByCid(cid));
+    return "teacher/courseDetail";
   }
 
   @ApiOperation(value = "教师登录")

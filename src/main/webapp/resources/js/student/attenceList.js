@@ -34,10 +34,11 @@ function loadStuSignList(page,studentId) {
         success:function (data) {
             $('#signList').empty();
             $('#count').html(data.count);
-
             for(var i = 0 ; i<data.data.length;i++){
-                var $node = $(' <li id = "'+data.data[i].signId+'" class="mui-table-view-cell mui-collapse" onclick="toAttencedetailView(this)">\n' +
-                    '            <a href='+data.data[i].signId+'>'+data.data[i].startTime+'<span class="mui-icon mui-icon-arrowright"></span></a>\n' +
+                // '            <a href="${ctx}/leaveApi/selectByPrimaryKey/' + data.body.list[i].leaveId + '">\n' +
+
+                var $node = $(' <li id = "'+data.data[i].signId+'" class="mui-table-view-cell">\n' +
+                    '            <a href="'+ctx+'/signApi/toAttenceDetail/'+data.data[i].signId+'">'+data.data[i].startTime+'<span class="mui-icon mui-icon-arrowright"></span></a>\n' +
                     '        </li>')
                 $('#signList').append($node);
             }

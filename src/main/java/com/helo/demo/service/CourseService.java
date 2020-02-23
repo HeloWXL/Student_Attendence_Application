@@ -3,6 +3,7 @@ package com.helo.demo.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.helo.demo.mapper.CourseMapper;
 import com.helo.demo.model.Course;
+import com.helo.demo.model.Student;
 import com.helo.demo.vo.CourseVo;
 import org.springframework.stereotype.Service;
 
@@ -107,6 +108,15 @@ public class CourseService {
    */
   public Course selectCourseDetailByCid(Integer cid){
     return courseMapper.selectCourseDetailByCid(cid);
+  }
+
+  /**
+  * @Description: 查询上本门课程的所有学生
+  * @Author: wangxianlin
+  * @Date: 2020/2/14 9:10 PM
+  */ 
+  public List<Student> selectStudentByCid(Integer cid){
+      return courseMapper.selectStudentByCid(cid);
   }
 
 }

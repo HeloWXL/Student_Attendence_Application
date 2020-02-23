@@ -31,15 +31,6 @@ public class CourseController {
     return "counselor/course";
   }
 
-  @ApiOperation(value = "根据ID查询课程信息")
-  @GetMapping("/selectByCourseId/{id}")
-  @ResponseBody
-  public DataResult<Course> selectByCourseId(@RequestParam("id") Integer id){
-    DataResult<Course> result = new DataResult<>();
-    result.setBody(courseService.selectByPrimaryKey(id));
-    return result;
-  }
-
   @ApiOperation(value = "根据ID删除课程信息")
   @GetMapping("/deleteByCourseId/{id}")
   @ResponseBody
@@ -86,12 +77,7 @@ public class CourseController {
     return result;
   }
 
-  @ApiOperation(value = "根据ID查询课程的详细信息")
-  @GetMapping("/selectCourseDetailByCid/{cid}")
-  public String selectCourseDetailByCid(@PathVariable("cid") Integer cid, Model model){
-    model.addAttribute("course",courseService.selectCourseDetailByCid(cid));
-    return "/teacher/courseDetail.html";
-  }
+
 
 
   @ApiOperation(value = "根据ID查询课程的详细信息")
