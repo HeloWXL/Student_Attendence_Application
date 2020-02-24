@@ -1,4 +1,4 @@
-var signs = '${sign}';
+
 if('${sign.isStartStatus}'==1&&'${sign.isEndStatus}'==0){
     $("#start").show();
     var start = new Date('${sign.startTime}')
@@ -15,6 +15,7 @@ if('${sign.isStartStatus}'==1&&'${sign.isEndStatus}'==0){
     $("#end p").html("地点："+'${sign.signOutLocation}')
 }
 
+//时间格式化
 function dateFormat(fmt, date) {
     var ret;
     var opt = {
