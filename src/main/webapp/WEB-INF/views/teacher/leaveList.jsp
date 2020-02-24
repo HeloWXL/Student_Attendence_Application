@@ -105,6 +105,7 @@
                     var start = new Date( data.body[i].startTime)
                     var end = new Date( data.body[i].endTime)
                     var $node = $('<li class="mui-table-view-cell mui-media">\n' +
+                        getConnectStr(data.body[i].isRead)+
                         '            <a href="${ctx}/leaveApi/selectByPrimaryKey/' + data.body[i].leaveId + '">\n' +
                         '                <div class="mui-media-body">\n' +
                         '                    <div>请假标题：' + reason+ '</div>\n' +
@@ -137,6 +138,19 @@
             };
         };
         return fmt;
+    }
+    
+    function getConnectStr(isRead) {
+        if(isRead==1){
+            var str = '<span class="mui-badge mui-badge-success" id="success">已批准</span>\n';
+            return str;
+        }else if(isRead==2){
+            var str = '<span class="mui-badge mui-badge-danger" id="success">未批准</span>\n';
+            return str;
+        }else{
+            var str = '<span class="mui-badge mui-badge-primary" id="success">未批阅</span>\n';
+            return str;
+        }
     }
 </script>
 

@@ -10,7 +10,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>打卡详情</title>
+    <title>考勤详情</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link href="${ctx}/resources/mui/mui.min.css" rel="stylesheet"/>
@@ -21,11 +21,17 @@
         var student = "${studentsession}";
         var signs = '${sign}';
     </script>
+
+    <style>
+        .mui-title {
+            color: #FFFFFF;
+        }
+    </style>
 </head>
 <body>
 <header class="mui-bar mui-bar-nav mui-badge-primary">
     <span class="mui-icon mui-icon-back" onclick="javascript:history.back(-1);"></span>
-    <h1 class="mui-title">签到详情</h1>
+    <h1 class="mui-title">考勤详情</h1>
 </header>
 <div class="mui-content">
     <!--日历容器-->

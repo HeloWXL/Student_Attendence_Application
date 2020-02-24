@@ -12,13 +12,10 @@ $(function() {
     contentType: 'application/json; charset=utf-8',
     success:function(data) {
       for(var i = 0 ;i<data.body.list.length;i++){
-        var day = getDay(data.body.list[i].classarrangement)
-
+        var day = getDay(data.body.list[i].classarrangement);
         var start = data.body.list[i].starttime;
         var end = data.body.list[i].endtime;
-
-        var $node = $('<li class="mui-table-view-cell">\n' +
-            '      <span class="mui-badge mui-badge-success" id="success">'+courseStatus(start,end)+'</span>\n' +
+          var $node = $('<li class="mui-table-view-cell">\n'+courseStatus(start,end)+
             '      <a href = +"/selectCourseDetailByCid/'+data.body.list[i].courseId+'>\n' +
             '        <h4>'+data.body.list[i].courseName+'</h4>\n' +
             '        <p>\n' +
@@ -38,7 +35,6 @@ $(function() {
     }
   });
 });
-
 //获取星期几
 function getDay(n) {
   switch (n) {
@@ -60,27 +56,24 @@ function getDay(n) {
 
   }
 }
-
-
 function courseStatus(start,end) {
   var now = new Date();
-
   var start_time = start.replace("-","/");
   start_time = new Date(Date.parse(start_time));
-
-  var end_time = start.replace("-","/");
+  var end_time = end.replace("-","/");
   end_time = new Date(Date.parse(end_time));
 
   if(now>start_time&&now<end_time){
-    return "进行中";
+      var str = '<span class="mui-badge mui-badge-success" id="success">进行中</span>\n';
+    return str;
   }
-
   if(now<start_time){
-    return "未开课";
+      var str = '<span class="mui-badge mui-badge-danger" id="success">未开课</span>\n';
+      return str;
   }
 
   if(now>end_time){
-    return "已结课";
+    var str = '<span class="mui-badge mui-badge-primary" id="success">已结课</span>\n';
+    return str;
   }
-
 }
