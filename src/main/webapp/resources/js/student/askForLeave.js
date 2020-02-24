@@ -30,6 +30,11 @@ $(function () {
             mui.alert("请假标题不能为空");
             return;
         }
+        var course = $.trim($('#courseName').attr('name'))
+        if(course==null||course==''){
+            mui.alert("课程不能为空");
+            return;
+        }
         var start = $.trim($("#start").val());
         if(start==null||start==''){
             mui.alert("开始时间不能为空");
@@ -53,9 +58,10 @@ $(function () {
             startTime: start,
             endTime: end,
             leaveTitle: leaveTitle,
-            coundelorId: 1
+            coundelorId: 1,
+            courseId:parseInt(course)
         };
-        // 向后台提交数据
+        // 向后台提交数据insertSelective
         $.ajax({
             url: ctx + '/leaveApi/insertSelective',
             data: JSON.stringify(leave),
@@ -88,6 +94,23 @@ $(function () {
     });
 });
 
+
+var courseList =loadCourse(pid);
+// 专业选择
+var Picker = new mui.PopPicker();
+Picker.setData(courseList);
+courseName.addEventListener('tap', function(event) {
+    var $dom  = $(this);
+    Picker.show(function(items) {
+        var vals = items[0].text;
+        var name = items[0].value;
+        $dom.val(vals);
+        $dom.attr('name',name);
+    });
+}, false);
+
+
+
 function getDate(strDate) {
     var date = eval('new Date(' + strDate.replace(/\d+(?=-[^-]+$)/,
         function (a) {
@@ -108,4 +131,30 @@ function dateSelect(dom) {
         var endDate = item.y.text + '-' + item.m.text + '-' + item.d.text;
         $a.val(item.value);
     });
+}
+
+/**
+ * 加载课程列表
+ * @returns {any[]}
+ */
+function loadCourse(id) {
+    var courseList = new Array();
+    $.ajax({
+        url:ctx+'/courseApi/getCourseNameByProsessionId',
+        type:'get',
+        async:false,
+        dataType:'json',
+        data:{
+            pid:id
+        },
+        success:function (data) {
+            for(var i = 0 ;i<data.length;i++){
+                var obj = new Object();
+                obj.value = data[i].courseId;
+                obj.text = data[i].courseName;
+                courseList.push(obj)
+            }
+        }
+    })
+    return courseList;
 }

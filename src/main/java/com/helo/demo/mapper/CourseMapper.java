@@ -78,4 +78,12 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select("select * from ")
     List<Student> selectStudentByCid(Integer cid);
 
+    /**
+    * @Description: 根据专业ID查询课程列表
+    * @Author: wangxianlin
+    * @Date: 2020/2/24 1:07 PM
+    */ 
+    @Select("select course_name,course_id from course where profession = #{prosessioonId}")
+    public List<Course> getCourseNameByProsessionId(@Param("prosessioonId") int prosessioonId);
+
 }

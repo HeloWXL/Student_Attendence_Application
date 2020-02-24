@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -77,14 +78,19 @@ public class CourseController {
     return result;
   }
 
-
-
-
   @ApiOperation(value = "根据ID查询课程的详细信息")
   @GetMapping("/selectCourseDetailByCid/")
   @ResponseBody
   public Course selectCourseDetailByCid(@RequestParam("cid") Integer cid){
     return courseService.selectCourseDetailByCid(cid);
+  }
+
+
+  @ApiOperation(value = "根据专业的ID查询课程列表")
+  @GetMapping("/getCourseNameByProsessionId")
+  @ResponseBody
+  public List<Course> getCourseNameByProsessionId(@RequestParam("pid") Integer pid){
+    return courseService.getCourseNameByProsessionId(pid);
   }
 
 }

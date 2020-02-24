@@ -5,6 +5,7 @@ import com.helo.demo.mapper.CourseMapper;
 import com.helo.demo.model.Course;
 import com.helo.demo.model.Student;
 import com.helo.demo.vo.CourseVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,7 +39,6 @@ public class CourseService {
    * @return int
    */
   public int insertSelective(Course record){
-
     return courseMapper.insertSelective(record);
   }
 
@@ -119,4 +119,13 @@ public class CourseService {
       return courseMapper.selectStudentByCid(cid);
   }
 
+
+  /**
+  * @Description: 根据专业的ID查询课程列表
+  * @Author: wangxianlin
+  * @Date: 2020/2/24 1:10 PM
+  */ 
+  public List<Course> getCourseNameByProsessionId(int prosessioonId){
+    return courseMapper.getCourseNameByProsessionId(prosessioonId);
+  }
 }

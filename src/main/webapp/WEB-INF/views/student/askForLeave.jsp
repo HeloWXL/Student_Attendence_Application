@@ -20,6 +20,7 @@
     <script>
         var ctx = '${ctx }';
         var student = "${studentsession}";
+        var pid ="${studentsession.professionId}";
     </script>
 </head>
 <body>
@@ -50,7 +51,13 @@
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row">
                         <label>标题：</label>
-                        <input type="text" class="mui-input-clear" id="leaveTitle">
+                        <input type="text" class="mui-input-clear" id="leaveTitle" placeholder="请选择请假标题">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>课程：</label>
+                        <input type="text" class="mui-input-clear" id="courseName" placeholder="请选择请假课程">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
@@ -67,7 +74,7 @@
                 </li>
                 <div class="mui-input-row">
                     <label>事由：</label>
-                    <textarea id="leaveReason" rows="8" placeholder="  请写明请假缘由"
+                    <textarea id="leaveReason" rows="8" placeholder="请写明请假缘由"
                               style="width: 95%; margin-left: 8px;border: 1px solid #BBBBBB;"></textarea>
                 </div>
                 <div class="btn">

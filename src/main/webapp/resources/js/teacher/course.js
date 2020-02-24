@@ -41,6 +41,8 @@ $(function() {
             $dom.attr('name',name);
         });
     }, false);
+
+
     // 上课时间选择
     var DatePicker = new mui.PopPicker();
     DatePicker.setData(dateList);
@@ -85,8 +87,8 @@ $(function() {
         var course  = {
             courseName:courseName,
             classarrangement:classarrangement,
-            starttime:getDate(starttime),
-            endtime:getDate(endtime),
+            starttime:starttime,
+            endtime:endtime,
             profession:profession,
             teacherId:teacherId
         };

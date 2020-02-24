@@ -19,9 +19,6 @@ $(function () {
     mui("#mycourselist").on('tap', 'img', function () {
         mui.alert("正在建设中.....")
     })
-    mui("#mycourselist").on('tap', 'img', function () {
-        mui.alert("正在建设中.....")
-    })
     //我的信息
     $("#myinfo").click(function () {
         location.href = ctx + '/teacherApi/toPerson';

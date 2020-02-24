@@ -105,6 +105,9 @@
       <if test="coundelorId != null" >
         coundelor_id,
       </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
       <if test="isRead != null" >
         is_read,
       </if>
@@ -130,6 +133,9 @@
       </if>
       <if test="coundelorId != null" >
         #{coundelorId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
       </if>
       <if test="isRead != null" >
         #{isRead,jdbcType=INTEGER},
