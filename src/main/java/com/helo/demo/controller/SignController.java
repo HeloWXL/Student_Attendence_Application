@@ -217,7 +217,7 @@ public class SignController {
     private WritableCellFormat setContentCellFormat() throws WriteException {
         WritableCellFormat contentCellFormat = new WritableCellFormat();
         contentCellFormat.setFont(new WritableFont(WritableFont.createFont("宋体"), 10, WritableFont.NO_BOLD, false));
-        contentCellFormat.setAlignment(jxl.format.Alignment.LEFT);
+        contentCellFormat.setAlignment(jxl.format.Alignment.CENTRE);
         contentCellFormat.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
         contentCellFormat.setWrap(true);
         return contentCellFormat;
