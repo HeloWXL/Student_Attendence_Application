@@ -55,6 +55,28 @@
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row">
+                        <label>课程：</label>
+
+                        <input type="text" class="mui-input-clear" id="courseName" value="${leave.course.courseName}">
+                    </div>
+                </li>
+
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>请假状态：</label>
+                        <c:if test="${leave.isRead==1}">
+                            <input type="text" class="mui-input-clear" id="status" value="已批准">
+                        </c:if>
+                        <c:if test="${leave.isRead==2}">
+                            <input type="text" class="mui-input-clear" id="status" value="未批准">
+                        </c:if>
+                        <c:if test="${leave.isRead==0}">
+                            <input type="text" class="mui-input-clear" id="status" value="未批阅">
+                        </c:if>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
                         <label>开始时间：</label>
                         <input type="text" class="mui-input-clear" id="start">
                     </div>

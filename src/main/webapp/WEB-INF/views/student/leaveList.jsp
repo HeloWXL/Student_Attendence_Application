@@ -103,10 +103,10 @@
                     if(reason.length>20){
                         reason = reason.substring(0,20)+".....";
                     }
-
                     var start = new Date( data.body.list[i].startTime)
                     var end = new Date( data.body.list[i].endTime)
                     var $node = $('<li class="mui-table-view-cell mui-media">\n' +
+                        status(data.body.list[i].isRead)+
                         '            <a href="${ctx}/leaveApi/selectByPrimaryKey/' + data.body.list[i].leaveId + '">\n' +
                         '                <div class="mui-media-body">\n' +
                         '                    <div>请假标题：' + reason+ '</div>\n' +
@@ -119,6 +119,21 @@
             }
         });
     });
+
+
+    // 请假状态
+    function status(is_read) {
+      if(is_read==1){
+        var str = '<span class="mui-badge mui-badge-success" id="success">已批准</span>\n';
+        return str;
+      }else if(is_read==2){
+        var str = '<span class="mui-badge mui-badge-danger" id="success">未批准</span>\n';
+        return str;
+      }else{
+        var str = '<span class="mui-badge mui-badge-primary" id="success">未批阅</span>\n';
+        return str;
+      }
+    }
 
     function dateFormat(fmt, date) {
         var ret;
