@@ -27,6 +27,12 @@
 <header class="mui-bar mui-bar-nav mui-badge-primary">
     <span class="mui-icon mui-icon-back" onclick="javascript:history.back(-1);"></span>
     <h1 class="mui-title">考勤</h1>
+    <style>
+        #allmap{
+            width:100px;
+            height: 100px;
+        }
+    </style>
 </header>
 <div class="mui-content">
     <div class="top" style="margin-top: 10px;">
@@ -61,14 +67,48 @@
                     <p></p>
                 </div>
             </div>
+
         </div>
     </div>
+    <div id="allmap" style="display: none"></div>
 </div>
 </body>
 <%--引入js文件--%>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/mui/mui.min.js" type="application/javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO&v=2.0&services=false"></script>
+<script type="text/javascript">
+  var locations = "";
+  var map = new BMap.Map("allmap");
+  var point = new BMap.Point(116.331398,39.897445);
+  map.centerAndZoom(point,12);
+
+  var geoc = new BMap.Geocoder();
+  var geolocation = new BMap.Geolocation();
+  geolocation.getCurrentPosition(function(r){
+    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+      var mk = new BMap.Marker(r.point);
+      map.addOverlay(mk);
+      map.panTo(r.point);
+      setLocation(r.point);
+    }
+    else {
+      alert('failed'+this.getStatus());
+    }
+    //获取地理位置的函数
+    function setLocation(point){
+      geoc.getLocation(point, function(rs){
+        var addComp = rs.addressComponents;
+        locations = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+        console.log(locations)
+      });
+    }
+  });
+
+  console.log(locations)
+</script>
 <%--引入自定义js文件--%>
 <script src="${ctx}/resources/js/student/attence.js" type="application/javascript"></script>
+
 </html>

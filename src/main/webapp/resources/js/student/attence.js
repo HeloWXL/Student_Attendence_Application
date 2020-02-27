@@ -45,7 +45,7 @@ function start_time(_this) {
     var myDate = new Date();
     var now = myDate.toLocaleString();     //获取当前时间
     var sign = {
-        signLocation: '泉州师范学院-泉州',
+        signLocation: locations,
         studentId: parseInt(studentId),
         courseId: 1
     }
@@ -61,7 +61,7 @@ function start_time(_this) {
                 $(_this).hide();
                 var $start = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
                     '                    <p>\n' +
-                    '                        地点：泉州师范学院-泉州\n' +
+                    '                        地点：'+locations+'\n' +
                     '                    </p>';
                 //获取到上课签到时间
                 $("#start-time div").append($start)
@@ -78,7 +78,7 @@ function end_time(_this) {
     var now = myDate.toLocaleString();     //获取当前时间
 
     var sign = {
-        signOutLocation: '泉州师范学院-泉州',
+        signOutLocation: locations,
         signId:signId
     }
     $.ajax({
@@ -93,7 +93,7 @@ function end_time(_this) {
                 $(_this).hide();
                 var $end = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
                     '                    <p>\n' +
-                    '                        地点：泉州师范学院-泉州\n' +
+                    '                        地点：'+locations+'\n' +
                     '                    </p>';
                 //获取到上课签到时间
                 $("#end-time div").append($end)
