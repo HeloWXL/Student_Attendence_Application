@@ -38,12 +38,6 @@
             <p>我的课程</p>
         </a>
     </div>
-    <div id="attendancelist">
-        <a href="">
-            <img src="${ctx}/resources/images/attendence.png"/>
-            <p>创建考勤</p>
-        </a>
-    </div>
     <div id="mycourselist">
         <a href="">
             <img src="${ctx}/resources/images/attendenceList.png"/>
