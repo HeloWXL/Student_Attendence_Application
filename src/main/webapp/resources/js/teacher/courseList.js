@@ -16,7 +16,7 @@ $(function() {
         var start = data.body.list[i].starttime;
         var end = data.body.list[i].endtime;
           var $node = $('<li class="mui-table-view-cell">\n'+courseStatus(start,end)+
-            '      <a href = +"/selectCourseDetailByCid/'+data.body.list[i].courseId+'>\n' +
+            '      <a href = '+ctx+'/teacherApi/selectCourseDetailByCid/'+data.body.list[i].courseId+'>\n' +
             '        <h4>'+data.body.list[i].courseName+'</h4>\n' +
             '        <p>\n' +
             '          上课时间：<span>'+day+'</span>\n' +

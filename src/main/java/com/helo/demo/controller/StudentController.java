@@ -164,4 +164,14 @@ public class StudentController {
     result.setBody(studentService.selectCourseBySno(sno));
     return result;
   }
+
+
+  @ApiOperation(value = "根据课程的ID查询学生")
+  @GetMapping("/selectStudentByCid")
+  @ResponseBody
+  public  DataResult<List<Student>> selectStudentByCid(@RequestParam("cid") Integer cid){
+    DataResult<List<Student>> result = new DataResult<>();
+    result.setBody(studentService.selectStudentByCid(cid));
+    return result;
+  }
 }

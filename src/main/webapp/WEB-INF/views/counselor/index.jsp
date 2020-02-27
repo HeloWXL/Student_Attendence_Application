@@ -25,7 +25,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="${ctx}/resources/images/user.jpg" class="layui-nav-img">
+                    <img src="${ctx}/resources/images/default.png" class="layui-nav-img">
                     ${counselor.counselorName}
                 </a>
                 <dl class="layui-nav-child">

@@ -26,51 +26,73 @@
     <h1 class="mui-title">课程详情</h1>
 </header>
 <div class="mui-content">
+    <input type="hidden" value="${course.courseId}" id="courseId">
     <ul class="mui-table-view">
         <li class="mui-table-view-cell">
             <div class="mui-input-row">
-                <label>课程名</label>
+                <label>课程名:</label>
                 <input type="text" class="mui-input-clear" value="${course.courseName}" disabled="true">
             </div>
 
             <div class="mui-input-row">
-                <label>上课时间</label>
-                <input type="text" class="mui-input-clear" value="${course.classarrangement}" disabled="true">
+                <label>上课时间:</label>
+                <c:if test="${course.classarrangement==1}">
+                    <input type="text" class="mui-input-clear" id="classArrange" value="星期一">
+                </c:if>
+                <c:if test="${lcourse.classarrangement==2}">
+                    <input type="text" class="mui-input-clear" id="classArrange" value="星期二">
+                </c:if>
+                <c:if test="${course.classarrangement==3}">
+                    <input type="text" class="mui-input-clear" id="classArrange" value="星期三">
+                </c:if>
+                <c:if test="${course.classarrangement==4}">
+                    <input type="text" class="mui-input-clear" id="classArrange" value="星期四">
+                </c:if>
+                <c:if test="${course.classarrangement==5}">
+                    <input type="text" class="mui-input-clear" id="classArrange" value="星期五">
+                </c:if>
             </div>
 
             <div class="mui-input-row">
-                <label>开课时间</label>
+                <label>开课时间:</label>
                 <input type="text" class="mui-input-clear" value="${course.starttime}" disabled="true" id="start">
             </div>
             <div class="mui-input-row">
-                <label>结课时间</label>
+                <label>结课时间:</label>
                 <input type="text" class="mui-input-clear" value="${course.endtime}" disabled="true" id="end">
             </div>
 
             <div class="mui-input-row">
-                <label>教师姓名</label>
+                <label>教师姓名:</label>
                 <input type="text" class="mui-input-clear" value="${course.teacher.teacherName}" disabled="true">
             </div>
 
             <div class="mui-input-row">
-                <label>教师职称</label>
+                <label>教师职称:</label>
                 <input type="text" class="mui-input-clear" value="${course.teacher.teacherJobTitle}" disabled="true">
             </div>
 
             <div class="mui-input-row">
-                <label>专业</label>
+                <label>专业:</label>
                 <input type="text" class="mui-input-clear" value="${course.professions.professionName}" disabled="true">
             </div>
 
             <div class="mui-input-row">
-                <label>学院</label>
+                <label>学院:</label>
                 <input type="text" class="mui-input-clear" value="${course.professions.apartment}" disabled="true">
             </div>
 
             <div class="mui-input-row">
-                <label>学校</label>
+                <label>学校:</label>
                 <input type="text" class="mui-input-clear" value="${course.professions.school}" disabled="true">
             </div>
+
+    </ul>
+    <div style="text-align: center">
+        <h3>学生列表</h3>
+    </div>
+    <ul class="mui-table-view" id="studengList" >
+
     </ul>
 </div>
 </body>

@@ -60,4 +60,11 @@ public interface StudentMapper extends BaseMapper<Student> {
      */
     List<Student> selectCourseBySno(String sno);
 
+    /**
+    * @Description: 根据课程的ID查询学生
+    * @Author: wangxianlin
+    * @Date: 2020/2/27 3:34 AM
+    */
+    @Select("select s.* from student s ,course c where s.profession_id = c.profession and c.course_id = #{cid} ")
+    List<Student> selectStudentByCid(Integer cid);
 }

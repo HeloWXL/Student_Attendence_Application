@@ -116,4 +116,13 @@ public class StudentService {
     public List<Student> selectCourseBySno(String sno) {
         return studentMapper.selectCourseBySno(sno);
     }
+
+    /**
+    * @Description: 根据课程的ID查询所教授的学生
+    * @Author: wangxianlin
+    * @Date: 2020/2/27 3:39 AM
+    */ 
+    public List<Student> selectStudentByCid(Integer cid){
+        return studentMapper.selectStudentByCid(cid);
+    }
 }

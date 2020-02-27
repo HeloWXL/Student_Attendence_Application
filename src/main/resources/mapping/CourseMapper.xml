@@ -57,7 +57,7 @@
 
   <select id="selectCourseDetailByCid" resultMap="selectCourseDetailByCourseId" parameterType="java.lang.Integer" >
     select
-      c.course_name,c.classArrangement,c.startTime,c.endTIme,
+      c.course_name,c.classArrangement,c.startTime,c.endTIme,c.course_id,
       t.teacher_name,t.teacher_job_title,
       p.profession_name,p.apartment,p.school
     from course c,teacher t ,profession p
