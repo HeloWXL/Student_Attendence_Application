@@ -35,31 +35,32 @@
       <result column="classArrangement" property="classarrangement" jdbcType="INTEGER" />
       <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
       <result column="endTIme" property="endtime" jdbcType="TIMESTAMP" />
-
       <association property="teacher" javaType="com.helo.demo.model.Teacher">
         <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
         <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
       </association>
-
+      <association property="professions" javaType="com.helo.demo.model.Profession">
+        <result column="profession_name" property="professionName" jdbcType="VARCHAR" />
+      </association>
     </collection>
 
   </resultMap>
   <select id="selectCourseBySno" resultMap="BaseResultMap1" parameterType="java.lang.String" >
       SELECT
           c.course_name,
-          c.course_id,
           c.startTime,
           c.endTIme,
           c.classArrangement,
           t.teacher_name,
-          t.teacher_job_title
-
+          t.teacher_job_title,
+          p.profession_name
       FROM
           course c,
           student stu,
-          teacher t
+          teacher t,
+          profession p
       WHERE
-          c.profession = stu.profession_id
+          c.profession = stu.profession_id AND p.profession_id = stu.profession_id
       AND t.teacher_id = c.teacher_id
       AND stu.student_sno = #{studentSno,jdbcType=VARCHAR}
         </select>

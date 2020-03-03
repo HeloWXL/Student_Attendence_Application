@@ -61,6 +61,12 @@ public class StudentController {
     return "student/askForLeave";
   }
 
+  @ApiOperation(value = "跳转到学生课程列表页面")
+  @GetMapping("/myCourse")
+  public String myCourse(){
+    return "student/myCourse";
+  }
+
   @ApiOperation(value = "根据Sno查询学生信息")
   @GetMapping("/selectByStudentId/{sno}")
   @ResponseBody
@@ -109,7 +115,7 @@ public class StudentController {
       log.info(student.getStudentName()+"正在登录");
       //根据学号的ID获取学生的专业相关信息
       Profession profession = professionService.selectByPrimaryKey(student.getProfessionId());
-      student.setProfession(profession);
+      student.setProfessions(profession);
       result.setBody(true);
       request.getSession().setAttribute("studentsession",student);
     } else {

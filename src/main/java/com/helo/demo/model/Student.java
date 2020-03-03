@@ -56,7 +56,7 @@ public class Student {
     private String imgBase64;
 
     @TableField(exist = false)
-    private Profession profession;
+    private Profession professions;
 
     @TableField(exist = false)
     private List<Course> courseList ;

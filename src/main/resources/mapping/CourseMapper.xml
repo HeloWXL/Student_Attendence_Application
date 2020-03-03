@@ -27,11 +27,14 @@
       <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
       <result column="teacher_job_title" property="teacherJobTitle" jdbcType="VARCHAR" />
     </association>
+    <association property="professions" javaType="com.helo.demo.model.Profession">
+      <result column="profession_name" property="professionName" jdbcType="VARCHAR" />
+    </association>
   </resultMap>
   <select id="selectCourseByTno" resultMap="selectCourseByTeacherTno" parameterType="map" >
-    select c.course_name,c.course_id ,t.teacher_name,t.teacher_job_title,c.startTime,c.endTIme,c.classArrangement
-    from course c , teacher t
-    where c.teacher_id = t.teacher_id and t.teacher_id=#{teacherId,jdbcType=INTEGER}
+    select c.course_name,c.course_id ,t.teacher_name,p.profession_name,t.teacher_job_title,c.startTime,c.endTIme,c.classArrangement
+    from course c , teacher t,profession p
+    where c.teacher_id = t.teacher_id and p.profession_id = c.profession and t.teacher_id=#{teacherId,jdbcType=INTEGER}
      limit #{pageNo} , #{pageSize}
   </select>
 <!--end-->

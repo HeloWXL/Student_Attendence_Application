@@ -18,9 +18,9 @@ $(function() {
       $('input[name="sex"]').val(data.body.studentSex);
       // $('input[name="qq"]').val(data.body.studentQq);
       $('input[name="email"]').val(data.body.studentEmail);
-      $('input[name="profession"]').val(data.body.profession.professionName);
-      $('input[name="apartment"]').val(data.body.profession.apartment);
-      $('input[name="school"]').val(data.body.profession.school);
+      $('input[name="profession"]').val(data.body.professions.professionName);
+      $('input[name="apartment"]').val(data.body.professions.apartment);
+      $('input[name="school"]').val(data.body.professions.school);
     }
   });
 

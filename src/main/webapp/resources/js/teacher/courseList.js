@@ -22,7 +22,7 @@ $(function() {
             '          上课时间：<span>'+day+'</span>\n' +
             '        </p>\n' +
             '        <p>\n' +
-            '          专业：<span>信管</span>\n' +
+            '          专业：<span>'+data.body.list[i].professions.professionName+'</span>\n' +
             '        </p>\n' +
             '        <p>\n' +
             '          上课人数：<span>'+data.body.count+'</span>人\n' +

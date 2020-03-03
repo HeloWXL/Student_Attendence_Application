@@ -45,7 +45,8 @@ function start_time(_this) {
     var myDate = new Date();
     var now = myDate.toLocaleString();     //获取当前时间
     var sign = {
-        signLocation: locations,
+        // signLocation: locations,
+        signLocation: "浙江省温州市幸福小区",
         studentId: parseInt(studentId),
         courseId: 1
     }
@@ -61,7 +62,7 @@ function start_time(_this) {
                 $(_this).hide();
                 var $start = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
                     '                    <p>\n' +
-                    '                        地点：'+locations+'\n' +
+                    '                        地点：'+'浙江省温州市幸福小区'+'\n' +
                     '                    </p>';
                 //获取到上课签到时间
                 $("#start-time div").append($start)
@@ -78,7 +79,8 @@ function end_time(_this) {
     var now = myDate.toLocaleString();     //获取当前时间
 
     var sign = {
-        signOutLocation: locations,
+        // signOutLocation: locations,
+        signOutLocation: "浙江省温州市幸福小区",
         signId:signId
     }
     $.ajax({
@@ -93,7 +95,7 @@ function end_time(_this) {
                 $(_this).hide();
                 var $end = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
                     '                    <p>\n' +
-                    '                        地点：'+locations+'\n' +
+                    '                        地点：'+'浙江省温州市幸福小区'+'\n' +
                     '                    </p>';
                 //获取到上课签到时间
                 $("#end-time div").append($end)

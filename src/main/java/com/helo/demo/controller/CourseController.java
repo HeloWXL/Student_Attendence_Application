@@ -67,7 +67,7 @@ public class CourseController {
     return courseService.getCourseList(pageNo,pageSiez);
   }
 
-  @ApiOperation(value = "查询课程信息")
+  @ApiOperation(value = "根据教师工号查询课程列表")
   @GetMapping("/selectCourseListByTno")
   @ResponseBody
   public DataResult<Map<String,Object>> selectCourseListByTno(@RequestParam("pageNo") Integer pageNo,
