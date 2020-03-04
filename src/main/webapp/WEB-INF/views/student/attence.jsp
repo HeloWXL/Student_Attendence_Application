@@ -35,13 +35,16 @@
     </style>
 </header>
 <div class="mui-content">
+    <input type="file" id="fileElem" accept="image/*" style="display: none">
+    <input type="file" id="fileElem1" accept="image/*" style="display: none">
+
     <div class="top" style="margin-top: 10px;">
         <ul class="layui-timeline">
             <li class="layui-timeline-item" id="start-time">
                 <i class="layui-icon layui-timeline-axis"></i>
-                <div class="layui-timeline-content layui-text">
-                    <h4 class="layui-timeline-title">上课签到</h4>
-                </div>
+                    <div class="layui-timeline-content layui-text" >
+                        <h4 class="layui-timeline-title">上课签到</h4>
+                    </div>
             </li>
             <li class="layui-timeline-item" id="end-time" style="display: none">
                 <i class="layui-icon layui-timeline-axis"></i>
@@ -53,20 +56,24 @@
     </div>
     <div class="c-center">
         <div class="center">
-            <div class="mui-card" id="start" onclick="start_time(this)">
-                <!--内容区-->
-                <div class="mui-card-content">
-                    上课签到
-                    <p></p>
+            <label for="fileElem">
+                <div class="mui-card" id="start">
+                    <!--内容区-->
+                    <div class="mui-card-content">
+                        上课签到
+                        <p></p>
+                    </div>
                 </div>
-            </div>
-            <div class="mui-card" id="end" style="display: none" onclick="end_time(this)">
-                <!--内容区-->
-                <div class="mui-card-content">
-                    下课签到
-                    <p></p>
+            </label>
+            <label for="fileElem1">
+                <div class="mui-card" id="end" style="display: none">
+                    <!--内容区-->
+                    <div class="mui-card-content">
+                        下课签到
+                        <p></p>
+                    </div>
                 </div>
-            </div>
+            </label>
 
         </div>
     </div>
@@ -105,8 +112,6 @@
       });
     }
   });
-
-  console.log(locations)
 </script>
 <%--引入自定义js文件--%>
 <script src="${ctx}/resources/js/student/attence.js" type="application/javascript"></script>

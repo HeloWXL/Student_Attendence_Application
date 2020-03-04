@@ -1,6 +1,9 @@
 package com.helo.demo.utils;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +49,30 @@ public class CommonUtil {
 		try {
 			return format.parse(stringValue);
 		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	* @Description: 将MultipartFile转成File
+	* @params: [multiFile]
+	* @return: java.io.File
+	* @Author: wangxianlin
+	* @Date: 2020/3/4 8:30 PM
+	*/ 
+	public static File MultipartFileToFile(MultipartFile multiFile) {
+		// 获取文件名
+		String fileName = multiFile.getOriginalFilename();
+		// 获取文件后缀
+		String prefix = fileName.substring(fileName.lastIndexOf("."));
+		// 若需要防止生成的临时文件重复,可以在文件名后添加随机码
+
+		try {
+			File file = File.createTempFile(fileName, prefix);
+			multiFile.transferTo(file);
+			return file;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

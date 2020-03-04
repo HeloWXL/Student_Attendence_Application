@@ -34,6 +34,12 @@ import java.util.Map;
 public class UploadController {
 
     //跳转到图片上传界面
+    @GetMapping("/mui")
+    public String toMui() {
+        return "mui";
+    }
+
+    //跳转到图片上传界面
     @GetMapping("/toUploadLocalView")
     public String toUploadImage() {
         return "upload/uploadToLocal";

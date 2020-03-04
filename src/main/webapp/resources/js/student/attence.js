@@ -4,8 +4,21 @@ $(function () {
         location.href = ctx + '/studentApi/toLogin';
         return;
     }
-    getStuNewSignInfo()
-})
+    getStuNewSignInfo();
+    var $starts =  $("#fileElem");
+    $starts.change(function () {
+        if($(this).val() != ""){
+            start_time()
+        }
+    });
+
+    var $ends =  $("#fileElem1");
+    $ends.change(function () {
+        if($(this).val() != ""){
+            end_time()
+        }
+    });
+});
 
 // 查询学生当前签到的状态
 function getStuNewSignInfo() {
@@ -41,28 +54,31 @@ function getStuNewSignInfo() {
 }
 
 // 上课签到
-function start_time(_this) {
+function start_time() {
+    var formData = new FormData();
+    var file =  $("#fileElem")[0].files[0];
+    formData.append("file",file);
     var myDate = new Date();
     var now = myDate.toLocaleString();     //获取当前时间
-    var sign = {
-        // signLocation: locations,
-        signLocation: "浙江省温州市幸福小区",
-        studentId: parseInt(studentId),
-        courseId: 1
-    }
+    formData.append("signLocation",locations);
+    // formData.append("signLocation","浙江省温州市幸福小区");
+    formData.append("studentId",parseInt(studentId));
+    formData.append("courseId",1);
     $.ajax({
         url: ctx + '/signApi/insertSign',
-        data: JSON.stringify(sign),
+        data: formData,
         type: 'post',
         dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
+        contentType: false,
+        processData: false,
         success: function (data) {
             if (data.body == 1) {
                 //隐藏本身
-                $(_this).hide();
+                $("#start").hide();
                 var $start = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
                     '                    <p>\n' +
-                    '                        地点：'+'浙江省温州市幸福小区'+'\n' +
+                    // '                        地点：'+'浙江省温州市幸福小区'+'\n' +
+                    '                        地点：'+locations+'\n' +
                     '                    </p>';
                 //获取到上课签到时间
                 $("#start-time div").append($start)
@@ -74,28 +90,30 @@ function start_time(_this) {
 }
 
 //下课签退
-function end_time(_this) {
+function end_time() {
+    var formData = new FormData();
+    var file =  $("#fileElem1")[0].files[0];
+    formData.append("file",file);
     var myDate = new Date();
     var now = myDate.toLocaleString();     //获取当前时间
-
-    var sign = {
-        // signOutLocation: locations,
-        signOutLocation: "浙江省温州市幸福小区",
-        signId:signId
-    }
+    formData.append("signOutLocation",locations);
+    // formData.append("signOutLocation","浙江省温州市幸福小区");
+    formData.append("studentId",parseInt(studentId));
     $.ajax({
         url: ctx + '/signApi/updateSignById',
-        data: JSON.stringify(sign),
         type: 'post',
+        data: formData,
         dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
+        contentType: false,
+        processData: false,
         success: function (data) {
             if (data == 1) {
                 //隐藏本身
-                $(_this).hide();
+                $("#end").hide();
                 var $end = ' <h3 class="layui-timeline-title">打卡时间 ' + now + '</h3>\n' +
                     '                    <p>\n' +
-                    '                        地点：'+'浙江省温州市幸福小区'+'\n' +
+                    // '                        地点：'+'浙江省温州市幸福小区'+'\n' +
+                    '                        地点：'+locations+'\n' +
                     '                    </p>';
                 //获取到上课签到时间
                 $("#end-time div").append($end)

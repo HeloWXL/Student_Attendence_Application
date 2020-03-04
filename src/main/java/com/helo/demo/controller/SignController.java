@@ -1,9 +1,9 @@
 package com.helo.demo.controller;
 
-import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSONObject;
 import com.helo.demo.config.DataResult;
+import com.helo.demo.facecompare.CommonMethod;
 import com.helo.demo.model.Sign;
-import com.helo.demo.model.Student;
 import com.helo.demo.service.SignService;
 import com.helo.demo.utils.CommonUtil;
 import com.helo.demo.vo.SignStudentVo;
@@ -16,14 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.lang.String.valueOf;
 
 /**
  * @author wangxl
@@ -68,13 +70,27 @@ public class SignController {
     @ApiOperation("学生签到-添加签到记录")
     @PostMapping("insertSign")
     @ResponseBody
-    public DataResult<Integer> insertSign(@RequestBody Sign sign) {
-        DataResult<Integer> result = new DataResult<>();
-        result.setMsg("添加成功");
-        result.setCode("200");
-        result.setBody(signService.insertSign(sign));
-        return result;
+    public DataResult<Integer> insertSign(@RequestParam("signLocation") String signLocation,@RequestParam("studentId") int studentId,
+                                          @RequestParam("courseId") int courseId,@RequestParam("file") MultipartFile file) {
+        DataResult<Integer> results = new DataResult<>();
+        File goldFile = new File("/Users/wangxianlin/Downloads/file/IMG_8733.jpg");
+        String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
+        JSONObject result = JSONObject.parseObject(str);
+        String confidence =String.valueOf(result.get("confidence"));
+        String s = confidence.substring(0,confidence.length()-1);
+        Double id=Double.valueOf(s);
+        if(id>80.00){
+            Sign sign = new Sign();
+            sign.setCourseId(courseId);
+            sign.setSignLocation(signLocation);
+            sign.setStudentId(studentId);
+            results.setBody(signService.insertSign(sign));
+        }else{
+            results.setBody(0);
+        }
+        return results;
     }
+
 
     @ApiOperation("获取所有学生签到记录")
     @GetMapping("/getSignByPage")
@@ -131,8 +147,8 @@ public class SignController {
                 sign.addCell(new Label(0, i + 1, signList.get(i).getStudentName(), contentCellFormat));
                 sign.addCell(new Label(1, i + 1, signList.get(i).getSignLocation(), contentCellFormat));
                 sign.addCell(new Label(2, i + 1, signList.get(i).getSignOutLocation(), contentCellFormat));
-                sign.addCell(new Label(3, i + 1, String.valueOf(CommonUtil.format(signList.get(i).getStartTime(),"yyyy-MM-dd HH:mm:ss")), contentCellFormat));
-                sign.addCell(new Label(4, i + 1, String.valueOf(CommonUtil.format(signList.get(i).getEndTime(),"yyyy-MM-dd HH:mm:ss")), contentCellFormat));
+                sign.addCell(new Label(3, i + 1, valueOf(CommonUtil.format(signList.get(i).getStartTime(),"yyyy-MM-dd HH:mm:ss")), contentCellFormat));
+                sign.addCell(new Label(4, i + 1, valueOf(CommonUtil.format(signList.get(i).getEndTime(),"yyyy-MM-dd HH:mm:ss")), contentCellFormat));
                 if(signList.get(i).getIsStartStatus()==1){
                     sign.addCell(new Label(5, i + 1, "已签到", contentCellFormat));
                 }else{
@@ -173,20 +189,21 @@ public class SignController {
     @ApiOperation("学生下课签退")
     @PostMapping("updateSignById")
     @ResponseBody
-    public int updateSignById(@RequestBody Sign sign,HttpServletRequest request) {
-        int studentId=0;
-        Student student = (Student) request.getSession().getAttribute("studentsession");
-        try {
-            if(student==null){
-             throw new Exception("学生未登录");
-            }else{
-                studentId = student.getStudentId();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public int updateSignById(@RequestParam("signOutLocation") String signOutLocation,
+                              @RequestParam("studentId") int studentId,@RequestParam("file") MultipartFile file) {
+        File goldFile = new File("/Users/wangxianlin/Downloads/file/IMG_8733.jpg");
+        String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
+        JSONObject result = JSONObject.parseObject(str);
+        String confidence =String.valueOf(result.get("confidence"));
+        String s = confidence.substring(0,confidence.length()-1);
+        Double id=Double.valueOf(s);
+        if(id>80.00){
+            return signService.updateSignById(signOutLocation,studentId);
+        }else{
+            return 0;
         }
-        return signService.updateSignById(sign.getSignOutLocation(),studentId);
     }
+
 
 
     /**

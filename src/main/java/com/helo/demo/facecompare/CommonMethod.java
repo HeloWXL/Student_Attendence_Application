@@ -20,6 +20,7 @@ public class CommonMethod {
     private final static int CONNECT_TIME_OUT = 30000;
     private final static int READ_OUT_TIME = 50000;
     private static String boundaryString = getBoundary();
+
     protected static byte[] post(String url, HashMap<String, String> map,
                                  HashMap<String, byte[]> fileMap) throws Exception {
         HttpURLConnection conne;
@@ -86,6 +87,7 @@ public class CommonMethod {
         ins.close();
         return bytes;
     }
+
     private static String getBoundary() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
@@ -94,9 +96,11 @@ public class CommonMethod {
         }
         return sb.toString();
     }
+
     private static String encode(String value) throws Exception {
         return URLEncoder.encode(value, "UTF-8");
     }
+
     public static byte[] getBytesFromFile(File f) {
         if (f == null) {
             return null;
@@ -116,5 +120,43 @@ public class CommonMethod {
         }
 
         return null;
+    }
+
+    public static String compareTo(File golafile,File compareFile) {
+        String result = "";
+        String API_KEY = "L_mT-oglbWdX2uw20G3tGl5TJqBy9v3L";
+        String API_SECRET = "jaoj6KDENsq7JcgUL8mD-tMQVSMZRFlX";
+        byte[] buff1 = getBytesFromFile(golafile);
+        byte[] buff2 = getBytesFromFile(compareFile);
+        /**
+         * Url
+         * 必须要传递的参数
+         */
+        String url = "https://api-cn.faceplusplus.com/facepp/v3/compare";
+        /**
+         * 存放 api_key ， api_secret
+         */
+        HashMap<String, String> map = new HashMap<>();
+        /**
+         * 存放 image_file 因为它是一个二进制数组
+         */
+        HashMap<String, byte[]> byteMap = new HashMap<>();
+        map.put("api_key", API_KEY);
+        map.put("api_secret", API_SECRET);
+        /***
+         * image_file
+         * 一个图片，二进制文件，需要用 post multipart/form-data 的方式上传
+         */
+        byteMap.put("image_file1", buff1);
+        byteMap.put("image_file2", buff2);
+        try{
+            byte[] bacd = post(url, map, byteMap);
+            String str = new String(bacd);
+            result = str;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

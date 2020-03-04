@@ -23,75 +23,80 @@ import java.util.Map;
 @Service
 public class SignService {
 
-  @Resource
-  private SignMapper signMapper;
+    @Resource
+    private SignMapper signMapper;
 
-  /**
-   * 添加签到记录
-   * @param sign
-   * @return
-   */
-  public int insertSign(Sign sign){
-    return signMapper.insertSelective(sign);
-  }
-
-
-  /**
-   * 根据ID查询签到信息
-   * @param signId
-   * @return
-   */
-  public Sign selectSignById(Integer signId){
-    return signMapper.selectById(signId);
-  }
+    /**
+     * 添加签到记录
+     *
+     * @param sign
+     * @return
+     */
+    public int insertSign(Sign sign) {
+        return signMapper.insertSelective(sign);
+    }
 
 
-  /**
-   * 获取签到列表分页 -for admin
-   * @param pageNo
-   * @param pageSize
-   * @return
-   */
-  public Map<String, Object> getSignByPage(Integer pageNo, Integer pageSize) {
-    EntityWrapper entityWrapper = new EntityWrapper();
-    List<SignStudentVo> signList = signMapper.getSignList((pageNo-1)*pageSize,pageSize);
-    int count = signMapper.selectCount(entityWrapper);
-    Map<String,Object> map = new HashMap<>();
-    map.put("data",signList);
-    map.put("count",count);
-    map.put("code",0);
-    map.put("msg","");
-    return map;
-  }
-
-  /**
-   * 获取签到信息-for stu
-   * @param pageNo
-   * @param pageSize
-   * @param stuId
-   * @return
-   */
-  public Map<String, Object> getSignStuByPage(Integer pageNo, Integer pageSize,Integer stuId) {
-    EntityWrapper entityWrapper = new EntityWrapper();
-    entityWrapper.eq("student_id",stuId);
-    entityWrapper.orderBy("start_time",false);
-    List<Sign> signList = signMapper.selectPage(new Page<Sign>(pageNo,pageSize),entityWrapper);
-    int count = signMapper.selectCount(entityWrapper);
-    Map<String,Object> map = new HashMap<>();
-    map.put("data",signList);
-    map.put("count",count);
-    return map;
-  }
+    /**
+     * 根据ID查询签到信息
+     *
+     * @param signId
+     * @return
+     */
+    public Sign selectSignById(Integer signId) {
+        return signMapper.selectById(signId);
+    }
 
 
-  /**
-   * 根据学生的ID 查询最新一次签到的状态
-   * @param stuId
-   * @return
-   */
-  public Sign getStudentSign(Integer stuId){
-    return signMapper.getStudentSign(stuId);
-  }
+    /**
+     * 获取签到列表分页 -for admin
+     *
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public Map<String, Object> getSignByPage(Integer pageNo, Integer pageSize) {
+        EntityWrapper entityWrapper = new EntityWrapper();
+        List<SignStudentVo> signList = signMapper.getSignList((pageNo - 1) * pageSize, pageSize);
+        int count = signMapper.selectCount(entityWrapper);
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", signList);
+        map.put("count", count);
+        map.put("code", 0);
+        map.put("msg", "");
+        return map;
+    }
+
+    /**
+     * 获取签到信息-for stu
+     *
+     * @param pageNo
+     * @param pageSize
+     * @param stuId
+     * @return
+     */
+    public Map<String, Object> getSignStuByPage(Integer pageNo, Integer pageSize, Integer stuId) {
+        EntityWrapper entityWrapper = new EntityWrapper();
+        entityWrapper.eq("student_id", stuId);
+        entityWrapper.orderBy("start_time", false);
+        List<Sign> signList = signMapper.selectPage(new Page<Sign>(pageNo, pageSize), entityWrapper);
+        int count = signMapper.selectCount(entityWrapper);
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", signList);
+        map.put("count", count);
+        return map;
+    }
+
+
+    /**
+     * 根据学生的ID 查询最新一次签到的状态
+     *
+     * @param stuId
+     * @return
+     */
+    public Sign getStudentSign(Integer stuId) {
+        return signMapper.getStudentSign(stuId);
+    }
 
 
   /**
