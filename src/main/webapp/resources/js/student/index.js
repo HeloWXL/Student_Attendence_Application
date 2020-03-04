@@ -18,7 +18,7 @@ $(function() {
   });
 // 请假记录
   $('#leaveList').click(function() {
-    location.href=ctx+'/leaveApi/toLeaveList';
+    location.href=ctx+'/leaveApi/toLeaveList/'+studentSno;
   });
 //签到界面
   mui('#attendance').on('tap','img',function(){
@@ -26,7 +26,7 @@ $(function() {
   });
 
   mui('#mycourse').on('tap','img',function(){
-      location.href=ctx+'/studentApi/myCourse';
+      location.href=ctx+'/studentApi/myCourse/'+studentSno;
   });
   //我的签到列表
   mui('#attendancelist').on('tap','img',function(){

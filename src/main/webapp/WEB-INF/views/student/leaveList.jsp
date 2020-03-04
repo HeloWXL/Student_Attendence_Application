@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wangxianlin
-  Date: 2019/11/3
-  Time: 11:55 下午
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -73,6 +67,26 @@
 </header>
 <div class="mui-content">
     <ul class="mui-table-view" id="leaveList">
+    <c:forEach items="${leave.list}" var="l">
+        <li class="mui-table-view-cell mui-media">
+            <c:if test="${l.isRead==0}">
+                <span class="mui-badge mui-badge-primary" id="success">未批阅</span>
+            </c:if>
+            <c:if test="${l.isRead==1}">
+                <span class="mui-badge mui-badge-success" id="success">已批准</span>
+            </c:if>
+            <c:if test="${l.isRead==2}">
+                <span class="mui-badge mui-badge-danger" id="success">未批准</span>
+            </c:if>
+            <a href="${ctx}/leaveApi/selectByPrimaryKey/${l.leaveId}">
+                <div class="mui-media-body">
+                    <div>请假标题：${l.leaveTitle}</div>
+                    <p style="float: right;font-size: 12px">开始时间： <fmt:formatDate value="${l.startTime}" pattern="yyyy-MM-dd" />
+                        &nbsp;&nbsp;&nbsp;结束时间：<fmt:formatDate value="${l.endTime}" pattern="yyyy-MM-dd" /></p>
+                </div>
+            </a>
+        </li>
+    </c:forEach>
     </ul>
     <div id="loading">
         <button type="button" class="mui-btn mui-btn-outlined" style="display: none">加载</button>
@@ -89,71 +103,7 @@
             location.href = ctx + '/studentApi/toLogin';
             return;
         }
-        var pageNo = 1;
-        $.ajax({
-            url: ctx + '/leaveApi/selectLeaveByPage/',
-            dataType: 'json',
-            type: 'get',
-            data: {pageNo: pageNo, pageSize: 10, studentSno: studentSno},
-            contentType: 'application/json; charset=utf-8',
-            async: false,
-            success: function (data) {
-                for (var i = 0; i < data.body.list.length; i++) {
-                    var reason = data.body.list[i].leaveTitle;
-                    if(reason.length>20){
-                        reason = reason.substring(0,20)+".....";
-                    }
-                    var start = new Date( data.body.list[i].startTime)
-                    var end = new Date( data.body.list[i].endTime)
-                    var $node = $('<li class="mui-table-view-cell mui-media">\n' +
-                        status(data.body.list[i].isRead)+
-                        '            <a href="${ctx}/leaveApi/selectByPrimaryKey/' + data.body.list[i].leaveId + '">\n' +
-                        '                <div class="mui-media-body">\n' +
-                        '                    <div>请假标题：' + reason+ '</div>\n' +
-                        '                    <p style="float: right;font-size: 12px">开始时间： ' + dateFormat("YYYY-mm-dd",start) + ' &nbsp;&nbsp;&nbsp;结束时间：' + dateFormat("YYYY-mm-dd", end) + '</p>\n' +
-                        '                </div>\n' +
-                        '            </a>\n' +
-                        '        </li>')
-                    $("#leaveList").append($node);
-                }
-            }
-        });
     });
-
-
-    // 请假状态
-    function status(is_read) {
-      if(is_read==1){
-        var str = '<span class="mui-badge mui-badge-success" id="success">已批准</span>\n';
-        return str;
-      }else if(is_read==2){
-        var str = '<span class="mui-badge mui-badge-danger" id="success">未批准</span>\n';
-        return str;
-      }else{
-        var str = '<span class="mui-badge mui-badge-primary" id="success">未批阅</span>\n';
-        return str;
-      }
-    }
-
-    function dateFormat(fmt, date) {
-        var ret;
-        var opt = {
-            "Y+": date.getFullYear().toString(),        // 年
-            "m+": (date.getMonth() + 1).toString(),     // 月
-            "d+": date.getDate().toString(),            // 日
-            "H+": date.getHours().toString(),           // 时
-            "M+": date.getMinutes().toString(),         // 分
-            "S+": date.getSeconds().toString()          // 秒
-            // 有其他格式化字符需求可以继续添加，必须转化成字符串
-        };
-        for (var k in opt) {
-            ret = new RegExp("(" + k + ")").exec(fmt);
-            if (ret) {
-                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
-            };
-        };
-        return fmt;
-    }
 </script>
 
 </html>

@@ -19,6 +19,7 @@
     <script>
       var ctx = '${ctx }';
       var student = "${studentsession}";
+      var studentSno = "${studentsession.studentSno}";
     </script>
 </head>
 <body>

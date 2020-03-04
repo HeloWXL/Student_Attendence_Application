@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * 192.168.222.39
+ * 192.168.1.37:8081/helo/studentApi/toLogin
  * 学生
  * 127.0.0.1:8081/helo/studentApi/toLogin
  * 教师

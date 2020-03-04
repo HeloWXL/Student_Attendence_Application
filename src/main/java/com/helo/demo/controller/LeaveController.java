@@ -5,7 +5,6 @@ import com.helo.demo.model.Leave;
 import com.helo.demo.service.LeaveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +35,9 @@ public class LeaveController {
     }
 
     @ApiOperation(value = "跳转到请假请假列表页面")
-    @GetMapping("/toLeaveList")
-    public String toLeaveList() {
+    @GetMapping("/toLeaveList/{studentSno}")
+    public String toLeaveList(Model model,@PathVariable("studentSno") String studentSno) {
+        model.addAttribute("leave",leaveService.getLeaveByPage(1, 100, studentSno));
         return "/student/leaveList";
     }
 
@@ -67,11 +67,10 @@ public class LeaveController {
     @ApiOperation(value = "根据学号查询请假信息 -分页")
     @GetMapping("/selectLeaveByPage")
     @ResponseBody
-    public DataResult<Map<String, Object>> selectLeaveByPage(@RequestParam("pageNo") Integer pageNo,
-                                                             @RequestParam("pageSize") Integer pageSieze, @RequestParam("studentSno") Integer studentSno) {
-        DataResult<Map<String, Object>> result = new DataResult<>();
-        result.setBody(leaveService.getLeaveByPage(pageNo, pageSieze, studentSno));
-        return result;
+    public Map<String, Object> selectLeaveByPage(@RequestParam("pageNo") Integer pageNo,
+                                                             @RequestParam("pageSize") Integer pageSieze, @RequestParam("studentSno") String studentSno) {
+        return leaveService.getLeaveByPage(pageNo, pageSieze, studentSno);
+
     }
 
 

@@ -53,7 +53,7 @@ public class LeaveService {
      * @param pageSize
      * @return
      */
-    public Map<String, Object> getLeaveByPage(Integer pageNo, Integer pageSize, Integer studentSno) {
+    public Map<String, Object> getLeaveByPage(Integer pageNo, Integer pageSize, String studentSno) {
         EntityWrapper entityWrapper = new EntityWrapper();
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> data = new HashMap<>();

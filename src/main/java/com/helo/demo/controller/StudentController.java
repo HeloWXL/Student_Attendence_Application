@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -62,8 +63,9 @@ public class StudentController {
   }
 
   @ApiOperation(value = "跳转到学生课程列表页面")
-  @GetMapping("/myCourse")
-  public String myCourse(){
+  @GetMapping("/myCourse/{sno}")
+  public String myCourse(Model model,@PathVariable("sno") String sno){
+    model.addAttribute("course",studentService.selectCourseBySno(sno));
     return "student/myCourse";
   }
 
@@ -161,16 +163,6 @@ public class StudentController {
       }
     }
   }
-
-  @ApiOperation(value = "根据学生的学号查询学生课程")
-  @GetMapping("/selectCourseBySno")
-  @ResponseBody
-  public  DataResult<List<Student>> selectCourseBySno(@RequestParam("sno") String sno){
-    DataResult<List<Student>> result = new DataResult<>();
-    result.setBody(studentService.selectCourseBySno(sno));
-    return result;
-  }
-
 
   @ApiOperation(value = "根据课程的ID查询学生")
   @GetMapping("/selectStudentByCid")

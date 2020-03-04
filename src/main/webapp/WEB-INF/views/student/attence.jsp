@@ -115,5 +115,4 @@
 </script>
 <%--引入自定义js文件--%>
 <script src="${ctx}/resources/js/student/attence.js" type="application/javascript"></script>
-
 </html>
