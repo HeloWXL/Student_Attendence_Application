@@ -33,13 +33,25 @@ import java.util.Map;
 @RequestMapping("uploadApi")
 public class UploadController {
 
-    //跳转到图片上传界面
+    /**
+    * @Description: 跳转到图片上传界面
+    * @params: []
+    * @return: java.lang.String
+    * @Author: wangxianlin
+    * @Date: 2020/3/5 10:17 AM
+    */ 
     @GetMapping("/toUploadLocalView")
     public String toUploadImage() {
         return "upload/uploadToLocal";
     }
 
-    //图片上传接口
+    /**
+    * @Description: 图片上传接口 上传到本地
+    * @params: [file, response]
+    * @return: java.util.Map<java.lang.String,java.lang.Object>
+    * @Author: wangxianlin
+    * @Date: 2020/3/5 10:18 AM
+    */ 
     @ApiOperation(value = "上传到本地")
     @PostMapping("/uploadToLocal")
     @ResponseBody

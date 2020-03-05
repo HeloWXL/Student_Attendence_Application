@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ import java.util.Map;
  * @date 2019/8/21 0:08
  */
 @Api(tags = "学生接口")
-@Controller
+@RestController
 @RequestMapping("studentApi")
 @Slf4j
 public class StudentController {
@@ -46,38 +47,36 @@ public class StudentController {
 
   @ApiOperation(value = "跳转到学生登录界面")
   @GetMapping("/toLogin")
-  public String toLogin(){
-    return "student/login";
+  public ModelAndView toLogin(){
+    return new ModelAndView("/student/login");
   }
 
   @ApiOperation(value = "跳转到学生首页界面")
   @GetMapping("/index")
-  public String toIndex(){
-    return "student/index";
+  public ModelAndView toIndex(){
+    return new ModelAndView("/student/index");
   }
 
   @ApiOperation(value = "跳转到学生个人信息界面")
   @GetMapping("/myInfo")
-  public String myInfo(){
-    return "student/myinfo";
+  public ModelAndView myInfo(){
+    return new ModelAndView("/student/myinfo");
   }
 
   @ApiOperation(value = "跳转到学生个人信息界面")
   @GetMapping("/askForLeave")
-  public String askForLeave(){
-    return "student/askForLeave";
+  public ModelAndView askForLeave(){
+    return new ModelAndView("/student/askForLeave");
   }
 
   @ApiOperation(value = "跳转到学生课程列表页面")
   @GetMapping("/myCourse/{sno}")
-  public String myCourse(Model model,@PathVariable("sno") String sno){
-    model.addAttribute("course",studentService.selectCourseBySno(sno));
-    return "student/myCourse";
+  public ModelAndView myCourse(@PathVariable("sno") String sno){
+    return new ModelAndView("/student/myCourse").addObject("course",studentService.selectCourseBySno(sno));
   }
 
   @ApiOperation(value = "根据Sno查询学生信息")
   @GetMapping("/selectByStudentId/{sno}")
-  @ResponseBody
   public DataResult<Student> selectByStudentId(@PathVariable("sno") String sno){
     DataResult<Student> result = new DataResult<>();
     result.setBody(studentService.selectByPrimaryKey(sno));
@@ -86,7 +85,6 @@ public class StudentController {
 
   @ApiOperation(value = "根据ID删除学生信息")
   @PostMapping("/deleteByStudentId")
-  @ResponseBody
   public DataResult<Integer> deleteByStudentId(@RequestBody List<Integer> studentId){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(studentService.deleteByPrimaryKey(studentId));
@@ -104,7 +102,6 @@ public class StudentController {
 
   @ApiOperation(value = "修改学生信息")
   @PostMapping("/updateStudent")
-  @ResponseBody
   public DataResult<Integer> updateStudent(@RequestBody Student student){
     DataResult<Integer> result = new DataResult<>();
     result.setBody(studentService.updateByPrimaryKeySelective(student));
@@ -113,7 +110,6 @@ public class StudentController {
 
   @ApiOperation(value = "学生登录")
   @PostMapping("/checkLogin")
-  @ResponseBody
   public DataResult<Boolean> checkLogin(@RequestParam("sno") String sno, @RequestParam("password") String password, HttpServletRequest request,
                                         HttpServletResponse response){
       response.addHeader("Access-Control-Allow-Origin","*");
@@ -135,14 +131,12 @@ public class StudentController {
 
   @ApiOperation(value = "查询学生信息-分页显示")
   @GetMapping("/selectStudentByPage")
-  @ResponseBody
   public Map<String,Object> selectStudentByPage(@RequestParam("sno") String sno,@RequestParam("name") String name,@RequestParam("page") Integer page , @RequestParam("limit") int limit){
     return studentService.getStudentList(sno,name,page,limit);
   }
 
   @ApiOperation(value = "获取学生的session对象")
   @PostMapping("/getStudentSession")
-  @ResponseBody
   public DataResult<Student> getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean) {
     Student student = (Student) request.getSession().getAttribute(studentBean);
     DataResult<Student> result = new DataResult<>();
@@ -172,7 +166,6 @@ public class StudentController {
 
   @ApiOperation(value = "根据课程的ID查询学生")
   @GetMapping("/selectStudentByCid")
-  @ResponseBody
   public  DataResult<List<Student>> selectStudentByCid(@RequestParam("cid") Integer cid){
     DataResult<List<Student>> result = new DataResult<>();
     result.setBody(studentService.selectStudentByCid(cid));
@@ -182,7 +175,6 @@ public class StudentController {
 
   @ApiOperation(value = "学生头像修改")
   @PostMapping("/updatePicBySid")
-  @ResponseBody
   public  Map<String,Object> upadtePicBySid(@RequestParam("studentId") int studentId,
                                             @RequestParam("file") MultipartFile file,HttpServletResponse response,HttpServletRequest request){
     Map<String,Object> result  = new HashMap<>();
