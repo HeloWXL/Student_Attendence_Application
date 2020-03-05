@@ -5,6 +5,7 @@ import com.helo.demo.config.DataResult;
 import com.helo.demo.facecompare.CommonMethod;
 import com.helo.demo.model.Sign;
 import com.helo.demo.service.SignService;
+import com.helo.demo.service.StudentService;
 import com.helo.demo.utils.CommonUtil;
 import com.helo.demo.vo.SignStudentVo;
 import io.swagger.annotations.Api;
@@ -42,6 +43,9 @@ public class SignController {
     @Autowired
     private SignService signService;
 
+    @Autowired
+    private StudentService studentService;
+
     @ApiOperation("跳转到签到界面")
     @GetMapping("toAttence")
     public String toAttenceView() {
@@ -73,7 +77,12 @@ public class SignController {
     public DataResult<Integer> insertSign(@RequestParam("signLocation") String signLocation,@RequestParam("studentId") int studentId,
                                           @RequestParam("courseId") int courseId,@RequestParam("file") MultipartFile file) {
         DataResult<Integer> results = new DataResult<>();
-       /* File goldFile = new File("/Users/wangxianlin/Downloads/file/IMG_8733.jpg");
+        //获取该学生的头像地址
+        String picPath = studentService.getPicBySid(studentId);
+        //将学生的头像抓成file文件
+        File goalFile = CommonUtil.getFileByPath(picPath);
+
+       /*
         String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
         JSONObject result = JSONObject.parseObject(str);
         String confidence =String.valueOf(result.get("confidence"));
@@ -89,6 +98,28 @@ public class SignController {
             results.setBody(0);
         }*/
         return results;
+    }
+
+    @ApiOperation("学生下课签退")
+    @PostMapping("updateSignById")
+    @ResponseBody
+    public int updateSignById(@RequestParam("signOutLocation") String signOutLocation,
+                              @RequestParam("studentId") int studentId,@RequestParam("file") MultipartFile file) {
+        //获取该学生的头像地址
+        String picPath = studentService.getPicBySid(studentId);
+        //将学生的头像抓成file文件
+        File goalFile = CommonUtil.getFileByPath(picPath);
+        /*
+        String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
+        JSONObject result = JSONObject.parseObject(str);
+        String confidence =String.valueOf(result.get("confidence"));
+        String s = confidence.substring(0,confidence.length()-1);
+        Double id=Double.valueOf(s);
+        if(id>80.00){*/
+        return signService.updateSignById(signOutLocation,studentId);
+        /*}else{
+            return 0;
+        }*/
     }
 
 
@@ -186,23 +217,7 @@ public class SignController {
         return signService.getStudentSign(stuId);
     }
 
-    @ApiOperation("学生下课签退")
-    @PostMapping("updateSignById")
-    @ResponseBody
-    public int updateSignById(@RequestParam("signOutLocation") String signOutLocation,
-                              @RequestParam("studentId") int studentId,@RequestParam("file") MultipartFile file) {
-        /*File goldFile = new File("/Users/wangxianlin/Downloads/file/IMG_8733.jpg");
-        String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
-        JSONObject result = JSONObject.parseObject(str);
-        String confidence =String.valueOf(result.get("confidence"));
-        String s = confidence.substring(0,confidence.length()-1);
-        Double id=Double.valueOf(s);
-        if(id>80.00){*/
-            return signService.updateSignById(signOutLocation,studentId);
-        /*}else{
-            return 0;
-        }*/
-    }
+
 
 
 

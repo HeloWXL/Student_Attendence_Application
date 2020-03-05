@@ -5,6 +5,8 @@ import com.helo.demo.model.Profession;
 import com.helo.demo.model.Student;
 import com.helo.demo.service.ProfessionService;
 import com.helo.demo.service.StudentService;
+import com.helo.demo.utils.CommonUtil;
+import com.helo.demo.utils.ConfigUtil;
 import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,11 +14,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -171,5 +177,63 @@ public class StudentController {
     DataResult<List<Student>> result = new DataResult<>();
     result.setBody(studentService.selectStudentByCid(cid));
     return result;
+  }
+
+
+  @ApiOperation(value = "学生头像修改")
+  @PostMapping("/updatePicBySid")
+  @ResponseBody
+  public  Map<String,Object> upadtePicBySid(@RequestParam("studentId") int studentId,
+                                            @RequestParam("file") MultipartFile file,HttpServletResponse response,HttpServletRequest request){
+    Map<String,Object> result  = new HashMap<>();
+    response.setContentType("text/html;charset=UTF-8");
+    String fileName = file.getOriginalFilename();
+    try {
+      Date date = new Date();
+      String picDir = ConfigUtil.getValue("imageDir");
+      String relativeDir = getRelativeDir(date);
+      File fileDir = new File(picDir + relativeDir);
+      if (!fileDir.exists()) {
+        fileDir.mkdirs();
+      }
+      //新的文件名
+      String newName = CommonUtil.format(date, "HHmmssSSS") +
+              Math.round(Math.random() * 8999 + 1000) +
+              fileName.substring(fileName.lastIndexOf("."));
+      //头像地址
+      String imgPath = relativeDir + newName;
+      file.transferTo(new File(picDir + imgPath));
+      int res = studentService.upadtePicBySid(studentId,imgPath);
+      if(res==1){
+        //清除学生的session
+        request.getSession().removeAttribute("studentsession");
+        //给session重新赋值
+        request.getSession().setAttribute("studentsession",this.studentService.getStudentById(studentId));
+        result.put("code", 200);
+        result.put("msg", fileName);
+        result.put("data", imgPath);
+      }else{
+        result.put("code", 500);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      result.put("code", 500);
+      result.put("msg", fileName);
+      result.put("data", "图片上传发生未知异常，请联系管理员！");
+    }
+    return result;
+  }
+
+  /**
+   * 根据日期得到年/月/日/的相对路径
+   * @param date
+   * @return
+   */
+  private String getRelativeDir(Date date) {
+    String year = CommonUtil.format(date, "yyyy");
+    String month = CommonUtil.format(date, "MM");
+    String day = CommonUtil.format(date, "dd");
+    String dir = year + "/" + month + "/" + day + "/";
+    return dir;
   }
 }

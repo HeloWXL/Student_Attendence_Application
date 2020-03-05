@@ -4,6 +4,8 @@ package com.helo.demo.utils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,4 +79,18 @@ public class CommonUtil {
 		}
 		return null;
 	}
+
+	/**
+	* @Description: 根据路径获取file文件
+	* @params: [path]
+	* @return: java.io.File
+	* @Author: wangxianlin
+	* @Date: 2020/3/5 2:38 AM
+	*/ 
+	public static File getFileByPath(String path) {
+		File file = new File(ConfigUtil.getValue("imageDir") + path);
+		return file;
+	}
+
+
 }

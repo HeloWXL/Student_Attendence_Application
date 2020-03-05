@@ -19,6 +19,7 @@
     <script>
       var ctx = '${ctx }';
       var student = "${studentsession}";
+      var studentId ="${studentsession.studentId}";
     </script>
 </head>
 <body>
@@ -29,11 +30,14 @@
 </header>
 <%--中间部分--%>
 <div class="mui-content">
+    <input type="file" id="fileElem" accept="image/*" style="display: none">
     <ul class="mui-table-view">
+        <label for="fileElem">
             <div class="mui-input-row">
                 <label>头像</label>
-                <img src="" name="userPic">
+                <img src="" name="userPic" id="head">
             </div>
+        </label>
         <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>姓名</label>
@@ -58,12 +62,6 @@
                 <input type="text" class="mui-input-clear" name="sex">
             </div>
         </li>
-        <%--<li class="mui-table-view-cell">--%>
-            <%--<div class="mui-input-row">--%>
-                <%--<label>QQ</label>--%>
-                <%--<input type="text" class="mui-input-clear" name="qq">--%>
-            <%--</div>--%>
-    <%--</li>--%>
         <li class="mui-table-view-cell">
             <div class="mui-input-row">
                 <label>邮箱</label>

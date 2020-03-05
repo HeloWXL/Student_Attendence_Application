@@ -2,11 +2,14 @@ package com.helo.demo.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.helo.demo.mapper.ProfessionMapper;
 import com.helo.demo.mapper.StudentMapper;
+import com.helo.demo.model.Profession;
 import com.helo.demo.model.Student;
 import com.helo.demo.utils.Md5Utils;
 import com.helo.demo.vo.StudentListVo;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +29,22 @@ public class StudentService {
     @Resource
     private StudentMapper studentMapper;
 
+    @Resource
+    private ProfessionMapper professionMapper;
+
+    /**
+    * @Description: 根据ID查询学生信息
+    * @params: [id]
+    * @return: com.helo.demo.model.Student
+    * @Author: wangxianlin
+    * @Date: 2020/3/5 9:49 AM
+    */ 
+    public Student getStudentById(int id){
+        Student student = studentMapper.selectById(id);
+        student.setProfessions(professionMapper.selectByPrimaryKey(student.getProfessionId()));
+        return student;
+    }
+
     /**
      * 根据学生的ID删除学生信息
      *
@@ -44,7 +63,7 @@ public class StudentService {
      */
     public int insertSelective(Student student) {
         student.setStudentPassword(Md5Utils.getSaltMD5(student.getStudentPassword()));
-        student.setStudentPic("/resources/images/user.jpg");
+        student.setStudentPic("default");
         return studentMapper.insertSelective(student);
     }
 
@@ -124,5 +143,26 @@ public class StudentService {
     */ 
     public List<Student> selectStudentByCid(Integer cid){
         return studentMapper.selectStudentByCid(cid);
+    }
+    /**
+     * @Description: 根据学号查询学生的图片
+     * @params: [cid]
+     * @return: java.util.List<com.helo.demo.model.Student>
+     * @Author: wangxianlin
+     * @Date: 2020/3/5 2:36 AM
+     */
+    public String getPicBySid(Integer sid){
+        return studentMapper.getPicBySid(sid);
+    }
+
+    /**
+    * @Description: 根据ID修改学生头像
+    * @params: [sid, url]
+    * @return: java.lang.String
+    * @Author: wangxianlin
+    * @Date: 2020/3/5 2:59 AM
+    */ 
+    public int upadtePicBySid(Integer sid,String url){
+        return studentMapper.upadtePicBySid(sid,url);
     }
 }

@@ -6,6 +6,7 @@ import com.helo.demo.vo.StudentListVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,4 +68,25 @@ public interface StudentMapper extends BaseMapper<Student> {
     */
     @Select("select s.* from student s ,course c where s.profession_id = c.profession and c.course_id = #{cid} ")
     List<Student> selectStudentByCid(Integer cid);
+
+
+    /**
+    * @Description: 根据学号查询学生的图片
+    * @params: [cid]
+    * @return: java.util.List<com.helo.demo.model.Student>
+    * @Author: wangxianlin
+    * @Date: 2020/3/5 2:36 AM
+    */ 
+    @Select("select student_pic from student where student_id  = #{sid} ")
+    String getPicBySid(Integer sid);
+
+    /**
+     * @Description: 根据id修改用户头像
+     * @params: [cid]
+     * @return: java.util.List<com.helo.demo.model.Student>
+     * @Author: wangxianlin
+     * @Date: 2020/3/5 2:36 AM
+     */
+    @Update("update student set student_pic = #{url} where student_id  = #{sid} ")
+    int upadtePicBySid(Integer sid,String url);
 }
