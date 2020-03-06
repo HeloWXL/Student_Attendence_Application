@@ -64,14 +64,7 @@ $(function () {
             mui.alert("结课时间不能为空");
             return;
         }
-        var release = {
-            teacherId: teacherId,
-            startTime:   new Date(starttime),
-            endTime:  new Date(endtime),
-            professionId: profession,
-            courseId: courseId
-        };
-        submitAddCourse(release)
+        submitAddCourse(teacherId,starttime,endtime,profession,courseId)
     });
 
     /**
@@ -127,13 +120,18 @@ $(function () {
     /**
      * 后台提交数据
      */
-    function submitAddCourse(release) {
+    function submitAddCourse(teacherId,starttime,endtime,profession,courseId) {
         $.ajax({
             url: ctx + '/releaseApi/insertRelease',
-            data: JSON.stringify(release),
+            data: {
+                teacherId: teacherId,
+                startTime:   starttime,
+                endTime:  endtime,
+                professionId: profession,
+                courseId: courseId
+            },
             dataType: 'json',
             type: 'post',
-            contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data == 1) {
                     mui.alert('提交成功', function () {

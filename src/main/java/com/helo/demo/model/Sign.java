@@ -43,7 +43,8 @@ public class Sign {
     private Integer isEndStatus;
     /**
      * 发布ID
-    */ 
+    */
+    @TableField("release_id")
     private Integer ReleaseId;
 
     @TableField(exist = false)

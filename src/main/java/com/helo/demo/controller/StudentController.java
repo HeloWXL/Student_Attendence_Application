@@ -11,6 +11,8 @@ import com.helo.demo.utils.Md5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +38,9 @@ import java.util.Map;
 @Api(tags = "学生接口")
 @RestController
 @RequestMapping("studentApi")
-@Slf4j
 public class StudentController {
+
+  private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
   @Resource
   private StudentService studentService;
@@ -116,7 +119,7 @@ public class StudentController {
       Student student = studentService.selectBySno(sno);
       DataResult<Boolean> result = new DataResult<>();
     if (Md5Utils.getSaltverifyMD5(password,student.getStudentPassword())) {
-      log.info(student.getStudentName()+"正在登录");
+      logger.info(student.getStudentName()+"正在登录");
       //根据学号的ID获取学生的专业相关信息
       Profession profession = professionService.selectByPrimaryKey(student.getProfessionId());
       student.setProfessions(profession);
@@ -156,7 +159,7 @@ public class StudentController {
     request.getSession().removeAttribute("studentsession");
     if ( request.getSession().getAttribute("studentsession") == null) {
       try {
-        log.info(student.getStudentName()+"正在退出登录");
+        logger.info(student.getStudentName()+"正在退出登录");
         response.sendRedirect("/helo/studentApi/toLogin");
       } catch (IOException e) {
         e.printStackTrace();
@@ -177,6 +180,7 @@ public class StudentController {
   @PostMapping("/updatePicBySid")
   public  Map<String,Object> upadtePicBySid(@RequestParam("studentId") int studentId,
                                             @RequestParam("file") MultipartFile file,HttpServletResponse response,HttpServletRequest request){
+    logger.info("学生头像修改");
     Map<String,Object> result  = new HashMap<>();
     response.setContentType("text/html;charset=UTF-8");
     String fileName = file.getOriginalFilename();
@@ -196,6 +200,7 @@ public class StudentController {
       String imgPath = relativeDir + newName;
       file.transferTo(new File(picDir + imgPath));
       int res = studentService.upadtePicBySid(studentId,imgPath);
+      logger.info("修改学生头像成功");
       if(res==1){
         //清除学生的session
         request.getSession().removeAttribute("studentsession");
@@ -209,6 +214,7 @@ public class StudentController {
       }
     } catch (Exception e) {
       e.printStackTrace();
+      logger.error("图片上传发生未知异常，请联系管理员！");
       result.put("code", 500);
       result.put("msg", fileName);
       result.put("data", "图片上传发生未知异常，请联系管理员！");

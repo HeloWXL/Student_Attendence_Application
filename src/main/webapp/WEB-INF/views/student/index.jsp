@@ -20,6 +20,7 @@
       var ctx = '${ctx }';
       var student = "${studentsession}";
       var studentSno = "${studentsession.studentSno}";
+      var professionId = "${studentsession.professionId}";
     </script>
 </head>
 <body>

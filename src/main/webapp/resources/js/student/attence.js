@@ -6,12 +6,26 @@ $(function () {
     }
     getStuNewSignInfo();
     var $starts =  $("#fileElem");
-    $starts.change(function () {
-        if($(this).val() != ""){
-            start_time()
-        }
-    });
 
+    if($("#success").attr("status")=="0"){
+        mui.alert("考勤未开始",function () {
+            location.href=ctx+'/studentApi/index';
+        });
+        return ;
+    }else if($("#success").attr("status")=="2"){
+        mui.alert("考勤已结束,继续签到将会被记为迟到");
+        $starts.change(function () {
+            if($(this).val() != ""){
+                start_time()
+            }
+        });
+    }else{
+        $starts.change(function () {
+            if($(this).val() != ""){
+                start_time()
+            }
+        });
+    }
     var $ends =  $("#fileElem1");
     $ends.change(function () {
         if($(this).val() != ""){
@@ -19,6 +33,13 @@ $(function () {
         }
     });
 });
+
+function convertDateFromString(dateString) {
+    if (dateString) {
+        var date = new Date(dateString.replace(/-/,"/"))
+        return date;
+    }
+}
 
 // 查询学生当前签到的状态
 function getStuNewSignInfo() {
@@ -62,7 +83,7 @@ function start_time() {
     var now = myDate.toLocaleString();     //获取当前时间
     formData.append("signLocation",locations);
     formData.append("studentId",parseInt(studentId));
-    formData.append("courseId",1);
+    formData.append("courseId",courseId);
     $.ajax({
         url: ctx + '/signApi/insertSign',
         data: formData,

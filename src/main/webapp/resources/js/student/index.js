@@ -22,7 +22,7 @@ $(function() {
   });
 //签到界面
   mui('#attendance').on('tap','img',function(){
-    location.href=ctx+'/signApi/toAttence';
+    location.href=ctx+'/signApi/toAttence/'+professionId;
   });
 
   mui('#mycourse').on('tap','img',function(){

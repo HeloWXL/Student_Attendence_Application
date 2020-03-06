@@ -20,9 +20,6 @@
       <if test="signId != null" >
         sign_id,
       </if>
-      <if test="status != null" >
-        status,
-      </if>
       <if test="ReleaseId != null" >
         release_id,
       </if>
@@ -46,9 +43,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="signId != null" >
         #{signId,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
       </if>
       <if test="ReleaseId != null" >
         #{ReleaseId,jdbcType=INTEGER},

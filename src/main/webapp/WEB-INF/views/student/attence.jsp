@@ -1,13 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wangxianlin
-  Date: 2019/11/29
-  Time: 9:44 下午
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<jsp:useBean id="now" class="java.util.Date" scope="page"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <title>考勤</title>
@@ -21,6 +17,7 @@
         var ctx = '${ctx}';
         var student = "${studentsession}";
         var studentId = "${studentsession.studentId}";
+        var courseId = "${release.courseId}";
     </script>
 </head>
 <body>
@@ -32,12 +29,28 @@
             width:100px;
             height: 100px;
         }
+        #success{
+            position: absolute;
+            right: 0px;
+        }
     </style>
 </header>
 <div class="mui-content">
     <input type="file" id="fileElem" accept="image/*" style="display: none">
     <input type="file" id="fileElem1" accept="image/*" style="display: none">
-
+    <div style="color: red;margin-top: 5px;">
+        <c:if test="${(release.startTime<now)&&(release.endTime>now)}">
+            <span class="mui-badge mui-badge-success" id="success" status ="1">进行中</span>
+        </c:if>
+        <c:if test="${release.endTime<now}">
+            <span class="mui-badge mui-badge-primary" id="success" status ="2">已过期</span>
+        </c:if>
+        <c:if test="${now<release.startTime}">
+            <span class="mui-badge mui-badge-danger" id="success" status ="0">未开始</span>
+        </c:if>
+        <h4  class="layui-timeline-title">开始时间：<span id="s"><fmt:formatDate value="${release.startTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></h4>
+        <h4  class="layui-timeline-title">结束时间：<span id="e"><fmt:formatDate value="${release.endTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></h4>
+    </div>
     <div class="top" style="margin-top: 10px;">
         <ul class="layui-timeline">
             <li class="layui-timeline-item" id="start-time">

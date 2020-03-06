@@ -3,6 +3,7 @@ package com.helo.demo.controller;
 
 import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Sign;
+import com.helo.demo.service.ReleaseService;
 import com.helo.demo.service.SignService;
 import com.helo.demo.service.StudentService;
 import com.helo.demo.utils.CommonUtil;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +46,9 @@ public class SignController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private ReleaseService releaseService;
+
     /**
     * @Description: 跳转到签到界面
     * @params: []
@@ -51,9 +56,10 @@ public class SignController {
     * @Date: 2020/3/5 10:12 AM
     */ 
     @ApiOperation("跳转到签到界面")
-    @GetMapping("toAttence")
-    public ModelAndView toAttenceView() {
-        return new ModelAndView("/student/attence");
+    @GetMapping("toAttence/{pid}")
+    public ModelAndView toAttenceView(@PathVariable("pid") int pid) {
+
+        return new ModelAndView("/student/attence").addObject("release",this.releaseService.getReleaseBypid(pid));
     }
     
     /**

@@ -1,9 +1,11 @@
 package com.helo.demo.service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.helo.demo.mapper.ReleaseDao;
 import com.helo.demo.model.Release;
 import com.helo.demo.vo.ReleaseCourseProfessionVo;
 import org.springframework.stereotype.Service;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -64,4 +66,18 @@ public class ReleaseService {
         return this.releaseDao.getReleaseByTid(tid);
     }
 
+    
+    /**
+    * @Description: 根据专业的ID查询最新的一条考勤
+    * @params: [pid]
+    * @return: com.helo.demo.model.Release
+    * @Author: wangxianlin
+    * @Date: 2020/3/6 10:51 AM
+    */ 
+    public Release getReleaseBypid(int pid){
+        EntityWrapper entityWrapper = new EntityWrapper();
+        entityWrapper.eq("profession_id",pid);
+        entityWrapper.orderBy("start_time",false);
+        return (Release)this.releaseDao.selectList(entityWrapper).get(0);
+    }
 }
