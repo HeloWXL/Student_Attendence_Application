@@ -19,6 +19,7 @@
     <script>
         var ctx = '${ctx}';
         var teacher = "${teacher}";
+        var teacherid ="${teacher.teacherId}";
     </script>
 </head>
 <body>
@@ -44,10 +45,10 @@
             <p>发布考勤</p>
         </a>
     </div>
-    <div id="mycourselist">
+    <div id="releaselist">
         <a href="">
             <img src="${ctx}/resources/images/attendenceList.png"/>
-            <p>考勤统计</p>
+            <p>考勤列表</p>
         </a>
     </div>
     <div id="leavelist">

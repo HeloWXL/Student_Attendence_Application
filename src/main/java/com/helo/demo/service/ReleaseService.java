@@ -2,6 +2,7 @@ package com.helo.demo.service;
 
 import com.helo.demo.mapper.ReleaseDao;
 import com.helo.demo.model.Release;
+import com.helo.demo.vo.ReleaseCourseProfessionVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,16 +30,6 @@ public class ReleaseService {
         return this.releaseDao.queryById(releaseId);
     }
 
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    public List<Release> queryAllByLimit(int offset, int limit) {
-        return this.releaseDao.queryAllByLimit(offset, limit);
-    }
 
     /**
      * 新增数据
@@ -61,14 +52,16 @@ public class ReleaseService {
         return this.queryById(release.getReleaseId());
     }
 
+
     /**
-     * 通过主键删除数据
-     *
-     * @param releaseId 主键
-     * @return 是否成功
-     */
-    public boolean deleteById(Integer releaseId) {
-        return this.releaseDao.deleteById(releaseId) > 0;
+    * @Description: 根据教师ID查询发布的考勤
+    * @params: [tid]
+    * @return: java.util.List<com.helo.demo.vo.ReleaseCourseProfessionVo>
+    * @Author: wangxianlin
+    * @Date: 2020/3/6 9:40 AM
+    */ 
+    public  List<ReleaseCourseProfessionVo> getReleaseByTid(int tid){
+        return this.releaseDao.getReleaseByTid(tid);
     }
 
 }

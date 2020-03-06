@@ -68,8 +68,6 @@ $(function () {
             teacherId: teacherId,
             startTime:   new Date(starttime),
             endTime:  new Date(endtime),
-            // startTime:starttime,
-            // endTime:endtime,
             professionId: profession,
             courseId: courseId
         };
@@ -183,7 +181,7 @@ $(function () {
         });
         Date.show(function (item) {
             //这里你可以用console 看看回调函数中的item的值
-            var endDate = item.y.text + '-' + item.m.text + '-'+item.h.text +" "+item.h.text+":"+item.i.text+":00";
+            var endDate = item.y.text + '-' + item.m.text + '-'+item.d.text +" "+item.h.text+":"+item.i.text+":00";
             $a.val(endDate);
         });
     }

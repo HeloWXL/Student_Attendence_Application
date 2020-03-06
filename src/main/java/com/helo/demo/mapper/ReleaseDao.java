@@ -2,9 +2,10 @@ package com.helo.demo.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Release;
-import org.apache.ibatis.annotations.Insert;
+import com.helo.demo.vo.ReleaseCourseProfessionVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -27,24 +28,6 @@ public interface ReleaseDao extends BaseMapper<Release> {
     Release queryById(Integer releaseId);
 
     /**
-     * 查询指定行数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<Release> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
-
-
-    /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param release 实例对象
-     * @return 对象列表
-     */
-    List<Release> queryAll(Release release);
-
-    /**
      * 修改数据
      *
      * @param release 实例对象
@@ -53,15 +36,13 @@ public interface ReleaseDao extends BaseMapper<Release> {
     int update(Release release);
 
     /**
-     * 通过主键删除数据
-     *
-     * @param releaseId 主键
-     * @return 影响行数
-     */
-    int deleteById(Integer releaseId);
-
-    @Insert("INSERT INTO appdemo.release   ( teacher_id,  start_time,  end_time,  profession_id,  course_id )  VALUES " +
-            "  ( #{teahcerId}, #{startTime},  #{endTime},  #{professionId},  #{courseId} )")
-    int insertRelease(int teahcerId,Date startTime,Date endTime,Integer professionId,Integer courseId);
-
+    * @Description: 根据教师ID查询已发布的考勤
+    * @params: [tid]
+    * @return: java.util.List<com.helo.demo.vo.ReleaseCourseProfessionVo>
+    * @Author: wangxianlin
+    * @Date: 2020/3/6 9:54 AM
+    */ 
+    @Select("select  r.start_time ,r.end_time ,p.profession_name,c.course_name from appdemo.release r,profession p ,course c where " +
+            "r.teacher_id = #{tid} AND r.profession_id =p.profession_id  and c.course_id = r.course_id order by r.start_time desc")
+    List<ReleaseCourseProfessionVo> getReleaseByTid(int tid);
 }

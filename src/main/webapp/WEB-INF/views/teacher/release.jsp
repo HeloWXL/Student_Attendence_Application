@@ -17,7 +17,11 @@
     </script>
 </head>
 <body>
-<div id="cotent">
+<header class="mui-bar mui-bar-nav mui-badge-primary">
+    <span class="mui-icon mui-icon-back" onclick="history.back()"></span>
+    <h1 class="mui-title">发布考勤</h1>
+</header>
+<div class="mui-content">
     <div class="location">
         <ul class="mui-table-view">
             <li class="mui-table-view-cell">
@@ -28,7 +32,7 @@
                 </div>
                 <div class="mui-input-row">
                     <label>专业：</label>
-                    <input type="text" class="mui-input-clear" placeholder="请选择专业" id="prefession" name="">
+                    <input type="text" class="mui-input-clear" placeholder="请选择专业" id="prefession">
                 </div>
                 <div class="mui-input-row">
                     <label>考勤课程：</label>

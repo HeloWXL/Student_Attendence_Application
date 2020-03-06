@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wangxianlin
-  Date: 2019/11/6
-  Time: 12:04 上午
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -28,7 +22,7 @@
     </header>
 
     <div class="mui-content">
-        <ul class="mui-table-view" id="commentDetail" >
+        <ul class="mui-table-view" id="commentDetail" style="margin-top: 0;">
 
         </ul>
         <div id="loading" style="display: none;">

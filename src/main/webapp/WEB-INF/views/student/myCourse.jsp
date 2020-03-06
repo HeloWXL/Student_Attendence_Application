@@ -32,13 +32,13 @@
         <c:forEach items="${course}" var="c">
             <li class="mui-table-view-cell">
                 <c:if test="${(c.courseList[0].starttime<now)&&(c.courseList[0].endtime>now)}">
-                    <span class="mui-badge mui-badge-success" id="success">进行中</span>
+                    <span class="mui-badge mui-badge-success" id="success">进行中...</span>
                 </c:if>
                 <c:if test="${c.courseList[0].endtime<now}">
                     <span class="mui-badge mui-badge-primary" id="success">已结课</span>
                 </c:if>
                 <c:if test="${now<c.courseList[0].starttime}">
-                    <span class="mui-badge mui-badge-danger" id="success">未开课</span>
+                    <span class="mui-badge mui-badge-danger" id="success">未开课!</span>
                 </c:if>
                 <h4>${c.courseList[0].courseName}</h4>
                 <p>

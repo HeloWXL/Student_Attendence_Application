@@ -62,4 +62,16 @@ public class ReleaseController {
         return new ModelAndView("/teacher/release");
     }
 
+    /**
+     * @Description: 考勤列表
+     * @params: []
+     * @return: org.springframework.web.servlet.ModelAndView
+     * @Author: wangxianlin
+     * @Date: 2020/3/6 9:08 AM
+     */
+    @GetMapping("toReleaseList/{tid}")
+    public ModelAndView toReleaseList(@PathVariable("tid") int tid) {
+        return new ModelAndView("/teacher/releaseList").addObject("release",this.releaseService.getReleaseByTid(tid));
+    }
+
 }

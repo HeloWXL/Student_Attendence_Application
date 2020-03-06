@@ -15,9 +15,11 @@ $(function () {
     mui("#leavelist").on('tap', 'img', function () {
         location.href = ctx + '/teacherApi/toLeaveList';
     });
-
     mui("#release").on('tap', 'img', function () {
         location.href = ctx + '/releaseApi/toRelease';
+    });
+    mui("#releaselist").on('tap', 'img', function () {
+        location.href = ctx + '/releaseApi/toReleaseList/'+teacherid;
     });
     //我的信息
     $("#myinfo").click(function () {
