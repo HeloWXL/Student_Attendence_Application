@@ -128,4 +128,15 @@ public class CourseService {
   public List<Course> getCourseNameByProsessionId(int prosessioonId){
     return courseMapper.getCourseNameByProsessionId(prosessioonId);
   }
+
+  /**
+  * @Description: 根据教师的ID查询课程
+  * @params: [tid]
+  * @return: java.util.List<com.helo.demo.model.Course>
+  * @Author: wangxianlin
+  * @Date: 2020/3/6 1:24 AM
+  */ 
+  public List<Course> getCourseByTid(int tid){
+    return courseMapper.selectList(new EntityWrapper<Course>().eq("teacher_id",tid));
+  }
 }

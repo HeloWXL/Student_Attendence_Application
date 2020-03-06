@@ -2,6 +2,7 @@ package com.helo.demo.controller;
 
 import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Course;
+import com.helo.demo.model.Profession;
 import com.helo.demo.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -91,6 +92,14 @@ public class CourseController {
   @ResponseBody
   public List<Course> getCourseNameByProsessionId(@RequestParam("pid") Integer pid){
     return courseService.getCourseNameByProsessionId(pid);
+  }
+
+
+  @ApiOperation(value = "加载课程")
+  @GetMapping("/loadCourseByTid")
+  @ResponseBody
+  public List<Course> loadCourse(@RequestParam("tid") int tid){
+    return this.courseService.getCourseByTid(tid);
   }
 
 }

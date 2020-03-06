@@ -11,14 +11,20 @@
     <result column="is_start_status" property="isStartStatus" jdbcType="INTEGER" />
     <result column="is_end_status" property="isEndStatus" jdbcType="INTEGER" />
     <result column="sign_out_location" property="signOutLocation" jdbcType="VARCHAR" />
-
+    <result column="release_id" property="ReleaseId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
-
   <insert id="insertSelective" parameterType="com.helo.demo.model.Sign" >
     insert into sign
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="signId != null" >
         sign_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="ReleaseId != null" >
+        release_id,
       </if>
       <if test="signLocation != null" >
         sign_location,
@@ -40,6 +46,12 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="signId != null" >
         #{signId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="ReleaseId != null" >
+        #{ReleaseId,jdbcType=INTEGER},
       </if>
       <if test="signLocation != null" >
         #{signLocation,jdbcType=VARCHAR},
@@ -63,6 +75,9 @@
     <set >
       <if test="signLocation != null" >
         sign_location = #{signLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="ReleaseId != null" >
+        #{ReleaseId,jdbcType=INTEGER},
       </if>
       <if test="startTime != null" >
         start_time = #{startTime,jdbcType=TIMESTAMP},

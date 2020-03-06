@@ -38,7 +38,7 @@ public class Course {
     @TableField("teacher_id")
     private Integer teacherId;
 
-    @TableField("crete_time")
+    @TableField("ceate_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date ceateTime;
 

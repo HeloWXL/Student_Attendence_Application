@@ -74,6 +74,7 @@ $(function() {
             mui.alert("课程安排不能为空");
             return;
         }
+
         var starttime = $('#startTime').val();
         if(starttime==''||starttime==null){
             mui.alert("开课时间不能为空");

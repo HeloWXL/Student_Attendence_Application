@@ -33,10 +33,18 @@ public class Sign {
     private Integer studentId;
 
     private Integer courseId;
-
+    /**
+     *  1表示已签到 0表示为签到
+     */
     private Integer isStartStatus;
-
+    /**
+     * 1表示已签退 0表示为未签退
+     */
     private Integer isEndStatus;
+    /**
+     * 发布ID
+    */ 
+    private Integer ReleaseId;
 
     @TableField(exist = false)
     private String studentName;

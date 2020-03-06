@@ -14,11 +14,11 @@ $(function () {
     //请假记录列表
     mui("#leavelist").on('tap', 'img', function () {
         location.href = ctx + '/teacherApi/toLeaveList';
-    })
+    });
 
-    mui("#mycourselist").on('tap', 'img', function () {
-        mui.alert("正在建设中.....")
-    })
+    mui("#release").on('tap', 'img', function () {
+        location.href = ctx + '/releaseApi/toRelease';
+    });
     //我的信息
     $("#myinfo").click(function () {
         location.href = ctx + '/teacherApi/toPerson';
