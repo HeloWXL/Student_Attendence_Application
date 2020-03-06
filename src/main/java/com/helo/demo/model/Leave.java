@@ -50,7 +50,4 @@ public class Leave {
 
     @TableField(exist = false)
     private Course course;
-
-    @TableField(exist = false)
-    private String courseName;
 }

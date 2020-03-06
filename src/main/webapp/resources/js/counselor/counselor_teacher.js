@@ -98,6 +98,12 @@ layui.use('table', function() {
                         '      </select>\n' +
                         '    </div>\n' +
                         '    </div>\n' +
+                    '            <div class="layui-form-item">\n' +
+                    '                <label class="layui-form-label" style="padding-left:-50px;">密码:</label>\n' +
+                    '                <div class="layui-input-block">\n' +
+                    '                    <input type="text" placeholder="请输入密码" name="password" id="password" class="layui-input">\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
                         '        </form>\n' +
                         '    </div>\n' +
                         '</div>\n',
@@ -129,20 +135,24 @@ layui.use('table', function() {
                             layer.msg("职称不能为空",{icon:5,time:1500});
                             return;
                         }
-
                         var professionId = $.trim($('#professionId').val());
                         if(professionId==null||professionId==''){
                             layer.msg("专业不能为空",{icon:5,time:1500});
                             return;
                         }
-
+                        var password = $.trim($('#password').val());
+                        if(password==null||password==''){
+                            layer.msg("密码不能为空",{icon:5,time:1500});
+                            return;
+                        }
                         // 提交
                         var teacher = {
                             teacherTno:teacherTno,
                             teacherName: teacherName,
                             teacherSex: teacherSex,
                             teacherJobTitle: teacherJobTitle,
-                            professionId:professionId
+                            professionId:professionId,
+                            teacherPassword:password
                         };
                         $.ajax({
                             url: ctx + '/teacherApi/insertTeacher',

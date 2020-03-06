@@ -13,7 +13,7 @@ $(function () {
     });
     //请假记录列表
     mui("#leavelist").on('tap', 'img', function () {
-        location.href = ctx + '/teacherApi/toLeaveList';
+        location.href = ctx + '/teacherApi/toLeaveList/'+teacherid;
     });
     mui("#release").on('tap', 'img', function () {
         location.href = ctx + '/releaseApi/toRelease';

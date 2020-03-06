@@ -59,9 +59,15 @@ public class LeaveController {
     @ApiOperation(value = "根据id查询请假记录")
     @GetMapping("/selectByPrimaryKey/{leaveId}")
     public String selectByPrimaryKey(@PathVariable("leaveId") Integer leaveId, Model model) {
-        Leave leave = leaveService.selectByPrimaryKey(leaveId);
-        model.addAttribute("leave", leave);
+        model.addAttribute("leave", leaveService.selectByPrimaryKey(leaveId));
         return "/student/leaveDetail";
+    }
+
+    @ApiOperation(value = "根据id查询请假记录1")
+    @GetMapping("/selectByPrimaryKey1")
+    @ResponseBody
+    public Object selectByPrimaryKey1(@RequestParam("leaveId") Integer leaveId) {
+        return leaveService.selectByPrimaryKey(leaveId);
     }
 
     @ApiOperation(value = "根据学号查询请假信息 -分页")

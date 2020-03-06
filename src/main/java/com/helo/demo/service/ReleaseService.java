@@ -78,6 +78,11 @@ public class ReleaseService {
         EntityWrapper entityWrapper = new EntityWrapper();
         entityWrapper.eq("profession_id",pid);
         entityWrapper.orderBy("start_time",false);
-        return (Release)this.releaseDao.selectList(entityWrapper).get(0);
+        if(this.releaseDao.selectList(entityWrapper).size()>0){
+            return (Release)this.releaseDao.selectList(entityWrapper).get(0);
+        }else{
+            return null;
+        }
+
     }
 }

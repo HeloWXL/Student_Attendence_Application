@@ -4,6 +4,7 @@ import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Profession;
 import com.helo.demo.model.Teacher;
 import com.helo.demo.service.CourseService;
+import com.helo.demo.service.LeaveService;
 import com.helo.demo.service.ProfessionService;
 import com.helo.demo.service.TeacherService;
 import com.helo.demo.utils.Md5Utils;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +40,8 @@ public class TeacherController {
   private TeacherService teacherService;
   @Resource
   private CourseService courseService;
+  @Resource
+  private LeaveService leaveService;
 
   @ApiOperation(value = "跳转到教师信息列表")
   @GetMapping("/toCounselorTeacherTable")
@@ -76,9 +80,9 @@ public class TeacherController {
   }
 
   @ApiOperation(value = "跳转到请假记录页面")
-  @GetMapping("/toLeaveList")
-  public String toLeaveList(){
-    return "/teacher/leaveList";
+  @GetMapping("/toLeaveList/{tId}")
+  public ModelAndView toLeaveList(@PathVariable("tId") Integer tId){
+    return new ModelAndView("/teacher/leaveList").addObject("leave",this.leaveService.getLeaveByTeacher(tId));
   }
 
   @ApiOperation(value = "根据ID查询课程的详细信息")
