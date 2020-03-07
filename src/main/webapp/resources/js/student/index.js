@@ -4,6 +4,7 @@ $(function() {
     location.href = ctx+'/studentApi/toLogin';
     return;
   }
+
 // 个人信息界面
   $('#myinfo').click(function() {
     location.href=ctx +'/studentApi/myInfo';

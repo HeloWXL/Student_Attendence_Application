@@ -74,9 +74,9 @@ public class TeacherController {
   }
 
   @ApiOperation(value = "跳转到课程列表页面")
-  @GetMapping("/toCourseList")
-  public String toCourseList(){
-    return "/teacher/courseList";
+  @GetMapping("/toCourseList/{tid}")
+  public ModelAndView toCourseList(@PathVariable("tid") Integer tid){
+    return new ModelAndView("/teacher/courseList").addObject("course",courseService.selectCourseByTno(tid));
   }
 
   @ApiOperation(value = "跳转到请假记录页面")

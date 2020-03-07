@@ -1,7 +1,9 @@
 package com.helo.demo.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.helo.demo.config.DataResult;
+import com.helo.demo.facecompare.CommonMethod;
 import com.helo.demo.model.Sign;
 import com.helo.demo.service.ReleaseService;
 import com.helo.demo.service.SignService;
@@ -112,28 +114,28 @@ public class SignController {
     @ApiOperation("学生签到-添加签到记录")
     @PostMapping("insertSign")
     public DataResult<Integer> insertSign(@RequestParam("signLocation") String signLocation,@RequestParam("studentId") int studentId,
-                                          @RequestParam("courseId") int courseId,@RequestParam("file") MultipartFile file) {
+                                          @RequestParam("releaseId") int releaseId,@RequestParam("courseId") int courseId, @RequestParam("status") int status,@RequestParam("file") MultipartFile file) {
         DataResult<Integer> results = new DataResult<>();
         //获取该学生的头像地址
         String picPath = studentService.getPicBySid(studentId);
         //将学生的头像抓成file文件
         File goalFile = CommonUtil.getFileByPath(picPath);
-
-       /*
-        String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
+        String str = CommonMethod.compareTo(goalFile,CommonUtil.MultipartFileToFile(file));
         JSONObject result = JSONObject.parseObject(str);
         String confidence =String.valueOf(result.get("confidence"));
         String s = confidence.substring(0,confidence.length()-1);
         Double id=Double.valueOf(s);
-        if(id>80.00){*/
+        if(id>80.00){
             Sign sign = new Sign();
             sign.setCourseId(courseId);
             sign.setSignLocation(signLocation);
             sign.setStudentId(studentId);
+            sign.setStatus(status);
+            sign.setReleaseId(releaseId);
             results.setBody(signService.insertSign(sign));
-       /* }else{
+       }else{
             results.setBody(0);
-        }*/
+        }
         return results;
     }
 
@@ -151,17 +153,16 @@ public class SignController {
         String picPath = studentService.getPicBySid(studentId);
         //将学生的头像抓成file文件
         File goalFile = CommonUtil.getFileByPath(picPath);
-        /*
-        String str = CommonMethod.compareTo(goldFile,CommonUtil.MultipartFileToFile(file));
+        String str = CommonMethod.compareTo(goalFile,CommonUtil.MultipartFileToFile(file));
         JSONObject result = JSONObject.parseObject(str);
         String confidence =String.valueOf(result.get("confidence"));
         String s = confidence.substring(0,confidence.length()-1);
         Double id=Double.valueOf(s);
-        if(id>80.00){*/
+        if(id>80.00){
         return signService.updateSignById(signOutLocation,studentId);
-        /*}else{
+        }else{
             return 0;
-        }*/
+        }
     }
 
     /**

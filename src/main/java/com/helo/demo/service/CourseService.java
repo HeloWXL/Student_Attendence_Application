@@ -81,17 +81,13 @@ public class CourseService {
 
   /**
    * 根据教师的ID查询 课程列表
-   * @param pageNo
-   * @param pageSize
    * @param
    * @return
    */
-  public Map<String, Object> selectCourseByTno(Integer pageNo, Integer pageSize,Integer tid){
+  public Map<String, Object> selectCourseByTno(Integer tid){
     Map<String,Object> data = new HashMap<>();
     EntityWrapper entityWrapper = new EntityWrapper();
     entityWrapper.eq("teacher_id",tid);
-    data.put("pageNo",(pageNo - 1) * pageSize);
-    data.put("pageSize",pageSize);
     data.put("teacherId",tid);
     List<Course> courses = courseMapper.selectCourseByTno(data);
     int count = courseMapper.selectCount(entityWrapper);

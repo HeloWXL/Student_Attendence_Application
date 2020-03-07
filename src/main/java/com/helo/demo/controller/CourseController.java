@@ -76,12 +76,8 @@ public class CourseController {
     @ApiOperation(value = "根据教师工号查询课程列表")
     @GetMapping("/selectCourseListByTno")
     @ResponseBody
-    public DataResult<Map<String, Object>> selectCourseListByTno(@RequestParam("pageNo") Integer pageNo,
-                                                                 @RequestParam("pageSize") Integer pageSize,
-                                                                 @RequestParam("tid") Integer tid) {
-        DataResult<Map<String, Object>> result = new DataResult<>();
-        result.setBody(courseService.selectCourseByTno(pageNo, pageSize, tid));
-        return result;
+    public Map<String, Object> selectCourseListByTno(@RequestParam("tid") Integer tid) {
+        return courseService.selectCourseByTno(tid);
     }
 
     @ApiOperation(value = "根据ID查询课程的详细信息")

@@ -1,12 +1,18 @@
 var signId = '';
+var status = 0 ;
 $(function () {
     if (student == '' || student == null) {
         location.href = ctx + '/studentApi/toLogin';
         return;
     }
+    if (path == 'default') {
+        mui.alert("请更换你的头像",function () {
+            location.href=ctx +'/studentApi/myInfo';
+        });
+        return;
+    }
     getStuNewSignInfo();
     var $starts =  $("#fileElem");
-
     if($("#success").attr("status")=="0"){
         mui.alert("考勤未开始",function () {
             location.href=ctx+'/studentApi/index';
@@ -14,15 +20,16 @@ $(function () {
         return ;
     }else if($("#success").attr("status")=="2"){
         mui.alert("考勤已结束,继续签到将会被记为迟到");
+        status = 1;
         $starts.change(function () {
             if($(this).val() != ""){
-                start_time()
+                start_time(status)
             }
         });
     }else{
         $starts.change(function () {
             if($(this).val() != ""){
-                start_time()
+                start_time(status)
             }
         });
     }
@@ -84,6 +91,8 @@ function start_time() {
     formData.append("signLocation",locations);
     formData.append("studentId",parseInt(studentId));
     formData.append("courseId",courseId);
+    formData.append("status",status);
+    formData.append("releaseId",$("#releaseId").val());
     $.ajax({
         url: ctx + '/signApi/insertSign',
         data: formData,

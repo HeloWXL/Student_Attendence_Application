@@ -9,7 +9,7 @@ $(function () {
     });
     //课程列表
     mui("#courselist").on('tap', 'img', function () {
-        location.href = ctx + '/teacherApi/toCourseList';
+        location.href = ctx + '/teacherApi/toCourseList/'+teacherid;
     });
     //请假记录列表
     mui("#leavelist").on('tap', 'img', function () {

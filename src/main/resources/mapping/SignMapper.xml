@@ -20,6 +20,9 @@
       <if test="signId != null" >
         sign_id,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
       <if test="ReleaseId != null" >
         release_id,
       </if>
@@ -36,13 +39,16 @@
       <if test="courseId != null" >
         course_id,
       </if>
+      <if test="signOutLocation != null" >
+        sign_out_location,
+      </if>
     </trim>
-    <if test="signOutLocation != null" >
-      sign_out_location,
-    </if>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="signId != null" >
         #{signId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="ReleaseId != null" >
         #{ReleaseId,jdbcType=INTEGER},

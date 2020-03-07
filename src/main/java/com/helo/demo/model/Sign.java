@@ -47,6 +47,9 @@ public class Sign {
     @TableField("release_id")
     private Integer ReleaseId;
 
+    @TableField("status")
+    private Integer status;
+
     @TableField(exist = false)
     private String studentName;
 

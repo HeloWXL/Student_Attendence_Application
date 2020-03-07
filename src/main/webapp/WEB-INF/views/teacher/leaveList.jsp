@@ -84,7 +84,8 @@
                 <a href="/helo/leaveApi/selectByPrimaryKey/${l.leaveId}">
                     <div class="mui-media-body">
                         <div>请假标题：${l.leaveTitle}</div>
-                            <div style="color:red">学号:${l.studentSno}</div>
+                        <div style="color:red">姓名:${l.studentName}</div>
+                        <div style="color:red">学号:${l.studentSno}</div>
                         <p style="float: right;font-size: 12px">开始时间： <fmt:formatDate value="${l.startTime}" pattern="yyyy-MM-dd" />
                             &nbsp;&nbsp;&nbsp;结束时间：<fmt:formatDate value="${l.endTime}" pattern="yyyy-MM-dd" /></p>
                         </div>

@@ -35,7 +35,6 @@
     select c.course_name,c.course_id ,t.teacher_name,p.profession_name,t.teacher_job_title,c.startTime,c.endTIme,c.classArrangement
     from course c , teacher t,profession p
     where c.teacher_id = t.teacher_id and p.profession_id = c.profession and t.teacher_id=#{teacherId,jdbcType=INTEGER}
-     limit #{pageNo} , #{pageSize}
   </select>
 <!--end-->
 
