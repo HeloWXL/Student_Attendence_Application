@@ -40,6 +40,15 @@ layui.use('table', function () {
                         }
                     }
                 }
+                , {
+                    field: 'isStartStatus', title: '状态', width: '8%',align:'center', templet: function (d) {
+                        if (d.status == 1) {
+                            return '<span style="color: red;">迟到</span>'
+                        }else{
+                            return '<span style="color: green;">正常</span>'
+                        }
+                    }
+                }
             ]]
             , skin: 'line,row' //表格风格
             , even: true

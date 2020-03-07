@@ -37,4 +37,6 @@ public class SignStudentVo {
     private Integer isEndStatus;
 
     private String studentName;
+
+    private int status;
 }

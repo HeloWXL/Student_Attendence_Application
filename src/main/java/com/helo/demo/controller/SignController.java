@@ -229,6 +229,7 @@ public class SignController {
             sign.addCell(new Label(4, 0, "签退时间", titleCellFormat));
             sign.addCell(new Label(5, 0, "是否签到", titleCellFormat));
             sign.addCell(new Label(6, 0, "是否签退", titleCellFormat));
+            sign.addCell(new Label(7, 0, "状态", titleCellFormat));
             WritableCellFormat contentCellFormat = setContentCellFormat();
             for (int i = 0; i < signList.size(); i++) {
                 sign.addCell(new Label(0, i + 1, signList.get(i).getStudentName(), contentCellFormat));
@@ -246,6 +247,12 @@ public class SignController {
                 }else{
                     sign.addCell(new Label(6, i + 1, "未签退", contentCellFormat));
                 }
+                if(signList.get(i).getStatus()==1){
+                    sign.addCell(new Label(7, i + 1, "迟到", contentCellFormat));
+                }else{
+                    sign.addCell(new Label(7, i + 1, "正常", contentCellFormat));
+                }
+
             }
             response.flushBuffer();
             workbook.write();
