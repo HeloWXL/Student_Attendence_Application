@@ -2,11 +2,14 @@ package com.helo.demo.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.helo.demo.mapper.LeaveMapper;
+import com.helo.demo.mapper.LeaveNoticeMapper;
 import com.helo.demo.model.Leave;
+import com.helo.demo.model.LeaveNotice;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,9 @@ public class LeaveService {
 
     @Resource
     private LeaveMapper leaveMapper;
+
+    @Resource
+    private LeaveNoticeMapper leaveNoticeMapper;
 
     /**
      * 添加一条请假记录
@@ -82,10 +88,8 @@ public class LeaveService {
         Map<String, Object> data = new HashMap<>();
         map.put("pageNo", (pageNo - 1) * pageSize);
         map.put("pageSize", pageSize);
-
         List<Leave> leaveList = leaveMapper.selectByPage(map);
         data.put("data", leaveList);
-
         int count = leaveMapper.selectCount(entityWrapper);
         data.put("count", count);
         data.put("msg", "");
@@ -104,6 +108,8 @@ public class LeaveService {
         Leave leave = new Leave();
         leave.setLeaveId(leaveId);
         leave.setIsRead(1);
+        Leave l = this.leaveMapper.selectByPrimaryKey(leaveId);
+        this.leaveNoticeMapper.insert(new LeaveNotice(leaveId,l.getStudent().getStudentId(),l.getCourse().getCourseName(),0,new Date()));
         return leaveMapper.updateById(leave);
     }
 
@@ -117,6 +123,8 @@ public class LeaveService {
         Leave leave = new Leave();
         leave.setLeaveId(leaveId);
         leave.setIsRead(2);
+        Leave l = this.leaveMapper.selectByPrimaryKey(leaveId);
+        this.leaveNoticeMapper.insert(new LeaveNotice(leaveId,l.getStudent().getStudentId(),l.getCourse().getCourseName(),0,new Date()));
         return leaveMapper.updateById(leave);
     }
 

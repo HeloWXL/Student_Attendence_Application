@@ -1,6 +1,5 @@
 package com.helo.demo.controller;
 
-import com.helo.demo.facecompare.FaceCompare;
 import com.helo.demo.model.API;
 import com.helo.demo.service.ApiService;
 import io.swagger.annotations.Api;

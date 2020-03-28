@@ -13,6 +13,10 @@ $(function() {
   $('#home').click(function() {
     location.href=ctx+'/studentApi/index';
   });
+  // 通知界面
+  $('#notice').click(function() {
+      location.href=ctx+'/studentApi/notice';
+  });
 // 请假页面
   $('#askForLeave').click(function() {
     location.href=ctx+'/leaveApi/toAskForLeave';

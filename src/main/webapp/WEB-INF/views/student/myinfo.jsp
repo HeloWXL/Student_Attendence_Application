@@ -94,9 +94,9 @@
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首页</span>
     </a>
-    <a class="mui-tab-item">
+    <a class="mui-tab-item" id="notice">
         <span class="mui-icon mui-icon-chatbubble"></span>
-        <span class="mui-tab-label">考勤统计</span>
+        <span class="mui-tab-label">通知</span>
     </a>
     <a class="mui-tab-item" id="myinfo">
         <span class="mui-icon mui-icon-person mui-active"></span>

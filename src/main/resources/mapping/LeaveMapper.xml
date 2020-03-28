@@ -26,6 +26,7 @@
   <result column="is_read" property="isRead" jdbcType="INTEGER" />
 
   <association property="student" javaType="com.helo.demo.model.Student">
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
     <result column="student_name" property="studentName" jdbcType="VARCHAR" />
     <result column="student_sno" property="studentSno" jdbcType="VARCHAR" />
   </association>
@@ -54,7 +55,7 @@
   </resultMap>
 
   <select id="selectByPrimaryKey" resultMap="StudentAndLeave" parameterType="java.lang.Integer" >
-    select s.student_name,s.student_sno,l.leave_title,l.leave_reason,l.start_time,l.end_time,c.course_name,l.is_read,l.file_url
+    select s.student_name,s.student_sno,l.leave_title,l.leave_reason,l.start_time,l.end_time,c.course_name,l.is_read,l.file_url,s.student_id
     from leaves l ,student s ,course c
     where l.student_sno = s.student_sno and c.course_id = l.course_id  and l.leave_id = #{leaveId}
   </select>

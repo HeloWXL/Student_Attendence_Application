@@ -129,12 +129,15 @@ function loadData(table) {
  */
 function view(id) {
     layer.open({
+        title:['请假详情','text-align:center'],
         type: 2,
         content: ctx+'/leaveApi/leaveDetail/'+id,
         area:['400px', '600px'],
         offset: 'auto',
         shade: 0.3,
-        anim: 1
+        anim: 1,
+        scrollbar: false,
+        skin:'layui-layer-molv'
 
     })
 }

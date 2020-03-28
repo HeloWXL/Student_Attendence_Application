@@ -20,7 +20,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +64,13 @@ public class StudentController {
   public ModelAndView myInfo(){
     return new ModelAndView("/student/myinfo");
   }
+
+  @ApiOperation(value = "跳转到学生通知界面")
+  @GetMapping("/notice")
+  public ModelAndView notice(){
+    return new ModelAndView("/student/notice");
+  }
+
 
   @ApiOperation(value = "跳转到学生个人信息界面")
   @GetMapping("/askForLeave")
@@ -231,4 +240,22 @@ public class StudentController {
     String dir = year + "/" + month + "/" + day + "/";
     return dir;
   }
+  @ApiOperation(value = "获取图片路径")
+  @GetMapping(value = "/getLocalImg")
+  public void getLocalImg(HttpServletRequest request, HttpServletResponse response, @RequestParam("path") String path){
+    try {
+      File file = new File(ConfigUtil.getValue("imageDir") + path);
+      FileInputStream fin = new FileInputStream(file);
+      byte[] data = new byte[(int) file.length()];
+      fin.read(data);
+      fin.close();
+      response.setContentType("image/*");
+      OutputStream out = response.getOutputStream();
+      out.write(data);
+      out.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
 }

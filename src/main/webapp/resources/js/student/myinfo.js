@@ -21,7 +21,7 @@ $(function() {
       if(data.body.studentPic=='default'){
           $('img[name="userPic"]').attr('src', ctx+'/resources/images/default.png');
       }else{
-          $('img[name="userPic"]').attr('src', ctx+'/uploadApi/getLocalImg?path='+data.body.studentPic);
+          $('img[name="userPic"]').attr('src', ctx+'/studentApi/getLocalImg?path='+data.body.studentPic);
       }
       $('input[name="username"]').val(data.body.studentName);
       $('input[name="sno"]').val(data.body.studentSno);
@@ -64,6 +64,10 @@ function uploadBySno() {
 // 返回个人信息页面
 $('#myinfo').click(function() {
     location.href = ctx+'/studentApi/myInfo';
+});
+// 通知界面
+$('#notice').click(function () {
+    location.href = ctx + '/studentApi/notice';
 });
 // 返回首页
 $('#home').click(function() {
