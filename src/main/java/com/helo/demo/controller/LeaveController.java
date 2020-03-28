@@ -1,15 +1,27 @@
 package com.helo.demo.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Leave;
 import com.helo.demo.service.LeaveService;
+import com.helo.demo.utils.CommonUtil;
+import com.helo.demo.utils.ConfigUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +53,13 @@ public class LeaveController {
         return "/student/leaveList";
     }
 
+    @ApiOperation(value = "请假详情")
+    @GetMapping("/leaveDetail/{id}")
+    public String toLeaveList(Model model,@PathVariable("id") Integer id) {
+        model.addAttribute("leave",leaveService.selectByPrimaryKey(id));
+        return "/counselor/leaveDetail";
+    }
+
     @ApiOperation(value = "跳转到辅导员管理请假列表页面")
     @GetMapping("/toCounselorLeaveTable")
     public String toCounselorLeaveList() {
@@ -50,10 +69,75 @@ public class LeaveController {
     @ApiOperation(value = "添加一条请假记录")
     @PostMapping("/insertSelective")
     @ResponseBody
-    public DataResult<Integer> insertSelective(@RequestBody Leave leave) {
+    public DataResult<Integer> insertSelective(@RequestParam("file") MultipartFile file,@RequestParam("coundelorId") Integer coundelorId,
+                                               @RequestParam("studentSno") String studentSno,
+                                               @RequestParam("leaveReason") String leaveReason,
+                                               @RequestParam("startTime") String startTime,
+                                               @RequestParam("endTime") String endTime,
+                                               @RequestParam("leaveTitle") String leaveTitle,@RequestParam("courseId") Integer courseId) {
         DataResult<Integer> result = new DataResult<>();
+        Leave leave = new Leave();
+        leave.setCoundelorId(coundelorId);
+        leave.setStudentSno(studentSno);
+        leave.setLeaveReason(leaveReason);
+        leave.setStartTime(CommonUtil.parse(startTime,"yyyy-MM-dd HH:mm"));
+        leave.setEndTime(CommonUtil.parse(endTime,"yyyy-MM-dd HH:mm"));
+        leave.setLeaveTitle(leaveTitle);
+        leave.setCourseId(courseId);
+
+        String fileName = file.getOriginalFilename();
+        Date date = new Date();
+        String picDir = ConfigUtil.getValue("imageDir");
+        String relativeDir = getRelativeDir(date);
+        File fileDir = new File(picDir + relativeDir);
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
+        }
+        //新的文件名
+        String newName = CommonUtil.format(date, "HHmmssSSS") +
+                Math.round(Math.random() * 8999 + 1000) +
+                fileName.substring(fileName.lastIndexOf("."));
+        //头像地址
+        String imgPath = relativeDir + newName;
+        leave.setFileUrl(imgPath);
+        try {
+            file.transferTo(new File(picDir + imgPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         result.setBody(leaveService.insertSelective(leave));
         return result;
+    }
+
+    @ApiOperation(value = "获取图片路径")
+    @GetMapping(value = "/getLocalImg")
+    public void getLocalImg(HttpServletRequest request, HttpServletResponse response, @RequestParam("path") String path){
+        try {
+            File file = new File(ConfigUtil.getValue("imageDir") + path);
+            FileInputStream fin = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            fin.read(data);
+            fin.close();
+            response.setContentType("image/*");
+            OutputStream out = response.getOutputStream();
+            out.write(data);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 根据日期得到年/月/日/的相对路径
+     * @param date
+     * @return
+     */
+    private String getRelativeDir(Date date) {
+        String year = CommonUtil.format(date, "yyyy");
+        String month = CommonUtil.format(date, "MM");
+        String day = CommonUtil.format(date, "dd");
+        String dir = year + "/" + month + "/" + day + "/";
+        return dir;
     }
 
     @ApiOperation(value = "根据id查询请假记录")
@@ -87,6 +171,7 @@ public class LeaveController {
                                             @RequestParam("limit") Integer pageSieze) {
         return leaveService.selectByPage(pageNo, pageSieze);
     }
+
 
 
     @ApiOperation(value = "同意请假")

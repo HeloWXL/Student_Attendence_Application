@@ -53,4 +53,7 @@ public class Leave {
 
     @TableField(exist = false)
     private String studentName;
+
+    @TableField("file_url")
+    private String fileUrl;
 }

@@ -84,6 +84,16 @@
                               style="width: 95%; margin-left: 8px;border: 1px solid #BBBBBB;"
                               >${leave.leaveReason}</textarea>
                 </div>
+
+                <c:if test="${!empty leave.fileUrl}">
+                    <li class="mui-table-view-cell">
+                        <div class="mui-input-row">
+                            <label>附件：</label>
+                            <img src="${ctx}/leaveApi/getLocalImg?path=${leave.fileUrl}" style="width: 150px;height: 150px;">
+                        </div>
+                    </li>
+                </c:if>
+
             </ul>
         </div>
 

@@ -84,14 +84,14 @@ function loadData(table) {
         , cols: [[ //表头
             {field: 'number', title: '序号', type: 'numbers'}
             , {
-                field: 'student', title: '学生姓名', width: '10%', templet: function (d) {
+                field: 'student', title: '学生姓名', width: '10%',align:'center', templet: function (d) {
                     return '<span>'+d.student.studentName+'</span>'
                 }
             }
-            , {field: 'leaveTitle', title: '请假标题', width: '10%'}
-            , {field: 'leaveReason', title: '请假缘由', width: '20%'}
-            , {field: 'startTime', title: '开始时间', width: '15%'}
-            , {field: 'endTime', title: '结束时间', width: '15%'}
+            , {field: 'leaveTitle', title: '请假标题', width: '10%',align:'center'}
+            , {field: 'leaveReason', title: '请假缘由', width: '20%',align:'center'}
+            , {field: 'startTime', title: '开始时间', width: '15%',align:'center'}
+            , {field: 'endTime', title: '结束时间', width: '15%',align:'center'}
             , {
                 field: 'isRead', title: '状态', width: '10%', templet: function (d) {
                     if (d.isRead == 1) {
@@ -105,12 +105,13 @@ function loadData(table) {
                 }
             }
             , {
-                title: '操作', width: '20%', templet: function (d) {
+                title: '操作', width: '20%',fixed:'right',align:'center', templet: function (d) {
                     if (d.isRead == 1||d.isRead==2) {
                         return '<button type="button" class="layui-btn layui-btn-normal" onclick="view(' + d.leaveId + ')">查看</button>';
                     }
                     return '<button type="button" class="layui-btn layui-btn-normal" onclick="notAgreeLeaves('+ d.leaveId + ')">不同意</button>' +
-                        '<button type="button" class="layui-btn layui-btn-normal" onclick="AgreeLeaves('+ d.leaveId + ')">同意</button>\n';
+                        '<button type="button" class="layui-btn layui-btn-normal" onclick="AgreeLeaves('+ d.leaveId + ')">同意</button>' +
+                        '<button type="button" class="layui-btn layui-btn-normal" onclick="view(\' + d.leaveId + \')">查看</button>\n';
                 }
             }
         ]]
@@ -127,7 +128,15 @@ function loadData(table) {
  * @param id
  */
 function view(id) {
-    alert("查看"+id)
+    layer.open({
+        type: 2,
+        content: ctx+'/leaveApi/leaveDetail/'+id,
+        area:['400px', '600px'],
+        offset: 'auto',
+        shade: 0.3,
+        anim: 1
+
+    })
 }
 
 

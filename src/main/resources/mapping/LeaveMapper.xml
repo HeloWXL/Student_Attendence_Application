@@ -11,10 +11,12 @@
     <result column="coundelor_id" property="coundelorId" jdbcType="INTEGER" />
     <result column="is_read" property="isRead" jdbcType="INTEGER" />
     <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
   </resultMap>
 
   <resultMap id="StudentAndLeave" type="com.helo.demo.model.Leave" >
   <id column="leave_id" property="leaveId" jdbcType="INTEGER" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
   <result column="student_sno" property="studentSno" jdbcType="VARCHAR" />
   <result column="leave_title" property="leaveTitle" jdbcType="VARCHAR" />
   <result column="leave_reason" property="leaveReason" jdbcType="VARCHAR" />
@@ -52,7 +54,7 @@
   </resultMap>
 
   <select id="selectByPrimaryKey" resultMap="StudentAndLeave" parameterType="java.lang.Integer" >
-    select s.student_name,s.student_sno,l.leave_title,l.leave_reason,l.start_time,l.end_time,c.course_name,l.is_read
+    select s.student_name,s.student_sno,l.leave_title,l.leave_reason,l.start_time,l.end_time,c.course_name,l.is_read,l.file_url
     from leaves l ,student s ,course c
     where l.student_sno = s.student_sno and c.course_id = l.course_id  and l.leave_id = #{leaveId}
   </select>
@@ -111,6 +113,9 @@
       <if test="isRead != null" >
         is_read,
       </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="leaveId != null" >
@@ -139,6 +144,9 @@
       </if>
       <if test="isRead != null" >
         #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

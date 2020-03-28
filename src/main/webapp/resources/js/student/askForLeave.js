@@ -19,6 +19,10 @@ $(function () {
 
     // 提交请假单
     $('#submit').click(function () {
+        var formData = new FormData();
+        var file = $("#file")[0].files[0];
+        formData.append("file",file);
+
         $('#studentsno').removeAttr("disabled");
         var studentSno = $.trim($("#studentsno").val());
         if(studentSno==null||studentSno==''){
@@ -52,22 +56,22 @@ $(function () {
         }
 
         // 将数据封装成对象
-        var leave = {
-            studentSno: studentSno,
-            leaveReason: leaveReason,
-            startTime: start,
-            endTime: end,
-            leaveTitle: leaveTitle,
-            coundelorId: 1,
-            courseId:parseInt(course)
-        };
+        formData.append("studentSno",studentSno);
+        formData.append("leaveReason",leaveReason);
+        formData.append("startTime",start);
+        formData.append("endTime",end);
+        formData.append("leaveTitle",leaveTitle);
+        formData.append("coundelorId",1);
+        formData.append("courseId",parseInt(course));
+
         // 向后台提交数据insertSelective
         $.ajax({
             url: ctx + '/leaveApi/insertSelective',
-            data: JSON.stringify(leave),
+            data: formData,
             dataType: 'json',
             type: 'post',
-            contentType: 'application/json; charset=utf-8',
+            processData:false,  //tell jQuery not to process the data
+            contentType: false,  //tell jQuery not to set contentType
             success: function (data) {
                 if (data.body == 1) {
                     mui.alert('提交成功', function () {
