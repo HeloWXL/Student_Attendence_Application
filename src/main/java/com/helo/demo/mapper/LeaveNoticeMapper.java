@@ -1,7 +1,10 @@
 package com.helo.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.LeaveNotice;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -11,7 +14,8 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-28 17:15:38
  */
-public interface LeaveNoticeMapper {
+@Mapper
+public interface LeaveNoticeMapper extends BaseMapper<LeaveNotice> {
 
     /**
      * 通过ID查询单条数据
@@ -40,14 +44,6 @@ public interface LeaveNoticeMapper {
     List<LeaveNotice> queryAll(LeaveNotice leaveNotice);
 
     /**
-     * 新增数据
-     *
-     * @param leaveNotice 实例对象
-     * @return 影响行数
-     */
-    int insert(LeaveNotice leaveNotice);
-
-    /**
      * 修改数据
      *
      * @param leaveNotice 实例对象
@@ -63,4 +59,17 @@ public interface LeaveNoticeMapper {
      */
     int deleteById(Integer id);
 
+    
+    /**
+    * @Description: 根据学生的ID查询请假未读的通知
+    * @params: [stuId]
+    * @return: int
+    * @Author: wangxianlin
+    * @Date: 2020/3/28 6:31 PM
+    */ 
+    @Select("select count(1) from leave_notice where state = 0 and student_id = #{stuId}")
+    int getNoRead(int stuId);
+
+    @Select("select * from leave_notice where student_id = #{stuId} order By state ")
+    List<LeaveNotice> getLeaveNoticeByStuId(int stuId);
 }

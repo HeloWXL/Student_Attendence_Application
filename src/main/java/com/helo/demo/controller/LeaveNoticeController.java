@@ -3,6 +3,7 @@ package com.helo.demo.controller;
 import com.helo.demo.model.LeaveNotice;
 import com.helo.demo.service.LeaveNoticeService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
@@ -30,6 +31,12 @@ public class LeaveNoticeController {
     @GetMapping("selectOne")
     public LeaveNotice selectOne(Integer id) {
         return this.leaveNoticeService.queryById(id);
+    }
+
+
+    @GetMapping("/noticeList/{stuId}")
+    public ModelAndView toNoticeList(@PathVariable("stuId") Integer stuId){
+        return new ModelAndView("/student/noticeList").addObject("noticeList",leaveNoticeService.getLeaveNoticeByStuId(stuId));
     }
 
 }

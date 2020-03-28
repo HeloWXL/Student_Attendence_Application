@@ -20,7 +20,7 @@
     <script>
         var ctx = '${ctx }';
         var student = "${studentsession}";
-        var pid ="${studentsession.professionId}";
+        var pid = "${studentsession.professionId}";
     </script>
 </head>
 <body>
@@ -72,23 +72,22 @@
                         <input type="text" class="mui-input-clear" placeholder="请选择结束时间" id="end">
                     </div>
                 </li>
-
-                <div class="mui-input-row">
-                    <label>事由：</label>
-                    <textarea id="leaveReason" rows="8" placeholder="请写明请假缘由"
-                              style="width: 95%; margin-left: 8px;border: 1px solid #BBBBBB;"></textarea>
-                </div>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row">
-                        <label>附件：</label>
-                        <input type="file" class="mui-input-clear" placeholder="请选择附件" id="file">
-                    </div>
-                </li>
-                <div class="btn">
-                    <button type="button" class="mui-btn mui-btn-primary" id="submit">提交</button>
-                    <button type="button" class="mui-btn" id="reset">重置</button>
-                </div>
             </ul>
+            <div class="mui-input-row">
+                <label>事由：</label>
+                <textarea id="leaveReason" rows="8" placeholder="请写明请假缘由"
+                          style="width: 95%; margin-left: 8px;border: 1px solid #BBBBBB;"></textarea>
+            </div>
+
+            <div class="mui-input-row" style="margin-top: 20px">
+                <label>附件：</label>
+                <input type="file" class="mui-input-clear" placeholder="请选择附件" id="file">
+            </div>
+
+            <div class="btn">
+                <button type="button" class="mui-btn mui-btn-primary" id="submit">提交</button>
+                <button type="button" class="mui-btn" id="reset">重置</button>
+            </div>
         </div>
 
     </div>

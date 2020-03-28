@@ -3,6 +3,7 @@ package com.helo.demo.controller;
 import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Profession;
 import com.helo.demo.model.Student;
+import com.helo.demo.service.LeaveNoticeService;
 import com.helo.demo.service.ProfessionService;
 import com.helo.demo.service.StudentService;
 import com.helo.demo.utils.CommonUtil;
@@ -12,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,6 +47,8 @@ public class StudentController {
   private StudentService studentService;
   @Resource
   private ProfessionService professionService;
+  @Resource
+  private LeaveNoticeService leaveNoticeService;
 
 
   @ApiOperation(value = "跳转到学生登录界面")
@@ -67,10 +71,11 @@ public class StudentController {
 
   @ApiOperation(value = "跳转到学生通知界面")
   @GetMapping("/notice")
-  public ModelAndView notice(){
-    return new ModelAndView("/student/notice");
+  public ModelAndView notice(HttpServletRequest request, HttpServletResponse response){
+    Student student = (Student) request.getSession().getAttribute("studentsession");
+    return new ModelAndView("/student/notice").addObject("leaveNotice",leaveNoticeService.getNoRead(student.getStudentId()))
+            .addObject("attenceNotice",1).addObject("courseNotice",1);
   }
-
 
   @ApiOperation(value = "跳转到学生个人信息界面")
   @GetMapping("/askForLeave")

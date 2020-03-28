@@ -49,7 +49,7 @@
                     <div class="mui-input-row">
                         <label>课程：</label>
 
-                        <input type="text" class="mui-input-clear"  value="${leave.course.courseName}">
+                        <input type="text" class="mui-input-clear" value="${leave.course.courseName}">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
@@ -69,32 +69,32 @@
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row">
                         <label>开始时间：</label>
-                        <input type="text" class="mui-input-clear" value="<fmt:formatDate value="${leave.startTime}" pattern="yyyy-MM-dd" />">
+                        <input type="text" class="mui-input-clear"
+                               value="<fmt:formatDate value="${leave.startTime}" pattern="yyyy-MM-dd" />">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row">
                         <label>结束时间：</label>
-                        <input type="text" class="mui-input-clear"  value="<fmt:formatDate value="${leave.endTime}" pattern="yyyy-MM-dd" />">
+                        <input type="text" class="mui-input-clear"
+                               value="<fmt:formatDate value="${leave.endTime}" pattern="yyyy-MM-dd" />">
                     </div>
                 </li>
-                <div class="mui-input-row">
-                    <label>事由：</label>
-                    <textarea id="leaveReason" rows="8"
-                              style="width: 95%; margin-left: 8px;border: 1px solid #BBBBBB;"
-                              >${leave.leaveReason}</textarea>
-                </div>
-
-                <c:if test="${!empty leave.fileUrl}">
-                    <li class="mui-table-view-cell">
-                        <div class="mui-input-row">
-                            <label>附件：</label>
-                            <img src="${ctx}/leaveApi/getLocalImg?path=${leave.fileUrl}" style="width: 150px;height: 150px;">
-                        </div>
-                    </li>
-                </c:if>
-
             </ul>
+            <div class="mui-input-row">
+                <label>事由：</label>
+                <textarea id="leaveReason" rows="8"
+                          style="width: 95%; margin-left: 8px;border: 1px solid #BBBBBB;"
+                >${leave.leaveReason}</textarea>
+            </div>
+
+            <c:if test="${!empty leave.fileUrl}">
+                <div class="mui-input-row" style="margin-top: 20px">
+                    <label>附件：</label>
+                    <img src="${ctx}/leaveApi/getLocalImg?path=${leave.fileUrl}"
+                         style="width: 150px;height: 150px;">
+                </div>
+            </c:if>
         </div>
 
     </div>

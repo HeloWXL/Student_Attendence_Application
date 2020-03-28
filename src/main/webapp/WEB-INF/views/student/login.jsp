@@ -53,38 +53,6 @@
             <a href="javascript:;">联系管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="javascript:;">忘记密码</a>
         </div>
-
-        <div class="aui-account-footer">
-            <div class="aui-account-footer-title">
-                <h2>其它登录方式</h2>
-            </div>
-            <div class="aui-palace">
-                <a href="javascript:;" class="aui-palace-grid">
-                    <div class="aui-palace-grid-icon">
-                        <img src="${ctx}/resources/images/wx.png" alt="">
-                    </div>
-                    <div class="aui-palace-grid-text">
-                        <h2>微信</h2>
-                    </div>
-                </a>
-                <a href="javascript:;" class="aui-palace-grid">
-                    <div class="aui-palace-grid-icon">
-                        <img src="${ctx}/resources/images/wb.png" alt="">
-                    </div>
-                    <div class="aui-palace-grid-text">
-                        <h2>微博</h2>
-                    </div>
-                </a>
-                <a href="javascript:;" class="aui-palace-grid">
-                    <div class="aui-palace-grid-icon">
-                        <img src="${ctx}/resources/images/qq.png" alt="">
-                    </div>
-                    <div class="aui-palace-grid-text">
-                        <h2>QQ</h2>
-                    </div>
-                </a>
-            </div>
-        </div>
     </section>
 </section>
 </body>

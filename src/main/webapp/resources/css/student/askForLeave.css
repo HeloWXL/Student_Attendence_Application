@@ -8,9 +8,6 @@ body{
   width: 100%;
   height: 100%;
 }
-.mui-table-view {
-  height: 100%;
-}
 input{
   font-size: 12px;
 }

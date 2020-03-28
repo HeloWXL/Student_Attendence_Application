@@ -54,12 +54,6 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into appdemo.leave_notice(leave_id, student_id, course_name, state, ceate_time)
-        values (#{leaveId}, #{studentId}, #{courseName}, #{state}, #{ceateTime})
-    </insert>
-
     <!--通过主键修改数据-->
     <update id="update">
         update appdemo.leave_notice

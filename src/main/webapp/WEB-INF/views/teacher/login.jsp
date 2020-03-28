@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wangxianlin
-  Date: 2019/11/5
-  Time: 11:37 下午
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -20,15 +14,10 @@
     </script>
 </head>
 <body>
-<header class="mui-bar mui-bar-nav mui-badge-primary">
-    <h1 class="mui-title">教师登录</h1>
-</header>
-
-<div class="mui-content">
-    <div class="center">
-        <img src="${ctx}/resources/images/default.png" id="icon"/>
-    </div>
-
+<div style="text-align: center">
+    <h3 style="color: #dddddd">教师登录</h3>
+</div>
+<div class="mui-content" style="margin-top: 50%;background-color: transparent">
     <form id='login-form' class="mui-input-group">
         <div class="mui-input-row">
             <label>工号：</label>
@@ -39,12 +28,10 @@
             <input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
         </div>
     </form>
-
     <div class="mui-content-padded">
         <button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
     </div>
     <div class="mui-content-padded oauth-area">
-
     </div>
 </div>
 </body>

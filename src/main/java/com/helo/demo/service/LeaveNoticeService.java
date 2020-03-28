@@ -73,4 +73,26 @@ public class LeaveNoticeService {
     public boolean deleteById(Integer id) {
         return this.leaveNoticeDao.deleteById(id) > 0;
     }
+
+    /**
+    * @Description: 根据学生的ID查询请假未读的通知
+    * @params: [stuId]
+    * @return: int
+    * @Author: wangxianlin
+    * @Date: 2020/3/28 6:31 PM
+    */ 
+    public int getNoRead(int stuId){
+        return this.leaveNoticeDao.getNoRead(stuId);
+    }
+
+    /**
+    * @Description: 根据学生ID查询请假通知
+    * @params: [stuId]
+    * @return: java.util.List<com.helo.demo.model.LeaveNotice>
+    * @Author: wangxianlin
+    * @Date: 2020/3/28 6:58 PM
+    */ 
+    public List<LeaveNotice> getLeaveNoticeByStuId(int stuId){
+        return this.leaveNoticeDao.getLeaveNoticeByStuId(stuId);
+    }
 }
