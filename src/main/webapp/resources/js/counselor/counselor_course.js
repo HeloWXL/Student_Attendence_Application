@@ -1,17 +1,52 @@
-layui.use('table', function () {
+layui.use(['table','upload'], function () {
     var table = layui.table;
+    var upload = layui.upload;
     // 加载表格数据
     loadData();
     // 查询
     $('#query').click(function () {
     });
 
+    table.on('toolbar(coursefilter)', function (obj) {
+        if(obj.event=="import"){
+            layer.open({
+                type: 1,
+                title: ['课程批量导入'],
+                skin: 'layui-layer-molv',
+                area: '350px',
+                offset: 'auto',
+                content: '<div class="layui-row"  style="margin-top:10px;">' +
+                '    <div class="layui-col-md12" style="text-align: center">' +
+                '<div class="layui-upload" style="margin-bottom: 10px;">\n' +
+                '  <button type="button" class="layui-btn layui-btn-normal" id="uploadSelect">选择文件</button>\n' +
+                '  <button type="button" class="layui-btn" id="upload">开始上传</button>\n' +
+                '</div>'+
+                '    </div>\n' +
+                '</div>\n'
+                , success: function(layero) {
+                    var upload  = layui.upload;
+                    //选完文件后不自动上传
+                    upload.render({
+                        elem: '#uploadSelect'
+                        ,url: ctx+'/courseApi/importCourse'
+                        ,auto: false
+                        ,bindAction: '#upload'
+                        ,done: function(res){
+                            layer.msg(res.msg)
+                            layer.closeAll()
+                        }
+                        ,accept: 'file'
+                    });
+                }
+            });
+        }
+    });
     //加载列表数据
     function loadData() {
         table.render({
             id: 'courseTable',
             elem: '#demo'
-            // , toolbar: '#toolbars'
+            , toolbar: '#toolbars'
             , method: 'get'
             , defaultToolbar: []
             , url: ctx + '/courseApi/selectCourseByPage' //数据接口

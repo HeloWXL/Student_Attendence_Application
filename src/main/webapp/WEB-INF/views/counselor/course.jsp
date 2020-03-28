@@ -51,7 +51,16 @@
     </div>
 </div>
 <!-- 表格标签工具栏 -->
-
+<!-- 表格标签工具栏 -->
+<script type="text/html" id="toolbars">
+    <div class="layui-btn-container">
+        <div class="layui-btn-group">
+            <button type="button" lay-event="import" class="layui-btn layui-btn-normal" id="import">
+                <i class="layui-icon">&#xe654;</i>批量导入
+            </button>
+        </div>
+    </div>
+</script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/counselor/counselor_course.js" type="application/javascript"></script>

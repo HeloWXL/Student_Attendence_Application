@@ -19,11 +19,19 @@
       var ctx = '${ctx}';
       var teacher = "${teacher}";
     </script>
+    <style>
+        .mui-input-row{
+            border-bottom: #dddddd solid 1px;
+        }
+        li div{
+            float: left;
+        }
+    </style>
 </head>
 <body>
 <header class="mui-bar mui-bar-nav mui-badge-primary">
     <span class="mui-icon mui-icon-back" onclick="javascript:history.back(-1);"></span>
-    <h1 class="mui-title">课程详情</h1>
+    <h1 class="mui-title" style="color: #ffffff">课程详情</h1>
 </header>
 <div class="mui-content">
     <input type="hidden" value="${course.courseId}" id="courseId">

@@ -27,7 +27,7 @@
     <ul class="mui-table-view" id="commentDetail" style="margin-top: 0;">
         <c:forEach items="${course.list}" var="c">
             <a href="${ctx}/teacherApi/selectCourseDetailByCid/${c.courseId}">
-                <li class="mui-table-view-cell">
+                <li class="mui-table-view-cell" style="border-bottom: #dddddd solid 1px">
                     <c:if test="${(c.starttime<now)&&(c.endtime>now)}">
                         <span class="mui-badge mui-badge-success" id="success">进行中...</span>
                     </c:if>

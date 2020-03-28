@@ -39,4 +39,9 @@ public class LeaveNoticeController {
         return new ModelAndView("/student/noticeList").addObject("noticeList",leaveNoticeService.getLeaveNoticeByStuId(stuId));
     }
 
+    @GetMapping("/updateNoticeById")
+    public int updateNoticeById(int id){
+        return this.leaveNoticeService.updateNoticeByid(id);
+    }
+
 }

@@ -39,4 +39,11 @@ public class Teacher {
     @TableField(exist = false)
     private Profession profession;
 
+    public Teacher(String teacherName, Integer professionId) {
+        this.teacherName = teacherName;
+        this.professionId = professionId;
+    }
+
+    public Teacher() {
+    }
 }

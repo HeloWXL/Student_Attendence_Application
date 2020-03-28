@@ -3,6 +3,7 @@ package com.helo.demo.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.helo.demo.model.Profession;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 专业Mapper
@@ -39,4 +40,10 @@ public interface ProfessionMapper extends BaseMapper<Profession> {
      */
     int updateByPrimaryKeySelective(Profession record);
 
+
+    /**
+     *自定义SQL
+     */
+    @Select("select profession_id from profession where profession_name = #{name}")
+    int getProfessionByName(String name);
 }

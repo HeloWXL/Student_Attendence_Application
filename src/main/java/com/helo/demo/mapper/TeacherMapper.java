@@ -61,6 +61,18 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
     List<TeacherVo> selectByPage(@Param("page") int page , @Param("limit") int limit);
 
 
+    /**
+     *自定义SQL
+     */
+
+    /**
+    * @Description: 根据教师的名字查询
+    * @params: [name]
+    * @return: int
+    * @Date: 2020/3/28 10:53 PM
+    */ 
+    @Select("select teacher_id from teacher where teacher_name = #{name}")
+    int getTeacherIdByName(String name);
 
 
 }

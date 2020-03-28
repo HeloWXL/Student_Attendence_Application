@@ -28,11 +28,10 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 body {
-	background: #0296bc;
+    background-color: #F5B6B6;
     background-position: center;
     text-align: center;
      font-family: 'PT Serif', serif;
-	height: 100vh;
 }
 /*--header--*/
 .header-w3l {
@@ -82,7 +81,7 @@ body {
 }
 .right-w3l input[type="submit"] {
     color: #fff;
-    background:#09a5cd;
+    background:#F5B6B6;
     border: none;
     padding: 12px 45px;
     outline: none;

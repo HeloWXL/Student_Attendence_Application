@@ -39,11 +39,11 @@
 
 </div>
 <nav class="mui-bar mui-bar-tab">
-    <a class="mui-tab-item mui-active" id="home">
+    <a class="mui-tab-item " id="home">
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首页</span>
     </a>
-    <a class="mui-tab-item" id="notice">
+    <a class="mui-tab-item mui-active" id="notice">
         <span class="mui-icon mui-icon-chatbubble"></span>
         <span class="mui-tab-label">通知</span>
     </a>
@@ -58,8 +58,8 @@
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script>
     $(function () {
-        if (student == '' || student == null) {
-            location.href = ctx + '/studentApi/toLogin';
+        if(student==''||student==null) {
+            location.href = ctx+'/studentApi/toLogin';
             return;
         }
         // 个人信息界面

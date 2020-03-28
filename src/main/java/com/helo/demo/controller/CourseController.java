@@ -4,6 +4,7 @@ import com.helo.demo.config.DataResult;
 import com.helo.demo.model.Course;
 import com.helo.demo.model.Profession;
 import com.helo.demo.service.CourseService;
+import com.helo.demo.utils.ExcelUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -11,8 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,5 +106,46 @@ public class CourseController {
     public List<Course> loadCourse(@RequestParam("tid") int tid) {
         return this.courseService.getCourseByTid(tid);
     }
+
+
+    @PostMapping("/importCourse")
+    @ResponseBody
+    public Map<String,Object>  importCourse(@RequestParam("file") MultipartFile file) {
+        Map<String,Object> map = new HashMap<>();
+        String fileName = file.getOriginalFilename();
+        String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
+        List<List<String>> listContent = new ArrayList<>();
+        String message = "导入成功";
+        try {
+            if (file != null) {
+                //文件类型判断
+                if (!ExcelUtil.isEXCEL(file)) {
+                    message="文件为空";
+                    map.put("msg",message);
+                    map.put("data",fileName);
+                    return map;
+                }
+                listContent = ExcelUtil.readExcelContents(file, pattern);
+                //文件内容判断
+                if (listContent.isEmpty()) {
+                    message="表格内容为空";
+                    map.put("msg",message);
+                    map.put("data",fileName);
+                    return map;
+                }
+                courseService.importCourse(listContent);
+            } else {
+                message="未选择文件";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        map.put("code",0);
+        map.put("msg",message);
+        map.put("data",fileName);
+        return map;
+    }
+
 
 }

@@ -20,7 +20,6 @@
     <link href="${ctx}/resources/css/counselor/style.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- //Custom Theme files -->
     <!-- Style-CSS -->
-    <link rel="stylesheet" href="${ctx}/resources/css/counselor/css/font-awesome.css">
     <!-- web font -->
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!--web font-->
@@ -31,7 +30,7 @@
 <body>
 <!--//header-->
 <div class="main-content-agile">
-    <div class="sub-main-w3">
+    <div class="sub-main-w3" style="border-radius: 8%">
         <h2>学生智能考勤后台管理系统</h2>
         <form>
             <div class="pom-agile">
@@ -52,7 +51,7 @@
                 <div class="clear"></div>
             </div>
             <div class="right-w3l">
-                <input type="submit" value="Login" id="login">
+                <input type="submit" value="登录" id="login">
             </div>
         </form>
     </div>

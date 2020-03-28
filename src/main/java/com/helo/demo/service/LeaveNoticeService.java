@@ -30,18 +30,6 @@ public class LeaveNoticeService {
     }
 
     /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-
-    public List<LeaveNotice> queryAllByLimit(int offset, int limit) {
-        return this.leaveNoticeDao.queryAllByLimit(offset, limit);
-    }
-
-    /**
      * 新增数据
      *
      * @param leaveNotice 实例对象
@@ -94,5 +82,17 @@ public class LeaveNoticeService {
     */ 
     public List<LeaveNotice> getLeaveNoticeByStuId(int stuId){
         return this.leaveNoticeDao.getLeaveNoticeByStuId(stuId);
+    }
+
+    /**
+    * @Description: 已读
+    * @params: [id]
+    * @return: int
+    * @Author: wangxianlin
+    * @Date: 2020/3/28 9:30 PM
+    */
+    public  int updateNoticeByid(int id){
+        return this.leaveNoticeDao.updateNoticeByid(id);
+
     }
 }

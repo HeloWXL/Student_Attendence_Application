@@ -30,13 +30,18 @@ $(function() {
               for(var i = 0 ;i<data.body.length;i++){
                   var $node = $('<li class="mui-table-view-cell">\n'+
                       '      <a >\n' +
-                      '        <h4>'+data.body[i].studentName+'</h4>\n' +
+                      ' <div style="border-radius: 50%;width: 100px" >' +
+                      '         <img src='+ctx+'/studentApi/getLocalImg?path='+data.body[i].studentPic+' width="100px" height="100px"/>' +
+                      ' </div>\n'+
+                      '        <div>' +
+                      '         <h4>'+data.body[i].studentName+'</h4>\n' +
                       '        <p>\n' +
                       '          学号：<span>'+data.body[i].studentSno+'</span>\n' +
                       '        </p>\n' +
                       '        <p>\n' +
                       '          性别：<span>'+data.body[i].studentSex+'</span>\n' +
-                      '        </p>\n' +
+                      '        </p>' +
+                      '        </div> \n' +
                       '      </a>\n' +
                       '    </li>');
                   $("#studengList").append($node);

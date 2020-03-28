@@ -28,4 +28,13 @@ public class Profession {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
+
+    public Profession(String professionName, String apartment, String school) {
+        this.professionName = professionName;
+        this.apartment = apartment;
+        this.school = school;
+    }
+
+    public Profession() {
+    }
 }
