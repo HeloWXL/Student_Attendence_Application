@@ -57,6 +57,12 @@
             <p>请假统计</p>
         </a>
     </div>
+    <div id="quiz">
+        <a href="">
+            <img src="${ctx}/resources/images/quiz.png"/>
+            <p>提问</p>
+        </a>
+    </div>
 </div>
 <!-- 底部选项卡 -->
 <nav class="mui-bar mui-bar-tab">

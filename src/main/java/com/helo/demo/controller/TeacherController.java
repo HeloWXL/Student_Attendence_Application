@@ -67,6 +67,12 @@ public class TeacherController {
     return "/teacher/person";
   }
 
+  @ApiOperation(value = "提问页面")
+  @GetMapping("/toQuiz")
+  public String toQuiz(){
+    return "/teacher/quiz";
+  }
+
   @ApiOperation(value = "跳转到教师添加课程页面")
   @GetMapping("/toCourse")
   public String toCourse(){

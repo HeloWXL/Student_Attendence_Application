@@ -21,6 +21,9 @@ $(function () {
     mui("#releaselist").on('tap', 'img', function () {
         location.href = ctx + '/releaseApi/toReleaseList/'+teacherid;
     });
+    mui("#quiz").on('tap', 'img', function () {
+        location.href = ctx + '/teacherApi/toQuiz';
+    });
     //我的信息
     $("#myinfo").click(function () {
         location.href = ctx + '/teacherApi/toPerson';
