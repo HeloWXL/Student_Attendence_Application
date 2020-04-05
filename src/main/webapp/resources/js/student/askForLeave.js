@@ -100,7 +100,7 @@ $(function () {
 
 
 var courseList =loadCourse(pid);
-// 专业选择
+// 课程选择
 var Picker = new mui.PopPicker();
 Picker.setData(courseList);
 courseName.addEventListener('tap', function(event) {

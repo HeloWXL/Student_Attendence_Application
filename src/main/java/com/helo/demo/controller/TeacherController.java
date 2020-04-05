@@ -69,8 +69,8 @@ public class TeacherController {
 
   @ApiOperation(value = "提问页面")
   @GetMapping("/toQuiz")
-  public String toQuiz(){
-    return "/teacher/quiz";
+  public ModelAndView toQuiz(){
+      return new ModelAndView("/teacher/quiz");
   }
 
   @ApiOperation(value = "跳转到教师添加课程页面")
@@ -96,6 +96,13 @@ public class TeacherController {
   public String selectCourseDetailByCid(@PathVariable("cid") Integer cid, Model model){
     model.addAttribute("course",courseService.selectCourseDetailByCid(cid));
     return "teacher/courseDetail";
+  }
+
+  @ApiOperation(value = "根据教师ID查询教师所教授的课程")
+  @GetMapping("/getCourseByTid")
+  @ResponseBody
+  public Map<String, Object>  getCourseByTid(@RequestParam("tid") Integer tid) {
+    return courseService.selectCourseByTno(tid);
   }
 
   @ApiOperation(value = "教师登录")
