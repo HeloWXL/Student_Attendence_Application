@@ -70,7 +70,7 @@
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首页</span>
     </a>
-    <a class="mui-tab-item">
+    <a class="mui-tab-item" id="notice">
         <span class="mui-icon mui-icon-chatbubble"></span>
         <span class="mui-tab-label">消息</span>
     </a>

@@ -8,13 +8,15 @@
         <result property="studentId" column="student_id" jdbcType="INTEGER"/>
         <result property="courseName" column="course_name" jdbcType="VARCHAR"/>
         <result property="state" column="state" jdbcType="INTEGER"/>
-        <result property="ceateTime" column="ceate_time" jdbcType="TIMESTAMP"/>
+        <result property="teacheId" column="teache_id" jdbcType="INTEGER"/>
+        <result property="tState" column="t_state" jdbcType="INTEGER"/>
+        <result property="ceate_time" column="ceateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="LeaveNoticeMap">
         select
-          id, leave_id, student_id, course_name, state, ceate_time
+          id, leave_id, student_id, course_name, state, ceate_time,t_state,teache_id
         from appdemo.leave_notice
         where id = #{id}
     </select>

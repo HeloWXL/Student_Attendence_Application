@@ -48,12 +48,41 @@ public class LeaveNotice implements Serializable {
     @TableField("ceate_time")
     private Date ceateTime;
 
-    public LeaveNotice(Integer leaveId, Integer studentId, String courseName, Integer state, Date ceateTime) {
+    /**
+     * 教师ID
+     */
+    @TableField("t_state")
+    private Integer tState;
+
+    /**
+     * 教师阅读状态
+     */
+    @TableField("teacher_id")
+    private Integer teacherId;
+
+    /**
+    * @Description: 课程ID
+    * @params: 
+    * @return: 
+    * @Author: wangxianlin
+    * @Date: 2020/4/7 9:02 PM
+    */ 
+    @TableField("course_id")
+    private Integer courseId;
+
+    @TableField(value = "student_pic",exist = false)
+    private String studentPic;
+
+    @TableField(value = "student_name",exist = false)
+    private String studentName;
+
+    public LeaveNotice(Integer leaveId, Integer studentId, String courseName, Integer state, Date ceateTime,Integer courseId) {
         this.leaveId = leaveId;
         this.studentId = studentId;
         this.courseName = courseName;
         this.state = state;
         this.ceateTime = ceateTime;
+        this.courseId=courseId;
     }
 
     public LeaveNotice() {

@@ -109,7 +109,7 @@ public class LeaveService {
         leave.setLeaveId(leaveId);
         leave.setIsRead(1);
         Leave l = this.leaveMapper.selectByPrimaryKey(leaveId);
-        this.leaveNoticeMapper.insert(new LeaveNotice(leaveId,l.getStudent().getStudentId(),l.getCourse().getCourseName(),0,new Date()));
+        this.leaveNoticeMapper.insert(new LeaveNotice(leaveId,l.getStudent().getStudentId(),l.getCourse().getCourseName(),0,new Date(),l.getCourseId()));
         return leaveMapper.updateById(leave);
     }
 
@@ -124,7 +124,7 @@ public class LeaveService {
         leave.setLeaveId(leaveId);
         leave.setIsRead(2);
         Leave l = this.leaveMapper.selectByPrimaryKey(leaveId);
-        this.leaveNoticeMapper.insert(new LeaveNotice(leaveId,l.getStudent().getStudentId(),l.getCourse().getCourseName(),0,new Date()));
+        this.leaveNoticeMapper.insert(new LeaveNotice(leaveId,l.getStudent().getStudentId(),l.getCourse().getCourseName(),0,new Date(),l.getCourseId()));
         return leaveMapper.updateById(leave);
     }
 

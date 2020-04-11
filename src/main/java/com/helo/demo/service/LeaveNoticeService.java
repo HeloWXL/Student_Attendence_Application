@@ -20,16 +20,6 @@ public class LeaveNoticeService {
     private LeaveNoticeMapper leaveNoticeDao;
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    public LeaveNotice queryById(Integer id) {
-        return this.leaveNoticeDao.queryById(id);
-    }
-
-    /**
      * 新增数据
      *
      * @param leaveNotice 实例对象
@@ -39,27 +29,6 @@ public class LeaveNoticeService {
     public LeaveNotice insert(LeaveNotice leaveNotice) {
         this.leaveNoticeDao.insert(leaveNotice);
         return leaveNotice;
-    }
-
-    /**
-     * 修改数据
-     *
-     * @param leaveNotice 实例对象
-     * @return 实例对象
-     */
-
-    public LeaveNotice update(LeaveNotice leaveNotice) {
-        this.leaveNoticeDao.update(leaveNotice);
-        return this.queryById(leaveNotice.getId());
-    }
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    public boolean deleteById(Integer id) {
-        return this.leaveNoticeDao.deleteById(id) > 0;
     }
 
     /**
@@ -93,6 +62,38 @@ public class LeaveNoticeService {
     */
     public  int updateNoticeByid(int id){
         return this.leaveNoticeDao.updateNoticeByid(id);
-
+    }
+    
+    /**
+    * @Description: 教师已读
+    * @params: [id]
+    * @return: int
+    * @Author: wangxianlin
+    * @Date: 2020/4/5 6:13 PM
+    */ 
+    public int updateNoticeByTeaId(int id){
+        return this.leaveNoticeDao.updateNoticeByTeaId(id);
+    }
+    
+    /**
+    * @Description: 根据教师的ID查询未读的通知
+    * @params: [teaId]
+    * @return: java.util.List<com.helo.demo.model.LeaveNotice>
+    * @Author: wangxianlin
+    * @Date: 2020/4/5 6:14 PM
+    */ 
+    public List<LeaveNotice> getLeaveNoticeByTeaId(int teaId){
+        return this.leaveNoticeDao.getLeaveNoticeByTeaId(teaId);
+    }
+    
+    /**
+    * @Description: 统计教师未读的通知数量
+    * @params: [teaId]
+    * @return: int
+    * @Author: wangxianlin
+    * @Date: 2020/4/5 6:14 PM
+    */ 
+    public int getNoReadByTeaId(int teaId){
+        return this.leaveNoticeDao.getNoReadByTeaId(teaId);
     }
 }

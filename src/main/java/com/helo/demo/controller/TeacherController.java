@@ -85,6 +85,14 @@ public class TeacherController {
     return new ModelAndView("/teacher/courseList").addObject("course",courseService.selectCourseByTno(tid));
   }
 
+  @ApiOperation(value = "跳转到教师通知界面")
+  @GetMapping("/notice")
+  public ModelAndView notice(HttpServletRequest request, HttpServletResponse response){
+    Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
+    return new ModelAndView("/teacher/notice").addObject("leaveNotice",1)
+            .addObject("attenceNotice",1).addObject("courseNotice",1);
+  }
+
   @ApiOperation(value = "跳转到请假记录页面")
   @GetMapping("/toLeaveList/{tId}")
   public ModelAndView toLeaveList(@PathVariable("tId") Integer tId){

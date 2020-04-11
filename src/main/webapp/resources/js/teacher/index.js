@@ -32,4 +32,8 @@ $(function () {
     $("#home").click(function () {
         location.href = ctx + '/teacherApi/toIndex';
     });
+    //通知
+    $("#notice").click(function () {
+        location.href = ctx + '/teacherApi/notice';
+    });
 })

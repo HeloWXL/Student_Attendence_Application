@@ -1,6 +1,7 @@
 package com.helo.demo.controller;
 
-import com.helo.demo.model.LeaveNotice;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.helo.demo.service.LeaveNoticeService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,18 +23,6 @@ public class LeaveNoticeController {
     @Resource
     private LeaveNoticeService leaveNoticeService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public LeaveNotice selectOne(Integer id) {
-        return this.leaveNoticeService.queryById(id);
-    }
-
-
     @GetMapping("/noticeList/{stuId}")
     public ModelAndView toNoticeList(@PathVariable("stuId") Integer stuId){
         return new ModelAndView("/student/noticeList").addObject("noticeList",leaveNoticeService.getLeaveNoticeByStuId(stuId));
@@ -42,6 +31,23 @@ public class LeaveNoticeController {
     @GetMapping("/updateNoticeById")
     public int updateNoticeById(int id){
         return this.leaveNoticeService.updateNoticeByid(id);
+    }
+
+    @GetMapping("/updateNoticeByTeaId")
+    public int updateNoticeByTeaId(int id){
+        return this.leaveNoticeService.updateNoticeByTeaId(id);
+    }
+
+    @GetMapping("/noticeTeaList/{teaId}")
+    public ModelAndView noticeTeaList(@PathVariable("teaId") Integer teaId){
+        return new ModelAndView("/teacher/noticeTeaList").addObject("noticeList",leaveNoticeService.getLeaveNoticeByTeaId(teaId));
+    }
+
+    @GetMapping("/getLeaveNoticeByTeaId")
+    public JSONObject getLeaveNoticeByTeaId(@RequestParam("id") Integer id){
+        JSONObject object = new JSONObject();
+        object.put("data",leaveNoticeService.getLeaveNoticeByTeaId(id));
+        return object;
     }
 
 }
