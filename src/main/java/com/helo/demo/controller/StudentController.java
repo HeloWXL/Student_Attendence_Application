@@ -245,6 +245,7 @@ public class StudentController {
     String dir = year + "/" + month + "/" + day + "/";
     return dir;
   }
+
   @ApiOperation(value = "获取图片路径")
   @GetMapping(value = "/getLocalImg")
   public void getLocalImg(HttpServletRequest request, HttpServletResponse response, @RequestParam("path") String path){

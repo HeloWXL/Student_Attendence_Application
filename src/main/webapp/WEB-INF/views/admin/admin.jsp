@@ -4,103 +4,98 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>辅导员登录</title>
+    <title>管理员首页</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
-    <link rel="icon" href="${ctx}/resources/ico/logo.ico" type=”image/x-icon”>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
-    <!-- Custom Theme files -->
-    <link href="${ctx}/resources/css/counselor/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <!-- //Custom Theme files -->
-    <!-- Style-CSS -->
-    <!-- web font -->
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <!--web font-->
+    <link rel="shortcut icon" href="${ctx}/resources/ico/logo.ico"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/user.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/global_style.css">
     <script>
-        var ctx = '${ctx }'
+        var ctx = '${ctx }';
+        var admin = '${admin}';
     </script>
 </head>
 <body>
-<!--//header-->
-<div class="main-content-agile">
-    <div class="sub-main-w3" style="border-radius: 8%">
-        <h2>学生智能考勤后台管理系统</h2>
-        <form>
-            <div class="pom-agile">
-                <span class="fa fa-user" aria-hidden="true"></span>
-                <input placeholder="教师工号（例如：1001）" name="Name" class="user" type="text" required="" id="cno">
-            </div>
-            <div class="pom-agile">
-                <span class="fa fa-key" aria-hidden="true"></span>
-                <input placeholder="密码（例如：123456）" name="Password" class="pass" type="password" required="" id="password">
-            </div>
-            <div class="sub-w3l">
-                <div class="sub-agile">
-                    <input type="checkbox" id="brand1" value="">
-                    <label for="brand1">
-                        <span></span>记住我</label>
+<div class="tm-tpl tpl-white-hn" style-name="tpl-white-hn">
+    <!--导航栏-->
+    <div class="tpl-left-sidebar">
+        <ul>
+            <li class="logo">
+                <img class="user-upload" src="${ctx}/resources/images/default.png" alt="" title="admin">
+                <span>${admin.nickName}</span>
+            </li>
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/counselorApi/toStatistcs onclick="getUrl(this)"><i
+                        class="fa fa-database nav-icon"></i><span>首页</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/professionApi/toCounselorProfessionTable onclick="getUrl(this)"><i
+                        class="fa fa-database nav-icon"></i><span>专业管理</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/courseApi/toCounselorCourseTable onclick="getUrl(this)"><i
+                        class="fa fa-database nav-icon"></i><span>课程管理</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/teacherApi/toCounselorTeacherTable onclick="getUrl(this)"><i
+                        class="fa fa-user-secret nav-icon"></i><span>教师管理</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/counselorApi/toCounselorStudentTable onclick="getUrl(this)"><i
+                        class="fa fa-user-secret nav-icon"></i><span>学生管理</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/leaveApi/toCounselorLeaveTable onclick="getUrl(this)"><i
+                        class="fa fa-user-secret nav-icon"></i><span>请假管理</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="a-item" name=${ctx}/signApi/toAttenceForCounselor onclick="getUrl(this)"><i
+                        class="fa fa-user-secret nav-icon"></i><span>考勤管理</span></a>
+            </li>
+        </ul>
+    </div>
+    <!--右侧内容-->
+    <div class="tpl-right-item">
+        <div class="tpl-body">
+            <!--头部-->
+            <div class="tpl-header">
+                <div class="tpl-header-fluid">
+                    <div class="tpl-button switch-list">
+                        <i class="fa fa-hand-o-left"></i>
+                    </div>
+                    <div class="tpl-button text">
+                        <a href=""><i class="fa fa-home"></i> 首页</a>
+                    </div>
+                    <div class="tpl-userbar">
+                        <ul>
+                            <li><a id="jbzl">${admin.nickName}</a></li>
+                            <li><a href="${ctx}/logoutUser" class="logout"><i class="fa fa-power-off"></i>退出登录</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <a href="#">忘记密码?</a>
-                <div class="clear"></div>
             </div>
-            <div class="right-w3l">
-                <input type="submit" value="登录" id="login">
+            <!--内容-->
+            <div class="tpl-content">
+                <div class="content-pannel clearfix" style="height: 810px">
+                    <iframe align="center" width="100%" height="100%" src="${ctx}/counselorApi/toStatistcs" frameborder="no"
+                            border="0" marginwidth="0"
+                            marginheight="20px" scrolling="no" style="background-color: #FFFFFF;"></iframe>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
-
 </body>
-<%--引入js文件--%>
-<script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
-<%--引入自定义js文件--%>
 <script>
-    $(function () {
-        $("#login").click(function (e) {
-            e.preventDefault();
-            var cno = $("#cno").val();
-            if (cno == null && cno == '') {
-                alert('工号不能为空');
-                return;
-            }
-            var password = $("#password").val();
-            if (password == null && password == '') {
-                alert('密码不能为空');
-                return;
-            }
-            login(cno, password);
-        })
-    })
-
-    //登录
-    function login(cno, password) {
-        $.ajax({
-            url: ctx + '/counselorApi/checkLogin',
-            data: {
-                cno: cno,
-                password: password
-            },
-            dataType: 'json',
-            type: 'post',
-            success: function (data) {
-                if (data.body == true) {
-                    location.href = ctx + "/counselorApi/toCounselorIndex";
-                } else {
-                    alert('工号或密码错误');
-                }
-            }, error: function (e) {
-                alert('服务器内部错误');
-            }
-        });
+    /**
+     * 跳转页面
+     * @param _this
+     */
+    function getUrl(_this) {
+        var url = $(_this).attr('name');
+        $("iframe").attr("src", url)
     }
-
 </script>
 </html>

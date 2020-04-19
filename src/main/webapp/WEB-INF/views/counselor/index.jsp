@@ -34,15 +34,9 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item"><a  name=${ctx}/counselorApi/toStatistcs onclick="getUrl(this)">首页</a></li>
                 <li class="layui-nav-item"><a  name=${ctx}/counselorApi/toCounselorStudentTable onclick="getUrl(this)">学生管理</a></li>
-                <li class="layui-nav-item"><a name=${ctx}/teacherApi/toCounselorTeacherTable onclick="getUrl(this)">教师管理</a></li>
-                <li class="layui-nav-item"><a name=${ctx}/professionApi/toCounselorProfessionTable onclick="getUrl(this)">专业管理</a></li>
-                <li class="layui-nav-item"><a name=${ctx}/courseApi/toCounselorCourseTable onclick="getUrl(this)">课程管理</a></li>
                 <li class="layui-nav-item"><a name=${ctx}/leaveApi/toCounselorLeaveTable onclick="getUrl(this)">请假管理</a></li>
                 <li class="layui-nav-item"><a name=${ctx}/signApi/toAttenceForCounselor onclick="getUrl(this)">考勤管理</a></li>
-                <li class="layui-nav-item"><a name=${ctx}/FaceApi/toApiView onclick="getUrl(this)">FaceApi管理</a></li>
-
             </ul>
         </div>
     </div>
